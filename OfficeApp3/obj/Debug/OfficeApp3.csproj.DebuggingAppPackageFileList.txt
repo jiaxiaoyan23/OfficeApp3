@@ -1,0 +1,2 @@
+bin\Debug\OfficeAppManifests\OfficeApp3Manifest.xml
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3\bin\Debug\OfficeApp3.debugapp

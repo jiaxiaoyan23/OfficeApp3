@@ -1,0 +1,6 @@
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\bin\OfficeApp3Web.dll.config
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\bin\OfficeApp3Web.dll
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\bin\OfficeApp3Web.pdb
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.csprojResolveAssemblyReference.cache
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.dll
+c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.pdb

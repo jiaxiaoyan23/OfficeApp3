@@ -1,0 +1,63 @@
+﻿#headercontent {
+    color: #b7472a;
+}
+
+.buttonclass {
+    background-color:#b7472a;
+}
+
+li.listItem {
+    background-color:#b7472a;
+    }
+
+li.listItem:hover{
+    cursor:pointer;
+    background-color:rgba(183,71,42,0.75);
+}
+
+#next {
+    background-color: #b7472a;
+}
+
+#next:hover {
+    background-color:rgba(183,71,42,0.75);
+}
+
+#previous {
+    background-color:#b7472a;
+}
+
+#previous:hover {
+    background-color:rgba(183,71,42,0.75);
+}
+.fancyImage{
+    background-color: #b7472a;
+}
+.fancyboxbuttonclass{
+    background-color: #b7472a;
+}
+
+#description a{
+    color:#b7472a;    
+}
+#codeMenu.tabSelected a, #descriptionMenu.tabSelected a {
+    color:#b7472a; 
+}
+
+#headercontent.listHeader {
+    color: #b7472a;
+}
+
+#headercontent.apiPageHeader {
+    background-color: #b7472a;
+    
+}
+
+#headercontent.tutorialpage {
+    background-color: #b7472a;
+}
+
+#codeMenu a.selected {
+     color: #b7472a;
+
+}

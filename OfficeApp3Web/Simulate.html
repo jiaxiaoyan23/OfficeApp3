@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulate Navigation</title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+</head>
+<body>
+    <input type="text" id="query1" value="scenario=Write+and+Read+Text"/>
+    <input type="text" id="query2" value="task=readSelectedDataText" />
+    <button id="redirectButton">Go to TryItOut</button>
+</body>
+</html>
+<script>
+    $('#redirectButton').click(function () {
+        window.location.href = "http://officeapitutorial.azurewebsites.net/Redirect.html?" +
+            document.getElementById('query1').value + "&" +
+            document.getElementById('query2').value;
+    });
+</script> 

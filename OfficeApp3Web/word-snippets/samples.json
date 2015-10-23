@@ -1,0 +1,107 @@
+{
+    "values": [
+        { "done": true, "filename": "", "name": "", "group": "", "description": "" },
+        
+        { "done": true, "filename": "bodyClear.js", "name": "Clear body contents", "group": "Body", "description": "Clear the contents of the body." },
+        { "done": true, "filename": "bodygetHTML.js", "name": "Get the body HTML", "group": "Body", "description": "Get the body HTML." },
+        { "done": true, "filename": "bodygetOoxml.js", "name": "Get the body OOXML", "group": "Body", "description": "Get the body OOXML." },
+        { "done": true, "filename": "bodygetText.js", "name": "Get the body text", "group": "Body", "description": "Get the body text." },
+        { "done": true, "filename": "bodyinsertBreak.js", "name": "Insert a page break", "group": "Body", "description": "Inserts a page break at the start of the body." },
+        { "done": true, "filename": "bodyinsertContentControl.js", "name": "Insert a content control", "group": "Body", "description": "Wraps the body in a content control." },
+        { "done": true, "filename": "bodyinsertHtml.js", "name": "Insert HTML content", "group": "Body", "description": "Inserts HTML content at the beginning of the body." },
+        { "done": true, "filename": "bodyinsertOoxml.js", "name": "Insert OOXML content", "group": "Body", "description": "Inserts OOXML content at the beginning of the body." },
+        { "done": true, "filename": "bodyinsertParagraph.js", "name": "Insert a paragraph", "group": "Body", "description": "Inserts a paragraph at the end of the body." },
+        { "done": true, "filename": "bodyinsertText.js", "name": "Insert text in to the body", "group": "Body", "description": "Inserts text at the beginning of the body." },
+        { "done": true, "filename": "bodyload.js", "name": "Load font and style properties", "group": "Body", "description": "Loads the font and style properties of the body." },
+        { "done": true, "filename": "bodysearch.js", "name": "Search the body", "group": "Body", "description": "Search the body for the string 'Video'." },
+        { "done": true, "filename": "bodyselect.js", "name": "Select the last paragraph", "group": "Body", "description": "Selects the entire body." },
+
+        { "done": true, "filename": "contentControlClear.js", "name": "Clear a content control", "group": "ContentControl", "description": "Clears the contents of the content control." },
+        { "done": true, "filename": "contentControlCreate.js", "name": "Create content control", "group": "ContentControl", "description": "Create a content control around a selection and change the content and properties." },
+        { "done": true, "filename": "contentControlDelete.js", "name": "Delete a content control", "group": "ContentControl", "description": "Deletes the content control." },
+        { "done": true, "filename": "contentControlGetHtml.js", "name": "Get content control HTML", "group": "ContentControl", "description": "Gets the HTML text of the first content control." },
+        { "done": true, "filename": "contentControlGetOoxml.js", "name": "Get content control OOXML", "group": "ContentControl", "description": "Gets the OOXML of the first content control." },        
+        { "done": true, "filename": "contentControlGetByTag.js", "name": "Get content control by tag", "group": "ContentControl", "description": "Get the content control by tag and print its value." },
+        { "done": true, "filename": "contentControlGetAllControls.js", "name": "Get content control collection", "group": "ContentControl", "description": "Get all content controls in the body and print out the length of each content control's text property." },
+        { "done": true, "filename": "contentControlInsertBreak.js", "name": "Insert a page break", "group": "ContentControl", "description": "Inserts a page break after the first content control." },        
+        { "done": true, "filename": "contentControlInsertParagraph.js", "name": "Insert a paragraph", "group": "ContentControl", "description": "Insert a paragraph after the first content control." },        
+        { "done": true, "filename": "contentControlInsertText.js", "name": "Insert text", "group": "ContentControl", "description": "Replace text in the first content control." },                
+        { "done": true, "filename": "contentControlInsertHtml.js", "name": "Insert HTML", "group": "ContentControl", "description": "Insert HTML at the start of the first content control." },        
+        { "done": true, "filename": "contentControlInsertOoxml.js", "name": "Insert OOXML", "group": "ContentControl", "description": "Insert OOXML at the end of the first content control." },
+        { "done": true, "filename": "contentControlLoad.js", "name": "Load content control properties", "group": "ContentControl", "description": "Load most of the content control properties." },        
+        { "done": true, "filename": "contentControlSelect.js", "name": "Select a content control", "group": "ContentControl", "description": "Select the first content control in the body." },    
+        { "done": true, "filename": "contentControlWrapParagraphs.js", "name": "Wrap paragraphs with content controls", "group": "ContentControl", "description": "Turn all paragraphs into content controls." },
+
+        { "done": true, "filename": "documentSave.js", "name": "Save the document", "group": "Document", "description": "Saves the document." },
+        { "done": true, "filename": "documentInsertHTMLIntoSelection.js", "name": "Insert HTML into the document", "group": "Document", "description": "Inserts HTML into the current selection." },
+        { "done": true, "filename": "documentInsertOOXMLIntoSelection.js", "name": "Insert OOXML into the document", "group": "Document", "description": "Inserts OOXML into the current selection." },
+        { "done": true, "filename": "documentInsertTextIntoSelection.js", "name": "Insert text into the document", "group": "Document", "description": "Inserts text into the current selection." },
+        { "done": true, "filename": "documentWrapSelectionContentControl.js", "name": "Wrap the selection", "group": "Document", "description": "Wrap a content control around the current selection." },
+        { "done": true, "filename": "documentLoadContentControls.js", "name": "Get all content controls in document", "group": "Document", "description": "Gets the collection of content controls in the document." },        
+
+        { "done": true, "filename": "fontMakeBold.js", "name": "Bold the current selection", "group": "Formatting", "description": "Apply bold formatting to the current selection." },
+        { "done": true, "filename": "fontChangeSize.js", "name": "Change the font size", "group": "Formatting", "description": "Change the font size of the current selection." },
+        { "done": true, "filename": "fontMakeUnderline.js", "name": "Underline the selection", "group": "Formatting", "description": "Underline the current selection." },
+        { "done": true, "filename": "fontSetParagraphFont.js", "name": "Set a paragraph's font", "group": "Formatting", "description": "Set a paragraph's font properties." },
+        { "done": true, "filename": "fontChange.js", "name": "Change the font", "group": "Formatting", "description": "Change the font of the current selection." },
+        { "done": true, "filename": "fontChangeColor.js", "name": "Change the font color", "group": "Formatting", "description": "Change the font color of the current selection." },
+        { "done": true, "filename": "fontHighlight.js", "name": "Highlight the selection", "group": "Formatting", "description": "Highlight the current selection." },
+        { "done": true, "filename": "fontStrikethrough.js", "name": "Strikethrough the font", "group": "Formatting", "description": "Strikethrough the font of the current selection." },
+
+        
+        { "done": true, "filename": "paragraphClear.js", "name": "Clear paragraph contents", "group": "Paragraph", "description": "Clear the contents of the first paragraph." },
+        { "done": true, "filename": "paragraphDelete.js", "name": "Delete a paragraph", "group": "Paragraph", "description": "Delete the first paragraph." },
+        { "done": true, "filename": "paragraphGetAllParagraphs.js", "name": "Get all paragraphs", "group": "Paragraph", "description": "Get all paragraphs and print out their text property." },
+        { "done": true, "filename": "paragraphgetHTML.js", "name": "Get the paragraph HTML", "group": "Paragraph", "description": "Get the HTML form of the first paragraph." },
+        { "done": true, "filename": "paragraphgetOoxml.js", "name": "Get the paragraph OOXML", "group": "Paragraph", "description": "Get the OOXML form of the first paragraph." },
+        { "done": true, "filename": "paragraphinsertBreak.js", "name": "Insert a page break", "group": "Paragraph", "description": "Inserts a page break after the first paragraph." },
+        { "done": true, "filename": "paragraphinsertContentControl.js", "name": "Insert a content control", "group": "Paragraph", "description": "Wrap the first paragraph in a content control." },
+        { "done": true, "filename": "paragraphinsertHtml.js", "name": "Insert HTML content", "group": "Paragraph", "description": "Inserts HTML content at the end of the first paragraph." },
+        { "done": true, "filename": "paragraphinsertInlinePictureFromBase64.js", "name": "Insert an inline picture", "group": "Paragraph", "description": "Inserts a picture at the beginning of the first paragraph." },
+        { "done": true, "filename": "paragraphinsertOoxml.js", "name": "Insert OOXML content", "group": "Paragraph", "description": "Inserts OOXML content at the end of the first paragraph." },
+        { "done": true, "filename": "paragraphinsertParagraph.js", "name": "Insert a paragraph (collection)", "group": "Paragraph", "description": "Inserts a paragraph at the end of the first paragraph." },
+        { "done": true, "filename": "paragraphinsertParagraphEndBody.js", "name": "Insert paragraph (body)", "group": "Paragraph", "description": "Inserts a new paragraph at the end of the body." },
+        { "done": true, "filename": "paragraphinsertText.js", "name": "Insert text in to the paragraph", "group": "Paragraph", "description": "Inserts text at the end of the first paragraph." },
+        { "done": true, "filename": "paragraphload.js", "name": "Load font and style properties", "group": "Paragraph", "description": "Loads the font and style properties of the first paragraph." },
+        { "done": true, "filename": "paragraphselect.js", "name": "Select the last paragraph", "group": "Paragraph", "description": "Select the last paragraph in the document." },
+        { "done": true, "filename": "paragraphFormatLineSpacing.js", "name": "Set line spacing", "group": "Paragraph", "description": "Set the paragraph line spacing." },        
+        
+        { "done": true, "filename": "rangeClear.js", "name": "Clear the range", "group": "Range", "description": "Clear the range." },
+        { "done": true, "filename": "rangeDelete.js", "name": "Delete the range", "group": "Range", "description": "Delete the range." },
+        { "done": true, "filename": "rangegetHTML.js", "name": "Get HTML", "group": "Range", "description": "Get the HTML from a range." },
+        { "done": true, "filename": "rangegetOOXML.js", "name": "Get OOXML", "group": "Range", "description": "Get the OOXML of the range." },
+        { "done": true, "filename": "rangeinsertBreak.js", "name": "Insert a break", "group": "Range", "description": "Insert a page break after the range." },
+        { "done": true, "filename": "rangeinsertContentControl.js", "name": "Insert Content Control", "group": "Range", "description": "Insert a content control in the range." },
+        { "done": true, "filename": "rangeinsertHtml.js", "name": "Insert HTML", "group": "Range", "description": "Insert HTML at the start of the range." },
+        { "done": true, "filename": "rangeinsertOoxml.js", "name": "Insert OOXML", "group": "Range", "description": "Insert OOXML at the start of the range." },
+        { "done": true, "filename": "rangeinsertParagraph.js", "name": "Insert a paragraph", "group": "Range", "description": "Insert paragraph at the end of the range." },
+        { "done": true, "filename": "rangeinsertText.js", "name": "Insert text", "group": "Range", "description": "Insert text at the end of the range." },
+        { "done": true, "filename": "rangeload.js", "name": "Load the range", "group": "Range", "description": "Load the range and then show its property values." },
+        { "done": true, "filename": "rangeselect.js", "name": "Select a range", "group": "Range", "description": "Insert HTML content, and then select the range of the inserted HTML content." },
+
+        { "done": true, "filename": "searchText.js", "name": "Search the document (matchCase)", "group": "Search", "description": "Perform a case insensitive search for the word 'video' and highlight the results." },
+        { "done": true, "filename": "searchWholeWord.js", "name": "Search the document text (matchWholeWord)", "group": "Search", "description": "Perform a whole word search for the word 'Click' and highlight the results." },
+        { "done": true, "filename": "searchPrefix.js", "name": "Search the document text (matchPrefix)", "group": "Search", "description": "Perform a search for the prefix 'pro' and highlight the results." },
+        { "done": true, "filename": "searchSuffix.js", "name": "Search the document text (matchSuffix)", "group": "Search", "description": "Perform a search for the suffix 'ly' and highlight the results." },
+        { "done": true, "filename": "searchIgnorePunctuation.js", "name": "Search the document text (ignorePunct)", "group": "Search", "description": "Perform a search for 'For example you' that ignores punctuation and highlight the results." },
+        { "done": true, "filename": "searchWildCard.js", "name": "Search the document text (*)", "group": "Search", "description": "Perform a search for 'to*' and highlight the results." },
+
+        { "done": true, "filename": "sectionInsertTextHeader.js", "name": "Insert a header", "group": "Section", "description": "Insert text into header and wrap the header in a content control." },
+        { "done": true, "filename": "sectionGetParagraphs.js", "name": "Get all paragraphs in a section", "group": "Section", "description": "Gets the paragraphs from the first section." }
+        
+    ],
+    "groups": [
+        
+        { "name": "Body" },
+        { "name": "ContentControl" },
+        { "name": "Document" },
+        { "name": "Formatting" },
+        { "name": "Paragraph" },
+        { "name": "Range" },
+        { "name": "Search" },
+        { "name": "Section" }
+    ],
+    "suggestions": [
+        { "missing": false, "done": false, "filename": "findAndReplace.js", "name": "Find Text and Replace", "description": "" }
+    ]
+}

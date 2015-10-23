@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirect</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <!-- Production -->
+    <span>Redirecting. If this takes more than a few seconds, click <a href='http://officeapitutorial.azurewebsites.net/TryItOut.html' target='_blank'>here</a>.</span>
+</body>
+</html>
+<script>
+    //Read in queryString, parse into hash, take values for scenario and task, set cookies, redirect to TryItOut
+    var queryString = window.location.search.substring(1);
+    console.log(queryString);
+    if (queryString.length) {
+        var queryHash = {};
+        var queries = queryString.split("&");
+        queries.forEach(function (singleQuery) {
+            splitQuery = singleQuery.split("=");
+            queryHash[splitQuery[0]] = splitQuery[1];
+        });
+        if (queryHash["scenario"]) {
+            document.cookie = "scenario=" + queryHash["scenario"] + ";expires=" + new Date(Date.now() + 86400000).toGMTString();
+        }
+        if (queryHash["task"]) {
+            document.cookie = "task=" + queryHash["task"] + ";expires=" + new Date(Date.now() + 86400000).toGMTString();
+        }
+    }
+    //Production
+    window.location.href = "https://officeapitutorial.azurewebsites.net/TryItOut.html";
+    
+</script>

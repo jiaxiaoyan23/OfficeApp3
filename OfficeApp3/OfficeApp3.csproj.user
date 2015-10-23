@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SharePointSiteUrl>https://devexperience.sharepoint.com/AddIn/</SharePointSiteUrl>
+    <GeneratedFeatureId>3827b24b-3a9a-4d0e-8d16-3ee32794b02f</GeneratedFeatureId>
+    <GeneratedPackageId>042218b6-3b1f-4d9c-8e93-07573509678c</GeneratedPackageId>
+    <GeneratedModuleId>{f677f8ab-325a-4a2b-b5f2-4e259293968e}</GeneratedModuleId>
+    <GeneratedListId>{5a263fb9-5d3a-4b13-95b5-a76ab36db841}</GeneratedListId>
+    <GeneratedProductId>{9db2e8af-e300-4544-b282-559bbc53ab35}</GeneratedProductId>
+    <GeneratedAppVersion>1.0.0.0</GeneratedAppVersion>
+    <GeneratedClientSecret>+ogn65SSpEte/NWZe5+u3L5+nWt13xs1cZxcZ2aAPJw=</GeneratedClientSecret>
+  </PropertyGroup>
+</Project>

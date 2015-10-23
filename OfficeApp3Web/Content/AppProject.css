@@ -1,0 +1,63 @@
+﻿#headercontent {
+    color: #31752f;
+}
+
+.buttonclass {
+    background-color:#31752f;
+}
+
+li.listItem {
+    background-color:#31752f;
+    }
+
+li.listItem:hover{
+    background-color:rgba(49,117,47,0.75);
+}
+
+#next {
+    background-color: #31752f;
+}
+
+#next:hover {
+    background-color:rgba(49,117,47,0.75);
+}
+
+#previous {
+    background-color:#31752f;
+}
+
+#previous:hover {
+    background-color:rgba(49,117,47,0.75);
+}
+
+.fancyImage{
+    background-color: #31752f;
+}
+.fancyboxbuttonclass{
+    background-color: #31752f;
+}
+
+#description a{
+    color:#31752f;    
+}
+#codeMenu.tabSelected a, #descriptionMenu.tabSelected a {
+    color:#31752f; 
+}
+
+#headercontent.listHeader {
+    color: #31752f;
+}
+
+#headercontent.apiPageHeader {
+    background-color: #31752f;
+    
+}
+
+#headercontent.tutorialpage {
+    background-color: #31752f;
+}
+
+#codeMenu a.selected {
+     color: #31752f;
+
+}

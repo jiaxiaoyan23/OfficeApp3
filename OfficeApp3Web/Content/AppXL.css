@@ -1,0 +1,59 @@
+﻿#headercontent {
+    color: #337147;
+}
+
+li.listItem {
+    background-color:#337147;
+    }
+
+li.listItem:hover{
+    background-color:rgba(51,113,71,0.75);
+}
+
+#next {
+    background-color: #337147;
+}
+
+#next:hover {
+    background-color:rgba(51,113,71,0.75);
+}
+
+#previous {
+    background-color:#337147;
+}
+
+#previous:hover {
+    background-color:rgba(51,113,71,0.75);
+}
+
+.fancyImage{
+    background-color: #337147;
+}
+.fancyboxbuttonclass{
+    background-color: #337147;
+}
+
+#description a{
+    color:#337147;    
+}
+#codeMenu.tabSelected a, #descriptionMenu.tabSelected a {
+    color:#337147;
+}
+
+#headercontent.listHeader {
+    color: #337147;
+}
+
+#headercontent.apiPageHeader {
+    background-color: #337147;
+    
+}
+
+#headercontent.tutorialpage {
+    background-color: #337147;
+}
+
+#codeMenu a.selected {
+     color: #337147;
+
+}
