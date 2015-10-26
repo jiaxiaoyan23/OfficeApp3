@@ -12,6 +12,7 @@ var logComment = function(message) {
 }
 
 Office.initialize = function (reason) {
+    
 	insideOffice = true;	
 	console.log('Add-in initialized, redirecting console.log() to console textArea');
 	consoleErrorFunction = console.error;
@@ -20,9 +21,9 @@ Office.initialize = function (reason) {
     var e = document.getElementById('samplesContainer');
     var scope = angular.element(e).scope();
     // update the model with a wrap in $apply(fn) which will refresh the view for us
-    scope.$apply(function() {
-        scope.insideOffice = true;
-    }); 
+    //scope.$apply(function() {
+    //    scope.insideOffice = true;
+    //}); 
 };
 
 officeJsSnippetApp.config(['$routeProvider', function ($routeProvider) {

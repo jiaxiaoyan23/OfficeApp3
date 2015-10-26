@@ -403,7 +403,7 @@ li.listItem:hover{
      overflow: hidden; 
      display:flex; 
      flex-direction: column; 
-     position: absolute;     
+     position: relative;     
      top:0px;
      bottom: 0px; 
      left: 0px; 
@@ -417,7 +417,7 @@ li.listItem:hover{
     bottom:0px;   
 }
 
-/*.divWrapperOutside {
+.divWrapperOutside {
     border-style: solid;
     border-width: 1px;
     border-color: #cac5c5;
@@ -432,5 +432,5 @@ li.listItem:hover{
 .divWrapperInside {
     position: relative;
     background-color: white;
-    height: 100%;
-}*/
+    height: 60%;
+}
