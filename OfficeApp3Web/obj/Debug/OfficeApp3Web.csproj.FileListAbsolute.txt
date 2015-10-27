@@ -7,6 +7,6 @@ c:\users\jishao\documents\visual studio 2013\Projects\OfficeApp3\OfficeApp3Web\o
 D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\bin\OfficeApp3Web.dll.config
 D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\bin\OfficeApp3Web.dll
 D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\bin\OfficeApp3Web.pdb
-D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.csprojResolveAssemblyReference.cache
 D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.dll
 D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.pdb
+D:\GithubSource\Repos\OfficeApp3\OfficeApp3Web\obj\Debug\OfficeApp3Web.csprojResolveAssemblyReference.cache

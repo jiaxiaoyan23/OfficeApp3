@@ -1,6 +1,6 @@
-﻿#headercontent {
+﻿/*#headercontent {
     color: #337147;
-}
+}*/
 
 li.listItem {
     background-color:#337147;
@@ -40,9 +40,9 @@ li.listItem:hover{
     color:#337147;
 }
 
-#headercontent.listHeader {
+/*#headercontent.listHeader {
     color: #337147;
-}
+}*/
 
 #headercontent.apiPageHeader {
     background-color: #337147;

@@ -1,18 +1,33 @@
 <div id="samplesContainer" class="container">
+    <div id="selectors">
+        <h2>
+            Or, explore Excel API code snippets:
+        </h2>
         <select ng-model="selectedGroup" ng-options="group.name for group in groups">
             <option value="">-- choose a group --</option>
         </select>
         <a href="#/testAll" style="text-decoration: none;">-</a>
-        <select ng-change="loadSampleCode()" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
-            <option value="">-- choose a sample --</option>
-        </select>
-    <div>
-        <p><button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()">Run!</button> <span>{{selectedSample.description}}</span></p>
-    </div>
-    <div style="flex-grow: 1; overflow: hidden" id="TxtRichApiScript">
+        <p>
+            <select ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
+                <!--ng-change="loadSampleCode()"-->
+                <option value="">-- choose a sample --</option>
+            </select>
+            <span>&nbsp;</span>
+            <button id="goButton" class="fa fa-arrow-circle-o-right" style="font-size:large" ng-click="loadSampleCode()"></button>            
+        </p>
 
+        <p>{{selectedSample.description}}</p>
     </div>
-    <div> <!--ng-hide="!insideOffice"-->
+   
+</div>
+<div class="hidden" id="codeSnippet">
+    <div style="overflow: hidden; display:flex; flex-direction: column; position: absolute; top:100px; bottom:0px; left: 0px; right: 0px; padding: 10px;" id="TxtRichApiScript">
+    </div>
+    <button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()" style="float:right;">Run!</button>
+    <div>
+        <!--ng-hide="!insideOffice"-->
         <textarea id="console"></textarea>
     </div>
 </div>
+
+

@@ -11,20 +11,20 @@ var logComment = function(message) {
 	consoleElement.scrollTop = consoleElement.scrollHeight;
 }
 
-Office.initialize = function (reason) {
+//Office.initialize = function (reason) {
     
-	insideOffice = true;	
-	console.log('Add-in initialized, redirecting console.log() to console textArea');
-	consoleErrorFunction = console.error;
-	console.error = logComment;
-	// get Angular scope from the known DOM element
-    var e = document.getElementById('samplesContainer');
-    var scope = angular.element(e).scope();
-    // update the model with a wrap in $apply(fn) which will refresh the view for us
-    //scope.$apply(function() {
-    //    scope.insideOffice = true;
-    //}); 
-};
+//	insideOffice = true;	
+//	console.log('Add-in initialized, redirecting console.log() to console textArea');
+//	consoleErrorFunction = console.error;
+//	console.error = logComment;
+//	// get Angular scope from the known DOM element
+//    var e = document.getElementById('samplesContainer');
+//    var scope = angular.element(e).scope();
+//    // update the model with a wrap in $apply(fn) which will refresh the view for us
+//    //scope.$apply(function() {
+//    //    scope.insideOffice = true;
+//    //}); 
+//};
 
 officeJsSnippetApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
@@ -64,6 +64,7 @@ officeJsSnippetApp.controller("SamplesController", function($scope, $routeParams
 	$scope.samples = [{ name: "Loading..." }];
 	$scope.selectedSample = { description: "No snippet loaded" };
 	$scope.insideOffice = insideOffice;
+	$scope.selectedGroup = { description: "No snippet group loaded" };
 	
 	CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
 			"/editorIntelliSense/ExcelLatest.txt",
@@ -85,7 +86,8 @@ officeJsSnippetApp.controller("SamplesController", function($scope, $routeParams
 	});
 
 	$scope.loadSampleCode = function() {
-		appInsights.trackEvent("SampleLoaded", {name:$scope.selectedSample.name});
+	    appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
+	    showSingleAPIPage($scope.selectedGroup.name, $scope.selectedSample.name);
 		snippetFactory.getSampleCode($routeParams["app"], $scope.selectedSample.filename).then(function (response) {
             $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);
 			$scope.insideOffice = insideOffice;
@@ -200,3 +202,11 @@ function isTrulyJavaScript(text) {
 	}
 }
 
+//Reformat page view before loads current code snippet
+function showSingleAPIPage(group, sample) {
+    $("#headercontent").attr("class", "apiPageHeader");
+    $("#content").hide();
+    $("#selectors").hide();
+    $("#headercontent").html("<div id='scenario'><span>Main </span><span>" + group + " </span><span>" + sample + " </span>").show();
+    $("#codeSnippet").removeClass("hidden");
+}

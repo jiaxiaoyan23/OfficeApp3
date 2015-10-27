@@ -1,4 +1,4 @@
-﻿/*html, body {
+﻿html, body {
     height: 100%;
     font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
     overflow-y: auto;
@@ -7,9 +7,9 @@
 #APILayout {
    height:100%;
    width:100%;
-}*/
+}
 
-/*#content {
+#content {
     position: absolute;
     top:42px;
     bottom:45px;
@@ -19,16 +19,16 @@
     padding-left:20px;
     overflow:hidden;
     background-color: white;
-}*/
+}
 
-/*#scenario{
+#scenario{
     z-index:0;
     width:100%;
     position:relative;
     float:left;
-}*/
+}
 
-/*#scenarioimg {
+#scenarioimg {
     position:relative;
     float:left;
     padding-top:25px;
@@ -97,7 +97,8 @@
     z-index:1000;
     height:80px;
     background-color:white;
-    color: #337147;
+    /*color: #337147;*/
+    color: black;
     position:absolute;
     top:0;
     left: 0px;
@@ -127,6 +128,9 @@
     width: 70%;
 }
 
+#scenarioList {
+    /*margin-top: 90px;*/
+}
 
 li.listItem {
     background-color:#337147;
@@ -142,7 +146,7 @@ li.listItem {
     -webkit-box-shadow: 2px 2px 2px gray;
     border-radius: 2px;
     box-shadow: 2px 2px 2px gray;
-    }
+}
 
 li.listItem:focus {
     -webkit-box-shadow:inset 0px 0px 0px 3px #000;
@@ -346,16 +350,16 @@ li.listItem:hover{
 
 #headercontent.listHeader {
     background-color:white;
-    color: #337147;
+    /*color: #337147;*/
+    color:black;
     padding-top:14px;
-    height:40px;
+    height:80px;
 }
 
 #headercontent.apiPageHeader {
     height: 85px;
     background-color: #337147;
-    color: white;
-    
+    color: white;    
 }
 
 #content.list {
@@ -366,7 +370,7 @@ li.listItem:hover{
 }
 
 #content.listPageContent {
-    margin-top: 0px;
+    margin-top: 40px;
     padding-left: 10px;
     bottom: 0px;
     overflow-y:auto;
@@ -397,7 +401,7 @@ li.listItem:hover{
      color: #337147;
      font-weight: 600;
 
-}*/
+}
 
 #samplesContainer {
      overflow: hidden; 
@@ -409,6 +413,18 @@ li.listItem:hover{
      left: 0px; 
      right: 0px; 
      padding: 10px;
+}
+
+#samplesContainer select{
+    width:80%;
+}
+
+#goButton {
+    border:none;
+    cursor:pointer;
+}
+#goButton:hover {
+    background:white;
 }
 
 #console {
