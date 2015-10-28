@@ -210,7 +210,8 @@ InteractiveTutorial.App = new function () {
             _currentTaskIndex = 0;
         }
         $("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back' /></span><span><div id='scenariolabel'><h4>" + self.htmlEncode(_currentScenario) + "</h4></div><div id='task'></div></span></div>").show();
-        $("#scenarioimg img").click(self.showList);
+       
+        $("#mainBtn").click(self.showList);
         self.showTask();
         if (firstTryItOut) {
             setAndShowFancyBox();
@@ -355,6 +356,7 @@ InteractiveTutorial.App = new function () {
         writeLog("Show Scenario [" + _currentScenario + "]");
         $("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back' /></span><span><div id='scenariolabel'><h4>" + self.htmlEncode(_currentScenario) + "</h4></div><div id='task'></div></span></div>").show();
         $("#scenarioimg img").click(self.showList);
+
         self.showTask();
     }
 
@@ -636,7 +638,7 @@ Office.initialize = function (reason) {
         InteractiveTutorial.App.init();
 
 
-
+        //Init code snippet
         insideOffice = true;
         console.log('Add-in initialized, redirecting console.log() to console textArea');
         consoleErrorFunction = console.error;

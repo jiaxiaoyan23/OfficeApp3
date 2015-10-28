@@ -6,7 +6,7 @@
         <select ng-model="selectedGroup" ng-options="group.name for group in groups">
             <option value="">-- choose a group --</option>
         </select>
-        <a href="#/testAll" style="text-decoration: none;">-</a>
+        <!--<a href="#/testAll" style="text-decoration: none;">-</a>-->
         <p>
             <select ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
                 <!--ng-change="loadSampleCode()"-->
@@ -15,19 +15,19 @@
             <span>&nbsp;</span>
             <button id="goButton" class="fa fa-arrow-circle-o-right" style="font-size:large" ng-click="loadSampleCode()"></button>            
         </p>
-
+        <p>Description:</p>
         <p>{{selectedSample.description}}</p>
     </div>
 
 </div>
 <div class="hidden" id="codeSnippet">
-    <div style="overflow: hidden; display:flex; flex-direction: column; position: absolute; top:100px; bottom:40px; left: 0px; right: 0px; padding: 10px;" id="TxtRichApiScript">
+    <div style="height:50%; overflow: hidden; display:flex; flex-direction: column; position: absolute; top:100px; bottom:40px; left: 0px; right: 0px; padding: 10px;" id="TxtRichApiScript">
     </div>
     <button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()" style="float:right; position: absolute; bottom:0px; ">Run!</button>
-    <!--<div>-->
+    <div>
         <!--ng-hide="!insideOffice"-->
-        <!--<textarea id="console"></textarea>
-    </div>-->
+        <!--<textarea id="console"></textarea>-->
+    </div>
 </div>
 
 
