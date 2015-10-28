@@ -60,7 +60,7 @@ officeJsSnippetApp.factory("snippetFactory", ['$http', function ($http) {
 	return factory;
 }]);
 
-officeJsSnippetApp.controller("SamplesController", function($scope, $routeParams, snippetFactory) {
+officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParams, $compile, snippetFactory) {
 	$scope.samples = [{ name: "Loading..." }];
 	$scope.selectedSample = { description: "(Please choose a group and sample above.)" };
 	$scope.insideOffice = insideOffice;
@@ -90,13 +90,23 @@ officeJsSnippetApp.controller("SamplesController", function($scope, $routeParams
 	    //showSingleAPIPage($scope.selectedGroup.name, $scope.selectedSample.name);
 
 	    //Reformat page view before loads current code snippet
-	   
-	    $("#headercontent").attr("class", "apiPageHeader");
-	    $("#content").hide();
-	    //$("#selectors").hide();
+	    $("#headercontent").empty();
+	   // $("#headercontent").attr("class", "apiPageHeader");
+	    $("#tutorial").hide();
+	    //$("#goButton").hide();
+	    $("#headerString").hide();
+	    $("#groupSelector").addClass("codeSnippetsMenu");
+	    $("#sampleSelector").addClass("codeSnippetsMenu");
+	    $("#samplesContainer").addClass("mainMenu");
+	    $("#mainMenu").removeClass("hidden");
+	    $("#mainBtn").removeClass("hidden");
+	    $("#placeholder1").removeClass("hidden");
+
+	    $("#placeholder2").removeClass("hidden");
+	    $("#bottomMenu").hide();
 	    
-	    $("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back'/></span><span>").show();
-	    $("#scenarioimg img").click(backToMain);
+	    //$("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back'/></span><span>").show();
+	    //$("#scenarioimg img").click(backToMain);
 	    //$("#headercontent").html("<div><button class='codeSnippetsMenu' id='mainBtn' onclick='backToMain();'>Main </button><span>> </span><select ng-model='selectedGroup' ng-options='group.name for group in groups' class='codeSnippetsMenu'><option value=''>" + $scope.selectedGroup.name + "</option></select><span>> </span><select class='codeSnippetsMenu' ng-model='selectedSample' ng-options='sample.name for sample in samples | filter:{group: selectedGroup.name}'><option value=''>" + $scope.selectedSample.name + "</option></select>");
 
 	    //$("#headercontent").html("<div><button class='codeSnippetsMenu' id='mainBtn' onclick='backToMain();'>Main </button><span>> </span><select id='groupSelect' ng-model='selectedGroup' class='codeSnippetsMenu'></select><span>> </span><select class='codeSnippetsMenu' ng-model='selectedSample' ng-options='sample.name for sample in samples | filter:{group: selectedGroup.name}'><option value=''>" + $scope.selectedSample.name + "</option></select>");
@@ -123,7 +133,16 @@ officeJsSnippetApp.controller("SamplesController", function($scope, $routeParams
 			CodeEditorIntegration.resizeEditor();
 		});
 	};
-	
+	$scope.backToMain = function() {
+	    $("#codeSnippet").addClass("hidden");
+	    $("#tutorial").show();
+	    $("#bottomMenu").show();
+	    //$("#headerString").show();
+	    //$("#goButton").show();
+	    $("#mainMenu").addClass("hidden");
+	    InteractiveTutorial.App.showList();
+	}
+
 	$scope.runSelectedSample = function() {
 		var script = CodeEditorIntegration.getJavaScriptToRun().replace(/console.log/g, "logComment");
 		
@@ -230,9 +249,3 @@ function isTrulyJavaScript(text) {
 	}
 }
 
-function backToMain() {
-    $("#codeSnippet").addClass("hidden");
-    $("#content").show();
-    $("#selectors").show();
-    InteractiveTutorial.App.showList();
-}

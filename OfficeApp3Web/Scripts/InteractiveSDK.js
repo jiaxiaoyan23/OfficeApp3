@@ -627,6 +627,7 @@ function updateCSSforHost() {
 }
 
 Office.initialize = function (reason) {
+    
     $(document).ready(function () {
         //Init telemetry
         var telemetryOptions = {};
@@ -639,6 +640,7 @@ Office.initialize = function (reason) {
 
 
         //Init code snippet
+        
         insideOffice = true;
         console.log('Add-in initialized, redirecting console.log() to console textArea');
         consoleErrorFunction = console.error;

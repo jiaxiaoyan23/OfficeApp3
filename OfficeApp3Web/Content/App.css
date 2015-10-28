@@ -297,7 +297,7 @@ li.listItem:hover{
 
 #description {
     margin-top:0px;
-    height:100%;
+    height:auto;
     overflow-y:auto;
 }
 
@@ -412,7 +412,7 @@ li.listItem:hover{
 }
 
 #samplesContainer select{
-    width:80%;
+    width:auto;
 }
 
 #selectorHeader{
@@ -430,9 +430,7 @@ li.listItem:hover{
 #goButton {
     border:none;
     cursor:pointer;
-}
-#goButton:hover {
-    background:white;
+    background:none;
 }
 
 #console {
@@ -447,8 +445,7 @@ li.listItem:hover{
     position:relative;
     left: 0px;
     right: 0px;
-    top: 0px;
-   
+    top: 0px;   
 }
 
 .divWrapperInside {
@@ -461,14 +458,21 @@ li.listItem:hover{
     background:none;
     cursor:pointer;
     border:none;
-    font-size:large;
+    font-size:15px;
+    color:white;    
+    height: auto;
+    padding:0;
+}
+
+.codeSnippetsMenu option{
+    color:black;
+}
+.codeSnippetsMenu .selected{
     color:white;
-    margin:5px;
 }
 
-#headercontent.button:hover :focus {
-    font:bold;   
-    border:none;
-    background:none;
+.mainMenu {
+    height: auto;
+    background-color: #337147;
+    color: white; 
 }
-

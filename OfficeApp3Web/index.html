@@ -54,29 +54,37 @@
 </head>
 
 <body style="padding: 0px; margin: 0px;">
+    
+    <div ng-view class="hidden" id="mainMenu">
 
-    <div id="fancyHolder" style="display:none"></div>
-    <div class="divWrapperOutside">
-        <div class="divWrapperInside">
-            <div id="headercontent">
-                <div id="title"><h1>API Tutorial for Office</h1></div>
-            </div>
-            <div id="content">
-                <div id="tabs">
+    </div>
+
+    <div id="tutorial">
+        <div id="fancyHolder" style="display:none"></div>
+        <div class="divWrapperOutside">
+            <div class="divWrapperInside">
+                <div id="headercontent">
+                    <div id="title"><h1>API Tutorial for Office</h1></div>
+
                 </div>
-                <div id='codeLayout'>
-                    <textarea id="codeWindow" name="codeWindow" spellcheck="false"></textarea>
+                <div id="content">
+                    <div id="tabs">
+                    </div>
+                    <div id='codeLayout'>
+                        <textarea id="codeWindow" name="codeWindow" spellcheck="false"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div id="navigation">
-            </div>
-            <div class="toast" id="toastMessage">
-                <div class="closeBtn"><img id="closeImage" src="Images/closeblack.png" role="button" tabindex="0" alt="Close" /></div>
-                <div id="message"></div>
+                <div id="navigation">
+                </div>
+                <div class="toast" id="toastMessage">
+                    <div class="closeBtn"><img id="closeImage" src="Images/closeblack.png" role="button" tabindex="0" alt="Close" /></div>
+                    <div id="message"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div ng-view>
+
+    <div ng-view id="bottomMenu">
     </div>
 
 </body>
