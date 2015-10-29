@@ -9,7 +9,6 @@
             <select id="groupSelector" ng-model="selectedGroup" ng-options="group.name for group in groups">              
                 <option value="">-- choose a group --</option>
             </select>
-            <span>{{selectedGroup.name}}</span>
             <span id="placeholder2" class="codeSnippetsMenu hidden">&nbsp; > </span>
             <!--<a href="#/testAll" style="text-decoration: none;">-</a>-->
 
@@ -17,20 +16,16 @@
                 <!--ng-change="loadSampleCode()"-->
                 <option value="">-- choose a sample --</option>
             </select>
-            <span>{{selectedSample.name}}</span>
             <button id="goButton" class="fa fa-arrow-circle-o-right" style="font-size:large;" ng-click="loadSampleCode()"></button>
         </p>
-
-       
     </div>
-
 </div>
-<div id="description" style="padding:10px">
+<div id="sampleDescription">
     <p>Description:</p>
     <p>{{selectedSample.description}}</p>
 </div>
 <div class="hidden" id="codeSnippet">
-    <div style="height:60%; overflow: hidden; display:flex; flex-direction: column; position: relative; top:0px; bottom:0px; left: 0px; right: 0px; padding: 10px;" id="TxtRichApiScript">
+    <div style="height:60%; overflow: hidden; display:flex; flex-direction: column; position: relative; top:0px; bottom:0px; left: 0px; right: 0px; padding: 5px;" id="TxtRichApiScript">
     </div>
     <button id="runButton" ng-click="runSelectedSample()" style="float:right; position: absolute; bottom:0px; ">Run!</button>  <!--ng-hide="!insideOffice"-->
     <div>

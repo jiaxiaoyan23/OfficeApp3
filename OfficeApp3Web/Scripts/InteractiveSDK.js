@@ -57,11 +57,11 @@ InteractiveTutorial.App = new function () {
             $("#toastMessage").slideUp();
         };
 
-        $('body').click(function (clickEvent) {
-            if (clickEvent.target.id != "run") {
-                $("#toastMessage").slideUp();
-            }
-        })
+        //$('body').click(function (clickEvent) {
+        //    if (clickEvent.target.id != "run") {
+        //        $("#toastMessage").slideUp();
+        //    }
+        //})
         $("#run").click(self.executeCode);
         $("#next").click(self.nextStep);
 

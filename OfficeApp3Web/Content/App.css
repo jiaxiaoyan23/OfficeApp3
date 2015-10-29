@@ -476,3 +476,11 @@ li.listItem:hover{
     background-color: #337147;
     color: white; 
 }
+
+#sampleDescription {
+    height:auto;
+    padding:10px;
+}
+#sampleDescription p{
+    margin:5px;
+}
