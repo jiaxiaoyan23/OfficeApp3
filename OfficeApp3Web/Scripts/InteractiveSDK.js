@@ -57,11 +57,11 @@ InteractiveTutorial.App = new function () {
             $("#toastMessage").slideUp();
         };
 
-        //$('body').click(function (clickEvent) {
-        //    if (clickEvent.target.id != "run") {
-        //        $("#toastMessage").slideUp();
-        //    }
-        //})
+        $('body').click(function (clickEvent) {
+            if (clickEvent.target.id != "run") {
+                $("#toastMessage").slideUp();
+            }
+        })
         $("#run").click(self.executeCode);
         $("#next").click(self.nextStep);
 
@@ -127,6 +127,8 @@ InteractiveTutorial.App = new function () {
             }
         }
         $("#content").removeClass("loading");
+        $("#tutorialMain").attr("class", "divWrapperInside");
+        $("#codeSnippetBlock").show();
     }
 
     this.navigateToDefaultStartLocation = function InteractiveTutorial_App$navigateToDefaultStartLocation() {
@@ -348,6 +350,8 @@ InteractiveTutorial.App = new function () {
     this.showAPIPage = function InteractiveTutorial_App$showAPIPage(event) {
         $("#headercontent").attr("class", "apiPageHeader");
         $("#content").attr("class", "apiPageContent");
+
+        $("#codeSnippetBlock").hide();
         _currentContentIndex = event.data.index;
         _currentScenario = event.data.content[_currentContentIndex].scenario;
         _currentLink = event.data.content[_currentContentIndex].link;
@@ -358,6 +362,7 @@ InteractiveTutorial.App = new function () {
         $("#scenarioimg img").click(self.showList);
 
         self.showTask();
+        $("#tutorialMain").attr("class", "divWrapperInsideFull");
     }
 
     //Show current step code and description.
@@ -462,7 +467,7 @@ InteractiveTutorial.App = new function () {
 
     //Resizing code editor.
     this.sizeCodeEditor = function InteractiveTutorial_App$sizeCodeEditor() {
-        $(".CodeMirror-scroll, #description").css("height", $("#content").height() - $("#tabs").height() - 10 + "px");
+      // $(".CodeMirror-scroll, #description").css("height", $("#content").height() - $("#tabs").height() - 10 + "px");
     }
 
     this.htmlEncode = function InteractiveTutorial_App$htmlEncode(value, allowLinks) {
@@ -639,8 +644,7 @@ Office.initialize = function (reason) {
         InteractiveTutorial.App.init();
 
 
-        //Init code snippet
-        
+        //Init code snippet        
         insideOffice = true;
         console.log('Add-in initialized, redirecting console.log() to console textArea');
         consoleErrorFunction = console.error;

@@ -267,6 +267,7 @@ li.listItem:hover{
     border:solid;
     border-color:#e8e6e6;
     border-width:1px;
+    height:100%
 }
 
 #codeLayout input, textarea {
@@ -445,13 +446,34 @@ li.listItem:hover{
     position:relative;
     left: 0px;
     right: 0px;
-    top: 0px;   
+    top: 0px;  
 }
 
 .divWrapperInside {
     position: relative;
-    background-color: white;
-    height: 60%;
+    background-color: white;     
+    height: 60%;    
+}
+
+.divWrapperInsideFull {
+    position: relative;
+    background-color: white;     
+    height: 100%;    
+}
+
+.snippetbuttonclass {
+   position:absolute;
+   bottom:0px;
+   right:10px;
+    background-color:#337147;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    font-family:Segoe UI, Tahoma, Verdana, sans-serif;
+    border:solid;
+    border-color:#9E9E9E;
+    border-width:1px;
+    cursor:pointer;
+    margin:10px;
 }
 
 .codeSnippetsMenu {
@@ -471,6 +493,9 @@ li.listItem:hover{
     color:white;
 }
 
+#codeSnippet {
+    margin:10px;
+}
 .mainMenu {
     height: auto;
     background-color: #337147;

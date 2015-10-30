@@ -1,37 +1,37 @@
-<div id="samplesContainer" class="container">
-    <div id="selectors">
-        <h2 id="headerString">
-            Or, explore Excel API code snippets:
-        </h2>
-        <p>
-            <button id="mainBtn" class="codeSnippetsMenu hidden" ng-click="backToMain()">Main </button><span id="placeholder1" class="codeSnippetsMenu hidden">&nbsp; > </span>
+<div id="codeSnippetBlock">
+    <div id="samplesContainer" class="container">
+        <div id="selectors">
+            <h2 id="headerString">
+                Or, explore Excel API code snippets:
+            </h2>
+            <p>
+                <button id="mainBtn" class="codeSnippetsMenu hidden" ng-click="backToMain()">Main </button><span id="placeholder1" class="codeSnippetsMenu hidden">&nbsp; > </span>
 
-            <select id="groupSelector" ng-model="selectedGroup" ng-options="group.name for group in groups">              
-                <option value="">-- choose a group --</option>
-            </select>
-            <span id="placeholder2" class="codeSnippetsMenu hidden">&nbsp; > </span>
-            <!--<a href="#/testAll" style="text-decoration: none;">-</a>-->
+                <select id="groupSelector" ng-model="selectedGroup" ng-options="group.name for group in groups">
+                    <option value="">(choose a group)</option>
+                </select>
+                <span id="placeholder2" class="codeSnippetsMenu hidden">&nbsp; > </span>
+                <!--<a href="#/testAll" style="text-decoration: none;">-</a>-->
 
-            <select id="sampleSelector" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
-                <!--ng-change="loadSampleCode()"-->
-                <option value="">-- choose a sample --</option>
-            </select>
-            <button id="goButton" class="fa fa-arrow-circle-o-right" style="font-size:large;" ng-click="loadSampleCode()"></button>
-        </p>
+                <select id="sampleSelector" ng-change="isSnippet && loadSampleCode()" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
+                    <option value="">(choose a sample)</option>
+                </select>
+                <button id="goButton" ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" style="font-size:large;" ng-click="loadSampleCode()"></button>
+            </p>
+        </div>
+    </div>
+    <div id="sampleDescription">
+        <p>Description:</p>
+        <p>{{selectedSample.description}}</p>
+    </div>
+    <div class="hidden" id="codeSnippet">
+        <div style="height:60%; overflow: hidden; display:flex; flex-direction: column; position: relative; top:0px; bottom:0px; left: 0px; right: 0px; padding: 5px;" id="TxtRichApiScript">
+        </div>
+        <button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()" class="snippetbuttonclass">Run Code</button>
+        <div>
+            <!--ng-hide="!insideOffice"-->
+            <!--<textarea id="console"></textarea>-->
+        </div>
     </div>
 </div>
-<div id="sampleDescription">
-    <p>Description:</p>
-    <p>{{selectedSample.description}}</p>
-</div>
-<div class="hidden" id="codeSnippet">
-    <div style="height:60%; overflow: hidden; display:flex; flex-direction: column; position: relative; top:0px; bottom:0px; left: 0px; right: 0px; padding: 5px;" id="TxtRichApiScript">
-    </div>
-    <button id="runButton" ng-click="runSelectedSample()" style="float:right; position: absolute; bottom:0px; ">Run!</button>  <!--ng-hide="!insideOffice"-->
-    <div>
-        <!--ng-hide="!insideOffice"-->
-        <!--<textarea id="console"></textarea>-->
-    </div>
-</div>
-
 

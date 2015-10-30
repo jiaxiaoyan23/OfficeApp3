@@ -1,8 +1,7 @@
 var officeJsSnippetApp = angular.module("officeJsSnippetApp", ['ngRoute']);
 var insideOffice = false;
 var consoleErrorFunction;
-
-var mainPage = true;
+var isSnippet = false;
 
 var rootUrl = document.location;
 
@@ -63,92 +62,78 @@ officeJsSnippetApp.factory("snippetFactory", ['$http', function ($http) {
 }]);
 
 officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParams, snippetFactory) {
-	$scope.samples = [{ name: "Loading..." }];
-	$scope.selectedSample = { description: "(Please choose a group and sample above.)" };
-	$scope.insideOffice = insideOffice;
-	$scope.selectedGroup = {};
+    $scope.samples = [{ name: "Loading..." }];
+    $scope.selectedSample = { description: "(Please choose a group and sample above.)" };
+    $scope.insideOffice = insideOffice;
+    $scope.selectedGroup = {};
+    $scope.isSnippet = isSnippet;
 	
-	CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
+    CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
 			"/editorIntelliSense/ExcelLatest.txt",
 			"/editorIntelliSense/WordLatest.txt",
 			"/editorIntelliSense/OfficeCommon.txt",
 			"/editorIntelliSense/OfficeDocument.txt"
-	]);
+    ]);
 	
-	CodeEditorIntegration.setDirty = function() {
-		if ($scope.selectedSample.code) {
-			$scope.selectedSample = { description: $scope.selectedSample.description + " (modified)" };
-			$scope.$apply();
-		}
-	}
+    CodeEditorIntegration.setDirty = function() {
+        if ($scope.selectedSample.code) {
+            $scope.selectedSample = { description: $scope.selectedSample.description + " (modified)" };
+            $scope.$apply();
+        }
+    }
 	
-	snippetFactory.getSamples($routeParams["app"]).then(function (response) {
-		$scope.samples = response.data.values;
-		$scope.groups = response.data.groups;
-	});
+    snippetFactory.getSamples($routeParams["app"]).then(function (response) {
+        $scope.samples = response.data.values;
+        $scope.groups = response.data.groups;
+    });
 
-	$scope.loadSampleCode = function () {	  
-	    appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
-	    //showSingleAPIPage($scope.selectedGroup.name, $scope.selectedSample.name);
+    $scope.loadSampleCode = function () {
+        if (($scope.selectedSample == null || !($scope.selectedSample.description)) && $scope.isSnippet) {        
+            $("#TxtRichApiScript").hide();
+        }
+        else {
+            if ($scope.selectedSample == null) {
+                $scope.selectedSample = { description: "(Please choose a group and sample above.)" };
+                $("#TxtRichApiScript").hide();
+            }
 
-	    //Reformat page view before loads current code snippet
-	    $("#headercontent").empty();
-	   // $("#headercontent").attr("class", "apiPageHeader");
-	    $("#tutorial").hide();
-	    //$("#goButton").hide();
-	    $("#headerString").hide();
-	    $("#groupSelector").addClass("codeSnippetsMenu");
-	    $("#sampleSelector").addClass("codeSnippetsMenu");
-	    $("#samplesContainer").addClass("mainMenu");
-	   // $("#mainMenu").removeClass("hidden");
-	    $("#mainBtn").removeClass("hidden");
-	    $("#placeholder1").removeClass("hidden");
+            appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
+            $scope.isSnippet = true;
+            $("#TxtRichApiScript").show();
+            $("#headercontent").empty();
+            $("#tutorial").hide();
+            $("#headerString").hide();
+            $("#groupSelector").addClass("codeSnippetsMenu");
+            $("#sampleSelector").addClass("codeSnippetsMenu");
+            $("#samplesContainer").addClass("mainMenu");
+            $("#mainBtn").removeClass("hidden");
+            $("#placeholder1").removeClass("hidden");
+            $("#placeholder2").removeClass("hidden");
 
-	    $("#placeholder2").removeClass("hidden");
-	   // $("#bottomMenu").hide();
-
-	    //$("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back'/></span><span>").show();
-	    //$("#scenarioimg img").click(backToMain);
-	    //$("#headercontent").html("<div><button class='codeSnippetsMenu' id='mainBtn' onclick='backToMain();'>Main </button><span>> </span><select ng-model='selectedGroup' ng-options='group.name for group in groups' class='codeSnippetsMenu'><option value=''>" + $scope.selectedGroup.name + "</option></select><span>> </span><select class='codeSnippetsMenu' ng-model='selectedSample' ng-options='sample.name for sample in samples | filter:{group: selectedGroup.name}'><option value=''>" + $scope.selectedSample.name + "</option></select>");
-
-	    //$("#headercontent").html("<div><button class='codeSnippetsMenu' id='mainBtn' onclick='backToMain();'>Main </button><span>> </span><select id='groupSelect' ng-model='selectedGroup' class='codeSnippetsMenu'></select><span>> </span><select class='codeSnippetsMenu' ng-model='selectedSample' ng-options='sample.name for sample in samples | filter:{group: selectedGroup.name}'><option value=''>" + $scope.selectedSample.name + "</option></select>");
-        
-
-	    //for (var i = 0; i < $scope.groups.length; i++) {
-	    //    var temp = document.createElement("option");
-	    //    temp.text = $scope.groups[i].name;
-        //    if (temp.text == $scope.selectedGroup.name) {
-        //        temp.selected = true;
-        //    }
-        //    else {
-        //        temp.setAttribute("style", "color:black");
-        //    }
-	    //    $("#groupSelect")[0].options.add(temp);	        
-        //}
-
-	    $("#codeSnippet").removeClass("hidden");
-
-		snippetFactory.getSampleCode($routeParams["app"], $scope.selectedSample.filename).then(function (response) {
-            $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);
-			$scope.insideOffice = insideOffice;
-			CodeEditorIntegration.setJavaScriptText($scope.selectedSample.code);
-			CodeEditorIntegration.resizeEditor();
-		});
+            if ($scope.selectedSample != null &&
+                ($scope.selectedSample.description != "(Please choose a group and sample above.)")) {
+                $("#codeSnippet").removeClass("hidden");
+            }
+   
+	        snippetFactory.getSampleCode($routeParams["app"], $scope.selectedSample.filename).then(function (response) {
+	            $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);
+	            $scope.insideOffice = insideOffice;
+	            CodeEditorIntegration.setJavaScriptText($scope.selectedSample.code);
+	            CodeEditorIntegration.resizeEditor();
+	        });
+        }
 	};
 
-	$scope.backToMain = function() {
+	$scope.backToMain = function () {
+	    $scope.isSnippet = false;
 	    $("#codeSnippet").addClass("hidden");
 	    $("#tutorial").show();
-	    //$("#headerString").show();
-	    //$("#goButton").show();
-	    //  $("#mainMenu").addClass("hidden");
 	    $("#groupSelector").removeClass("codeSnippetsMenu");
 	    $("#sampleSelector").removeClass("codeSnippetsMenu");
 	    $("#samplesContainer").removeClass("mainMenu");
 	    $("#mainBtn").addClass("hidden");
 	    $("#placeholder1").addClass("hidden");
 	    $("#placeholder2").addClass("hidden");
-
 	    $("#headerString").show();
 	    $("#bottomMenu").show();
 	    InteractiveTutorial.App.showList();
@@ -259,4 +244,3 @@ function isTrulyJavaScript(text) {
 		return false;
 	}
 }
-
