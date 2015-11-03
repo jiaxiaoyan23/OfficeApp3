@@ -78,6 +78,7 @@
     <Content Include="Content\FancyBox.css" />
     <Content Include="Content\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox_sprite.png" />
+    <Content Include="Images\arrow.png" />
     <Content Include="Images\back-translucent.png" />
     <Content Include="Images\back.png" />
     <Content Include="Images\backToList.png" />

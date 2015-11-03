@@ -45,12 +45,8 @@
     margin-bottom:0px;
 }
 
-#task {
-    padding-left:45px;
-}
-
 #task h3 {
-    margin-top:0px;
+    margin:0;
 }
 
 #toastMessage {
@@ -354,9 +350,10 @@ li.listItem:hover{
 }
 
 #headercontent.apiPageHeader {
-    height: 85px;
+    height: auto;
     background-color: #337147;
-    color: white;    
+    color: white; 
+    padding:10px;   
 }
 
 #content.list {
@@ -373,9 +370,8 @@ li.listItem:hover{
     overflow-y:auto;
 }
 
-#content.apiPageContent {
-    top:85px;
-    margin-top: 0px;
+#content.apiPageContent {    
+    margin-top: 10px;
     padding-right: 20px;
     padding-left: 20px;
     bottom: 45px;
@@ -413,20 +409,22 @@ li.listItem:hover{
 }
 
 #samplesContainer select{
-    width:auto;
+    width:auto;  
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background:url("/Images/arrow.png");
+  background-repeat: no-repeat;
+  background-position: right; 
+
+  /*//background: no-repeat scroll right center transparent;*/
+
+  padding-right: 14px;
 }
 
-#selectorHeader{
-     overflow: hidden; 
-     display:flex;
-     flex-direction: column; 
-     position: absolute;     
-     top:0px;
-     bottom: 0px; 
-     left: 10px; 
-     right: 0px; 
-     padding: 10px;
+#samplesContainer select::-ms-expand{
+    display:none;
 }
+
 
 #goButton {
     border:none;
@@ -509,3 +507,4 @@ li.listItem:hover{
 #sampleDescription p{
     margin:5px;
 }
+

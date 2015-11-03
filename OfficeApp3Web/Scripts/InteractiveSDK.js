@@ -358,8 +358,17 @@ InteractiveTutorial.App = new function () {
         _tasks = event.data.content[_currentContentIndex].tasks;
         _currentTaskIndex = 0;
         writeLog("Show Scenario [" + _currentScenario + "]");
-        $("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back' /></span><span><div id='scenariolabel'><h4>" + self.htmlEncode(_currentScenario) + "</h4></div><div id='task'></div></span></div>").show();
-        $("#scenarioimg img").click(self.showList);
+        
+        $("#headercontent").html("<div id='scenario'><button id='mainBtnInTutorial' class='codeSnippetsMenu' >Main </button><span class='codeSnippetsMenu'>&nbsp; > </span><select id='scenariolabel' class='codeSnippetsMenu'></span>").show(); 
+
+        var html = '';
+        for (var i = 0; i < event.data.content.length; i++) {
+            html += '<option value="' + event.data.content[i].scenario + '">' + event.data.content[i].scenario + '</option>';
+        }    
+        $("#scenariolabel").append(html);
+        $("#scenariolabel").change(self.changeTutorial);
+        $("#scenariolabel")[0].options[_currentContentIndex].selected = true;
+        $("#mainBtnInTutorial").click(self.showList);
 
         self.showTask();
         $("#tutorialMain").attr("class", "divWrapperInsideFull");
@@ -376,16 +385,20 @@ InteractiveTutorial.App = new function () {
 
         if (!isLastStep) {
             var taskTitle = _tasks[_currentTaskIndex].title;
-            $("#task").html("<h3>" + self.htmlEncode(taskTitle) + "</h3>");
+            //$("#task").html("<h3>" + self.htmlEncode(taskTitle) + "</h3>");
             var taskId = _currentTask = _tasks[_currentTaskIndex].id;
             var taskDescription = _tasks[_currentTaskIndex].description;
             writeLog("ShowTask [" + taskId + "]");
-            var menu = $("<div id='tabs'><ul'><li id='codeMenu' class='tabSelected'><a href='#' tabindex='0' title='View the code window'>CODE</a></li><li id='descriptionMenu'><a href='#' tabindex='0' title='View the description window'>DESCRIPTION</a></li></ul>").appendTo(APILayout);
-            var codeMenu = $("#codeMenu").click(self.showCode);
-            var descriptionMenu = $("#descriptionMenu").click(self.showDescription);
+            //var menu = $("<div id='tabs'><ul'><li id='codeMenu' class='tabSelected'><a href='#' tabindex='0' title='View the code window'>CODE</a></li><li id='descriptionMenu'><a href='#' tabindex='0' title='View the description window'>DESCRIPTION</a></li></ul>").appendTo(APILayout);
+
+            var menu = $("<div id='task'><h3>"+self.htmlEncode(taskTitle)+"</h3></div>").appendTo(APILayout);
+
+            //var codeMenu = $("#codeMenu").click(self.showCode);
+            //var descriptionMenu = $("#descriptionMenu").click(self.showDescription);
             var code = $("<div id='codeLayout'><textarea id='codeWindow' name='codeWindow' spellcheck='false'></textarea></div>").appendTo(APILayout);
+
             self.setCodeWindow(_tasks[_currentTaskIndex].code);
-            var description = $("<div id='description'>" + self.htmlEncode(taskDescription, true) + "</div>").hide().appendTo(APILayout);
+            //var description = $("<div id='description'>" + self.htmlEncode(taskDescription, true) + "</div>").hide().appendTo(APILayout);
 
             var run = $("<button id='run' class='buttonclass' accesskey='R'><u>R</u>un Code</button>").appendTo(navigation).click(self.executeCode);
 
@@ -500,7 +513,41 @@ InteractiveTutorial.App = new function () {
 
         return encodedHTML;
     }
+
+
+    this.changeTutorial = function InteractiveTutorial_App$changeTutorial() {
+
+        var scenarioTitle = $("#scenariolabel option:selected").text();
+        var taskTitle = '';
+        var scenarioList = $("#scenariolabel")[0];
+        var numTutorials = scenarioList.length;
+        var scenario, scenarioNumber = -1;
+        
+        for (var i = 0; i < numTutorials; i++) {
+            if (scenarioTitle == scenarioList.options[i].value) {
+                scenario = _contentList[i];
+                scenarioNumber = i;
+                break;
+            }
+        }
+
+        if (scenarioNumber == -1) {
+            writeLog("Invalid scenario name in cookies")
+            InteractiveTutorial.App.showList();
+            return;
+        }
+        _tasks = scenario.tasks;
+        _currentTaskIndex = 0;
+
+        _currentContentIndex = scenarioNumber;
+        _currentScenario = scenarioTitle;
+        //_currentLink = $("#scenariolabel")[0][scenarioNumber].link;
+        
+        InteractiveTutorial.App.showTask();
+    }
 }
+
+
 
 //FancyBox appears over content, triggered upon first use of TryitOut
 function setAndShowFancyBox() {
