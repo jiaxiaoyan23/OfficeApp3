@@ -61,3 +61,11 @@ li.listItem:hover{
      color: #2b579a;
 
 }
+
+#samplesContainer.mainMenu {
+    background-color: #2b579a;
+}
+
+.snippetbuttonclass {
+    background-color: #2b579a;
+}

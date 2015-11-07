@@ -2,7 +2,7 @@
     <div id="samplesContainer" class="container">
         <div id="selectors">
             <h2 id="headerString">
-                Or, explore Excel API code snippets:
+                Or, explore Office API code snippets:
             </h2>
             <p>
                 <button id="mainBtn" class="codeSnippetsMenu hidden" ng-click="backToMain()">Main </button><span id="placeholder1" class="codeSnippetsMenu hidden">&nbsp; > </span>
@@ -16,7 +16,7 @@
                 <select id="sampleSelector" ng-change="isSnippet && loadSampleCode()" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
                     <option value="">(choose a sample)</option>
                 </select>
-                <button id="goButton" ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" style="font-size:large;" ng-click="loadSampleCode()"></button>
+                <button id="goButton" ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" ng-click="loadSampleCode()"></button>
             </p>
         </div>
     </div>
@@ -25,12 +25,12 @@
         <p>{{selectedSample.description}}</p>
     </div>
     <div class="hidden" id="codeSnippet">
-        <div style="height:60%; overflow: hidden; display:flex; flex-direction: column; position: relative; top:0px; bottom:0px; left: 0px; right: 0px; padding: 5px;" id="TxtRichApiScript">
+        <div id="TxtRichApiScript">
         </div>
         <button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()" class="snippetbuttonclass">Run Code</button>
         <div>
             <!--ng-hide="!insideOffice"-->
-            <!--<textarea id="console"></textarea>-->
+            <textarea id="console"></textarea>
         </div>
     </div>
 </div>

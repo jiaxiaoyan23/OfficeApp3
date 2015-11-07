@@ -1,7 +1,5 @@
 {
-    "values": [
-        { "done": true, "filename": "", "name": "", "group": "", "description": "" },
-        
+    "values": [       
         { "done": true, "filename": "bodyClear.js", "name": "Clear body contents", "group": "Body", "description": "Clear the contents of the body." },
         { "done": true, "filename": "bodygetHTML.js", "name": "Get the body HTML", "group": "Body", "description": "Get the body HTML." },
         { "done": true, "filename": "bodygetOoxml.js", "name": "Get the body OOXML", "group": "Body", "description": "Get the body OOXML." },

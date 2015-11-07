@@ -381,7 +381,12 @@ InteractiveTutorial.App = new function () {
         var APILayout = $("<div id='APILayout'></div>").appendTo("#content");
         var navigation = $("#navigation").html("").show();
         var hasNapaLink = (typeof _currentLink != "undefined");
+        var isOnlyStep = (_currentTaskIndex == 0) && (_tasks.length == 1);
         var isLastStep = (_currentTaskIndex == _tasks.length) || (_currentTaskIndex == _tasks.length && !hasNapaLink);
+
+        if (isOnlyStep) {
+            _checked[_currentScenario] = true;
+        }
 
         if (!isLastStep) {
             var taskTitle = _tasks[_currentTaskIndex].title;
@@ -406,6 +411,7 @@ InteractiveTutorial.App = new function () {
             if (_currentTaskIndex == _tasks.length - 1 && !hasNapaLink) {
                 //show Next button as Tutorial List icon
                 $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to tutorial list'><img src='Images/list-translucent.png' alt='Tutorial List' /></div></div>").appendTo(navigation);
+                _checked[_currentScenario] = true;
             } else {
                 //show Next button as Next icon
                 $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to the next step'><img src='Images/next-translucent.png' alt='Next' /></div></div>").appendTo(navigation);
@@ -547,8 +553,6 @@ InteractiveTutorial.App = new function () {
     }
 }
 
-
-
 //FancyBox appears over content, triggered upon first use of TryitOut
 function setAndShowFancyBox() {
     $("#fancyHolder").html("<a class='fancybox'><h1 style='text-align:center'>Welcome to the API Tutorial</h1><p>This add-in helps you try out the selected API call against Excel Online in real time. To use it:</p><p> 1. Read the code and description for the API call you selected (Note: the API call itself may be in one of the next steps)</p><p>2. Click <span class='fancyboxbuttonclass'><u>R</u>un Code</span> to see the API calls in action</p><p> 3. Click <img src='../Images/next-translucent.png' class='fancyImage' /> to move on to the next step in the tutorial</p><p> 4. When completed, click <img src='../Images/list-translucent.png' class='fancyImage' /> to see a menu of other API calls to explore</p></a>");
@@ -612,6 +616,10 @@ function initAppHostInfo() {
                 case 4:
                     _appHost = "project"; break;
             }
+        }
+
+        if (_appHost.toLowerCase() != "excel" && _appHost.toLowerCase() != "word") {
+            $('#bottomMenu').hide();
         }
 
     } catch(e) {
@@ -678,9 +686,8 @@ function updateCSSforHost() {
         }
 }
 
-Office.initialize = function (reason) {
-    
-    $(document).ready(function () {
+Office.initialize = function (reason) {    
+    $(document).ready(function () {       
         //Init telemetry
         var telemetryOptions = {};
         telemetryOptions["appVersion"] = "1.1";
@@ -690,15 +697,8 @@ Office.initialize = function (reason) {
         //Init app
         InteractiveTutorial.App.init();
 
+        //Init code snippet 
+        CodeSnippetsInit();
 
-        //Init code snippet        
-        insideOffice = true;
-        console.log('Add-in initialized, redirecting console.log() to console textArea');
-        consoleErrorFunction = console.error;
-        console.error = logComment;
-        // get Angular scope from the known DOM element
-        var e = document.getElementById('samplesContainer');
-        var scope = angular.element(e).scope();
    });
-
 }

@@ -70,12 +70,7 @@
     padding-left:20px;
     color: #858484;
     font-size:15px;
-   
 }
-
-
-
-
 
 .toast .closeBtn {
     width: 100%;
@@ -169,6 +164,7 @@ li.listItem:hover{
     line-height:16px;
     font-size: 10pt;
     font-family:Arial;
+    padding-top:5px;
 }
 
 .navigationButtons {
@@ -410,15 +406,12 @@ li.listItem:hover{
 
 #samplesContainer select{
     width:auto;  
-  -moz-appearance:none;
-  -webkit-appearance:none;
-  background:url("/Images/arrow.png");
-  background-repeat: no-repeat;
-  background-position: right; 
-
-  /*//background: no-repeat scroll right center transparent;*/
-
-  padding-right: 14px;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background:url("/Images/arrow.png");
+    background-repeat: no-repeat;
+    background-position: right; 
+    padding-right: 14px;
 }
 
 #samplesContainer select::-ms-expand{
@@ -430,6 +423,7 @@ li.listItem:hover{
     border:none;
     cursor:pointer;
     background:none;
+    font-size:large; 
 }
 
 #console {
@@ -484,6 +478,20 @@ li.listItem:hover{
     padding:0;
 }
 
+#scenariolabel {
+    width:auto;  
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background:url("/Images/arrowWhite.png");
+    background-repeat: no-repeat;
+    background-position: right; 
+    padding-right: 14px;
+}
+
+#scenariolabel::-ms-expand{
+    display:none;
+}
+
 .codeSnippetsMenu option{
     color:black;
 }
@@ -508,3 +516,15 @@ li.listItem:hover{
     margin:5px;
 }
 
+#TxtRichApiScript {
+    height:60%; 
+    overflow: hidden; 
+    display:flex; 
+    flex-direction: column; 
+    position: relative; 
+    top:0px; 
+    bottom:0px; 
+    left: 0px; 
+    right: 0px; 
+    padding: 5px;
+}

@@ -2,30 +2,69 @@ var officeJsSnippetApp = angular.module("officeJsSnippetApp", ['ngRoute']);
 var insideOffice = false;
 var consoleErrorFunction;
 var isSnippet = false;
-
 var rootUrl = document.location;
+var hostName = "";
 
 var logComment = function(message) {
 	var consoleElement;
 	consoleElement = document.getElementById('console');
 	consoleElement.innerHTML += message + '\n';
 	consoleElement.scrollTop = consoleElement.scrollHeight;
+
+	//showMessage(message);
+}
+
+function GetAppHostInfo() {
+    var search = window.location.search.toLowerCase();
+    try {
+        var info = search.split("host_info=");
+        if (info.length > 1) {
+            var infoBits = info[1].split("|", 3);
+            if (infoBits.length == 1) {
+                //didn't find info using |, trying $
+                var infoBits = info[1].split("$", 3);
+            }
+            
+            //currently code snippets only support excel and word
+            if (infoBits[0].toLowerCase() == "excel" || infoBits[0].toLowerCase() == "word") {
+                hostName = infoBits[0];
+            }
+            
+            //_appBitness = infoBits[1];
+            //_appVersion = infoBits[2];
+        }
+
+        if (hostName == "" && window.external && window.external.GetContext) {
+            var appType = window.external.GetContext().GetAppType()
+            switch (appType) {
+                case 1:
+                    hostName = "excel"; break;
+                case 2:
+                    hostName = "word"; break;
+                default:
+                    hostName = ""; break;
+            }
+        }
+
+    } catch (e) {        
+    }
 }
 
 //Office.initialize = function (reason) {
-    
-//	insideOffice = true;	
-//	console.log('Add-in initialized, redirecting console.log() to console textArea');
-//	consoleErrorFunction = console.error;
-//	console.error = logComment;
-//	// get Angular scope from the known DOM element
-//    var e = document.getElementById('samplesContainer');
-//    var scope = angular.element(e).scope();
-//    // update the model with a wrap in $apply(fn) which will refresh the view for us
-//    //scope.$apply(function() {
-//    //    scope.insideOffice = true;
-//    //}); 
-//};
+function CodeSnippetsInit(reason) { 
+	insideOffice = true;	
+	console.log('Add-in initialized, redirecting console.log() to console textArea');
+	consoleErrorFunction = console.error;
+	console.error = logComment;
+	GetAppHostInfo();
+	// get Angular scope from the known DOM element
+    var e = document.getElementById('samplesContainer');
+    var scope = angular.element(e).scope();
+    // update the model with a wrap in $apply(fn) which will refresh the view for us
+    //scope.$apply(function() {
+    //    scope.insideOffice = true;
+    //}); 
+};
 
 officeJsSnippetApp.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
@@ -50,12 +89,13 @@ officeJsSnippetApp.config(['$routeProvider', function ($routeProvider) {
 officeJsSnippetApp.factory("snippetFactory", ['$http', function ($http) {
 	var factory = {};
 	
-	factory.getSamples = function(app) {
-		return $http.get(app + '-snippets/samples.json');
+	factory.getSamples = function () {
+	    GetAppHostInfo();	   
+	    return $http.get(hostName + '-snippets/samples.json');
 	};
-
-	factory.getSampleCode = function(app, filename) {
-		return $http.get(app + '-snippets/' + filename);
+	
+	factory.getSampleCode = function (filename) {
+	    return $http.get(hostName + '-snippets/' + filename);
 	};
 
 	return factory;
@@ -75,14 +115,14 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 			"/editorIntelliSense/OfficeDocument.txt"
     ]);
 	
-    CodeEditorIntegration.setDirty = function() {
+    CodeEditorIntegration.setDirty = function () {
         if ($scope.selectedSample.code) {
             $scope.selectedSample = { description: $scope.selectedSample.description + " (modified)" };
             $scope.$apply();
         }
     }
 	
-    snippetFactory.getSamples($routeParams["app"]).then(function (response) {
+    snippetFactory.getSamples().then(function (response) {//_appHost  $routeParams["app"]
         $scope.samples = response.data.values;
         $scope.groups = response.data.groups;
     });
@@ -105,6 +145,11 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
             $("#headerString").hide();
             $("#groupSelector").addClass("codeSnippetsMenu");
             $("#sampleSelector").addClass("codeSnippetsMenu");
+            $("#samplesContainer select").css({
+                "background": "url('/Images/arrowWhite.png')",
+                "background-repeat": "no-repeat",
+                "background-position": "right",
+                "padding-right": "14px"});
             $("#samplesContainer").addClass("mainMenu");
             $("#mainBtn").removeClass("hidden");
             $("#placeholder1").removeClass("hidden");
@@ -115,7 +160,7 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
                 $("#codeSnippet").removeClass("hidden");
             }
    
-	        snippetFactory.getSampleCode($routeParams["app"], $scope.selectedSample.filename).then(function (response) {
+            snippetFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
 	            $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);
 	            $scope.insideOffice = insideOffice;
 	            CodeEditorIntegration.setJavaScriptText($scope.selectedSample.code);
@@ -128,14 +173,19 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 	    $scope.isSnippet = false;
 	    $("#codeSnippet").addClass("hidden");
 	    $("#tutorial").show();
-	    $("#groupSelector").removeClass("codeSnippetsMenu");
+	    $("#groupSelector").removeClass("codeSnippetsMenu");	    
 	    $("#sampleSelector").removeClass("codeSnippetsMenu");
 	    $("#samplesContainer").removeClass("mainMenu");
+	    $("#samplesContainer select").css({
+	        "background": "url('/Images/arrow.png')",
+	        "background-repeat": "no-repeat",
+	        "background-position": "right",
+	        "padding-right": "14px"
+	    });
 	    $("#mainBtn").addClass("hidden");
 	    $("#placeholder1").addClass("hidden");
 	    $("#placeholder2").addClass("hidden");
 	    $("#headerString").show();
-	    $("#bottomMenu").show();
 	    InteractiveTutorial.App.showList();
 	}
 
