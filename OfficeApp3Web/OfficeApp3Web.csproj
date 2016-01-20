@@ -58,6 +58,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\officeapitutorial-staging - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial-staging - Web Deploy %282%29.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -441,7 +443,13 @@
     <Content Include="Scripts\Office\MicrosoftAjax.js" />
     <Content Include="Simulate.html" />
     <Content Include="TryItOut.html" />
-    <Content Include="tutorials.xml" />
+    <Content Include="tutorials_15.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="tutorials_16_excel.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="tutorials_16_word.xml" />
     <Content Include="word-snippets\samples.json" />
     <None Include="Properties\PublishProfiles\officeapitutorial - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy.pubxml" />

@@ -7,6 +7,9 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="OfficeApp3" />
   <Description DefaultValue="OfficeApp3"/>
+  <AppDomains>
+    <AppDomain>https://officeapitutorial-staging.azurewebsites.net</AppDomain>
+  </AppDomains>
   <Hosts>
     <Host Name="Workbook" />
     <Host Name="Presentation" />

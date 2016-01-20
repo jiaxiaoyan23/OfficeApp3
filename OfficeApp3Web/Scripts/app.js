@@ -6,12 +6,12 @@ var rootUrl = document.location;
 var hostName = "";
 
 var logComment = function(message) {
-	var consoleElement;
-	consoleElement = document.getElementById('console');
-	consoleElement.innerHTML += message + '\n';
-	consoleElement.scrollTop = consoleElement.scrollHeight;
+	//var consoleElement;
+	//consoleElement = document.getElementById('console');
+	//consoleElement.innerHTML += message + '\n';
+	//consoleElement.scrollTop = consoleElement.scrollHeight;
 
-	//showMessage(message);
+	showMessage(message);
 }
 
 function GetAppHostInfo() {

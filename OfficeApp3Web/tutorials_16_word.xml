@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <scenario title="Insert HTML">
+        <tasks>
+            <task title="Step 1 of 1. Insert HTML" id="insertHtml">
+                <code id="insertHtml">
+                  <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the document body.
+    var body = context.document.body;
+
+    // Queue a commmand to insert HTML in to the beginning of the body.
+    body.insertHtml('<strong>This is text inserted with body.insertHtml()</strong>', Word.InsertLocation.start);
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+        showMessage('HTML added to the beginning of the document body successfully. Click Next button to move on.');        
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});   
+    
+
+        ]]></code>
+            </task>                             
+        </tasks>
+    </scenario>
+  <scenario title="Create Content Control">
+    <tasks>
+      <task title= "Step 1 of 3. Wrap first paragraph in a content control"  id="wrapFirstParagraphInContentControl">
+        <code id="wrapFirstParagraphInContentControl">
+
+          <![CDATA[ 
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+    // Create a proxy object for the paragraphs collection.
+    var paragraphs = context.document.body.paragraphs;
+            
+    // Queue a commmand to load the text property for all of the paragraphs.
+    context.load(paragraphs, 'text');
+            
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync()
+        .then(function () {
+                    
+            // Wrap the first paragraph in a content control.
+            var contentControl = paragraphs.items[0].insertContentControl();
+                    
+            contentControl.load('id');
+                
+            return context.sync().then(function () {
+                contentControlId = contentControl.id;
+                showMessage('ContentControl: ' + contentControlId + ' inserted successfully. Click Next button to move on.');
+            })
+        });                
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});   
+    
+    
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 2 of 3. change contents of the content control"  id="changeContentsofTheContentControl">
+        <code id="changeContentsofTheContentControl">
+
+          <![CDATA[  
+ // Run a batch operation against the Word object model.    
+Word.run(function (context) {
+
+    // Create a proxy object for the content controls collection.
+    var contentControls = context.document.contentControls;
+            
+    // Queue a commmand to load the id property for all of the content controls.
+    context.load(contentControls, 'id');
+            
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync()
+        .then(function () {
+                    
+            // Get the first content control.            
+            contentControls.items[0].insertText("New text in the content control", Word.InsertLocation.replace);                
+      
+         return context.sync().then(function () {               
+                showMessage('Changed contents in the content control successfully. Click Next button to move on.');
+            })
+        });
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});           
+        
+
+        ]]>
+
+        </code>
+      </task>
+      
+      
+      <task title= "Step 3 of 3. delete content control"  id="deleteContentControl">
+        <code id="deleteContentControl">
+          <![CDATA[  
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the content controls collection.
+    var contentControls = context.document.contentControls;
+
+    // Queue a command to load the content controls collection.
+    contentControls.load('text');
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+
+        if (contentControls.items.length === 0) {
+            showMessage("There isn't a content control in this document.");
+        } else {
+
+            // Queue a command to delete the first content control. The
+            // contents will remain in the document.
+            contentControls.items[0].delete(true);
+            // Synchronize the document state by executing the queued commands, 
+            // and return a promise to indicate task completion.
+            return context.sync().then(function () {
+               showMessage('Content control deleted successfully.');
+            });      
+        }
+
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Write and Read Text">
+    <tasks>
+      <task title="Step 1 of 3. Write text to the beginning of the document body" id="writeText">
+        <code id="writeText">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the document body.
+    var body = context.document.body;
+
+    // Queue a commmand to insert text in to the beginning of the body.
+    body.insertText('This is text inserted with body.insertText()', Word.InsertLocation.start);
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+        showMessage('Added text to the beginning of the document body successfully. Click Next button to move on.');
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 3. Read text, font and style information" id="readText">
+        <code id="readText">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the document body.
+    var body = context.document.body;
+
+    // Queue a commmand to load font and style information for the document body.
+    context.load(body, 'text, font/size, font/name, font/color, style');
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+        // Show the results of the load method. Here we show the
+        // property values on the body object.
+        var results = 'Body contents: ' + body.text +
+                      '; Font size: ' + body.font.size +
+                      '; Font name: ' + body.font.name +
+                      '; Font color: ' + body.font.color +
+                      '; Body style: ' + body.style;
+        results += ' Click Next button to move on.';
+        showMessage(results);
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+
+        ]]>
+        </code>
+      </task>
+
+      <task title="Step 3 of 3. Search text" id="readSelectedDataText">
+        <code id="readSelectedDataTextIntro">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the document body.
+    var body = context.document.body;
+
+    // Queue a commmand to search the document.
+    var searchResults = context.document.body.search('is', {matchCase: false});
+
+    // Queue a commmand to load the results.
+    context.load(searchResults, 'text, font');
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {        
+        var results = 'Found count: ' + searchResults.items.length;
+        if (searchResults.items.length > 0)
+        {
+             results +='; we highlighted the result(s).';
+        }
+
+        // Queue a command to change the font for each found item. 
+        for (var i = 0; i < searchResults.items.length; i++) {
+          searchResults.items[i].font.color = '#FF0000'    // Change color to Red
+          searchResults.items[i].font.highlightColor = '#FFFF00';
+          searchResults.items[i].font.bold = true;
+        }
+
+        // Synchronize the document state by executing the queued commands, 
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            showMessage(results);
+        });  
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+
+        ]]>
+        </code>
+      </task>
+
+
+    </tasks>
+  </scenario>
+  <scenario title="Write and Read Paragraph">
+    <tasks>
+      <task title="Step 1 of 2. Insert a paragraph" id="insertParagraph">
+        <code id="insertParagraph">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the document body.
+    var body = context.document.body;
+
+    // Queue a commmand to insert the paragraph at the end of the document body.
+    body.insertParagraph('Content of a new paragraph.', Word.InsertLocation.end);
+   
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+        showMessage('Added a new paragraph at the end of the document body successfully. Click Next button to move on.');
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 2. Get value of the last paragraph" id="getParagraph">
+        <code id="getParagraph">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+    
+     // Create a proxy object for the paragraphs collection.
+    var paragraphs = context.document.body.paragraphs;
+
+    // Queue a commmand to load the text and style properties for all of the paragraphs.
+    context.load(paragraphs, 'text, style');
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+
+        // Queue a command to get the last paragraph and create a 
+        // proxy paragraph object.
+        var paragraph = paragraphs.items[paragraphs.items.length - 1]; 
+
+        // Queue a command to select the paragraph. The Word UI will 
+        // move to the selected paragraph.
+        paragraph.select();
+
+        // Synchronize the document state by executing the queued commands, 
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            showMessage('Selected the last paragraph successfully.');
+        });      
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});
+
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+
+  <scenario title="Insert Header Footer">
+    <tasks>
+      <task title="Step 1 of 2. add Header and Footer" id="addHeaderandFooter">
+        <code id="addHeaderandFooter">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the sections collection.
+    var sections = context.document.sections;
+            
+    // Queue a commmand to load the text property for all of the sections.
+    context.load(sections, 'text');
+            
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+                    
+            // Insert content into the header.
+            var headerSection = sections.items[0].getHeader('primary');
+            headerSection.insertText('Contoso LLC', Word.InsertLocation.end);
+                    
+            // Insert content into the footer.
+            var footerSection = sections.items[0].getFooter('primary');
+            footerSection.insertText('All rights reserved.', Word.InsertLocation.end); 
+            
+        // Synchronize the document state by executing the queued commands, 
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            showMessage('Added Header and Footer successfully. Click Next button to move on.');
+        }); 
+     });  
+})
+.catch(function (error) {
+    console.log('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});   
+        
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 2. remove Header and Footer" id="removeHeaderandFooter">
+        <code id="removeHeaderandFooter">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the sections collection.
+    var sections = context.document.sections;
+            
+    // Queue a commmand to load the text property for all of the sections.
+    context.load(sections, 'text');
+            
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync()
+        .then(function () {
+                    
+            // Insert content into the header.
+            var headerSection = sections.items[0].getHeader('primary');
+            headerSection.clear();
+                    
+            // Insert content into the footer.
+            var footerSection = sections.items[0].getFooter('primary');
+            footerSection.clear();
+                
+        // Synchronize the document state by executing the queued commands, 
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            showMessage('Removed Header and Footer successfully.');
+        }); 
+    });
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+}); 
+
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+
+  <scenario title="Clear Content">
+    <tasks>
+      <task title="Step 1 of 1. Set multiple values in range" id="writeSelectedDataMatrix">
+        <code id="writeSelectedDataMatrix">
+          <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (ctx) {
+
+    // Create a proxy object for the document body.
+    var body = ctx.document.body;
+
+    // Queue a commmand to clear the contents of the body.
+    body.clear();
+
+    // Synchronize the document state by executing the queued-up commands, 
+    // and return a promise to indicate task completion.
+    return ctx.sync().then(function () {
+        showMessage('Cleared the body contents.');
+    });  
+})
+.catch(function (error) {
+    showMessage("Error: " + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+    }
+});    
+
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+</content>

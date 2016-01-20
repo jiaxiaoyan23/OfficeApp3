@@ -127,7 +127,13 @@ InteractiveTutorial.App = new function () {
             }
         }
         $("#content").removeClass("loading");
-        $("#tutorialMain").attr("class", "divWrapperInside");
+        
+        if ((_appHost.toLowerCase() == "excel" || _appHost.toLowerCase() == "word") && _appVersion == "16") {
+            $("#tutorialMain").attr("class", "divWrapperInside");
+        }
+        else {
+            $("#tutorialMain").attr("class", "divWrapperInsideFull");
+        }
         $("#codeSnippetBlock").show();
     }
 
@@ -254,6 +260,9 @@ InteractiveTutorial.App = new function () {
 
     //Check existence of the method/object
     this.objExists = function InteractiveTutorial_App$objExists(ref) {
+        if (_appVersion == "16") {
+            return true;
+        }
         var parts = ref.split(".");
         var expr = "";
         var result;
@@ -269,6 +278,9 @@ InteractiveTutorial.App = new function () {
     //Returns true if the host supports the methods used in the code snippet
     this.hostSupportsMethodsForCode = function InteractiveTutorial_App$hostSupportsMethodsForCode(code) {
         //find the methods in the code, like Office.context.document.getSelectedDataAsync
+        if (_appVersion == "16") {
+            return true;
+        }
         var pattern = /Office\.([A-Za-z0-9\\.]+)/gi;
         var codeText = code;
         var methods = codeText.match(pattern);
@@ -287,7 +299,19 @@ InteractiveTutorial.App = new function () {
 
     //Gets the content from tutorial.xml and adds to an array.
     this.getTutorials = function InteractiveTutorial_App$getTutorials() {
-        self.getXml('tutorials.xml', function (xml) {
+        var xmlPath = "";
+        if (_appVersion == "16") {
+            if (_appHost == "word") {               
+                xmlPath = "tutorials_16_word.xml";
+            }
+            else {
+                xmlPath = "tutorials_16_excel.xml";
+            }                
+        }
+        else {
+            xmlPath = "tutorials_15.xml";
+        }
+        self.getXml(xmlPath, function (xml) {
             _contentXml = xml;
             var tutorial = _contentXml.find('scenario').each(function () {
                 var scenarioObject = {};
@@ -310,8 +334,8 @@ InteractiveTutorial.App = new function () {
                         var taskId = $(this).attr("id");
                         var taskObject = {};
                         var taskTitle = $(this).attr("title");
-                        var taskDescription = $(this).attr("description");
-                        taskObject = { "title": taskTitle, "id": taskId, "description": taskDescription, "code" : code };
+                       // var taskDescription = $(this).attr("description");
+                        taskObject = { "title": taskTitle, "id": taskId, "code" : code };
                         tasks.push(taskObject);
                         }
                     else {
@@ -618,8 +642,15 @@ function initAppHostInfo() {
             }
         }
 
-        if (_appHost.toLowerCase() != "excel" && _appHost.toLowerCase() != "word") {
-            $('#bottomMenu').hide();
+        if (_appVersion.search("16.") == 0) {
+            _appVersion = "16";                
+        }
+        else {
+            _appVersion = "15";
+        }
+
+        if ((_appHost.toLowerCase() == "excel" || _appHost.toLowerCase() == "word") && _appVersion == "16") {
+            $('#bottomMenu').removeClass("hidden");            
         }
 
     } catch(e) {

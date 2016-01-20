@@ -17,8 +17,10 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued-up commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        var results = 'Found count: ' + searchResults.items.length + 
-                      '; we highlighted the results.';
+        var results = 'Found count: ' + searchResults.items.length;
+        if (searchResults.items.length > 0){
+            results += '; we highlighted the results.';
+        }
 
         // Queue a command to change the font for each found item. 
         for (var i = 0; i < searchResults.items.length; i++) {
