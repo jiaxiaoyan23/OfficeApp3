@@ -260,7 +260,7 @@ InteractiveTutorial.App = new function () {
 
     //Check existence of the method/object
     this.objExists = function InteractiveTutorial_App$objExists(ref) {
-        if (_appVersion == "16") {
+        if (_appVersion == "16" && (_appHost == "word" || _appHost == "excel") ) {
             return true;
         }
         var parts = ref.split(".");
@@ -276,11 +276,11 @@ InteractiveTutorial.App = new function () {
     }
 
     //Returns true if the host supports the methods used in the code snippet
-    this.hostSupportsMethodsForCode = function InteractiveTutorial_App$hostSupportsMethodsForCode(code) {
-        //find the methods in the code, like Office.context.document.getSelectedDataAsync
-        if (_appVersion == "16") {
+    this.hostSupportsMethodsForCode = function InteractiveTutorial_App$hostSupportsMethodsForCode(code) {        
+        if (_appVersion == "16" && (_appHost == "word" || _appHost == "excel")) {
             return true;
         }
+        //find the methods in the code, like Office.context.document.getSelectedDataAsync
         var pattern = /Office\.([A-Za-z0-9\\.]+)/gi;
         var codeText = code;
         var methods = codeText.match(pattern);
@@ -296,17 +296,22 @@ InteractiveTutorial.App = new function () {
         return true;
     }
 
-
     //Gets the content from tutorial.xml and adds to an array.
     this.getTutorials = function InteractiveTutorial_App$getTutorials() {
         var xmlPath = "";
         if (_appVersion == "16") {
-            if (_appHost == "word") {               
-                xmlPath = "tutorials_16_word.xml";
-            }
-            else {
-                xmlPath = "tutorials_16_excel.xml";
-            }                
+            switch(_appHost){
+                case "word":
+                    xmlPath = "tutorials_16_word.xml";
+                    break;
+                case "excel":
+                    xmlPath = "tutorials_16_excel.xml";
+                    break;
+                case "powerpoint":
+                default:
+                    xmlPath = "tutorials_15.xml";
+                    break;
+            }                         
         }
         else {
             xmlPath = "tutorials_15.xml";
