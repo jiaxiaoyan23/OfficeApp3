@@ -1,0 +1,1155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <scenario title="Write and Read Text">
+        <tasks>
+            <task title="Step 1 of 2. Write text to user selection" id="writeSelectedDataText" description="The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142295' target='_blank'&gt;Document&lt;/a&gt;  object exposes a method to write to the user's current selection in a document or spreadsheet. To do that, the Document object provides the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method. The following example uses this method to write text into the spreadsheet (see later tutorials to learn how to write matrix and table data structures). The callback function returns an object containing the status of the performed operation. ">
+                <code id="writeSelectedDataText"><![CDATA[
+//Write text to the current user selection
+Office.context.document.setSelectedDataAsync(
+  "Hello World!", 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Success! Click the Next button to move on.");
+  }
+});
+        ]]></code>
+            </task>
+            <task title="Step 2 of 2. Read text from user selection" id="readSelectedDataText" description="The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142295' target='_blank'&gt;Document&lt;/a&gt; object also exposes the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read from the user's current selection in a document or spreadsheet. The following example uses this method to read text from the spreadsheet by specifying the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp161141.aspx' target='_blank'&gt;coercionType&lt;/a&gt; parameter as &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Text&lt;/a&gt;. You can also use the getSelectedDataAsync method to read range (matrix) and table data in Excel and Word, specifying either of those data types as the coercionType parameter of the method. The callback function returns an object containing the data currently selected by the user, which can use the asyncResult.value property to access the selected data.">
+                <code id="readSelectedDataTextIntro"><![CDATA[
+//Read text from the user current selection
+Office.context.document.getSelectedDataAsync(
+  Office.CoercionType.Text, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Selected data: " + asyncResult.value +
+      ". Click the Next button to choose a new tutorial.");
+  }
+});
+        ]]></code>
+            </task>
+        </tasks>
+    </scenario>
+    <scenario title="Write and Read a Range">
+        <tasks>
+            <task title="Step 1 of 2. Write a range (matrix) to user selection" id="writeSelectedDataMatrix" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method to write a matrix data structure, which is a range of cells, into the current selection in the spreadsheet. To do so, pass an array of arrays that contains the data to write to the setSelectedAsync method as the &lt;i&gt;data&lt;/i&gt; parameter. Be aware that a matrix can only be written into the spreadsheet if no other data in the surrounding cells will be overwritten. The callback function returns an object containing the status of the performed operation.">
+                <code id="writeSelectedDataMatrix"><![CDATA[
+/* Select an empty cell and click Run Code to write a range of cells */
+
+// Create a matrix (array of arrays).
+var myMatrix = [["1","2","3"],["4","5","6"],["7","8","9"]];
+
+// Set myMatrix in the document.
+Office.context.document.setSelectedDataAsync(
+  myMatrix,
+  {coercionType: Office.CoercionType.Matrix},
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("You successfully wrote a matrix! Click Next to learn how to read one.");
+    }
+  }
+);
+        ]]></code>
+            </task>
+            <task title="Step 2 of 2. Read range (matrix) from user selection" id="readSelectedDataMatrix" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read the currently selected range of cells. To specify that the selection is read as a range of cells, specify the &lt;i&gt;coerctionType&lt;/i&gt; parameter as &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Matrix&lt;/a&gt;. The callback function returns an object containing the data currently selected by the user, which can use the asyncResult.value property to access the data. ">
+                <code id="readSelectedDataMatrix"><![CDATA[
+/* Select a range of cells with data and click Run Code to read it */
+
+// Read a matrix from the current selection in the document and display 
+//its content
+Office.context.document.getSelectedDataAsync(
+  Office.CoercionType.Matrix, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Selected data: " + asyncResult.value);
+    }
+  }
+);
+        ]]></code>
+            </task>
+        </tasks>
+    </scenario>
+    <scenario title="Write and Read a Table">
+        <tasks>
+            <task title="Step 1 of 2. Write a table to user selection" id="writeSelectedDataTableGrades" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method to write a table into the current selection in the spreadsheet. The table data type is represented by the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object. We first instantiate the object, add sample headers and rows and then pass it as the &lt;i&gt;data&lt;/i&gt; parameter to the method. Be aware that a table can only be written into the spreadsheet if no other data in the surrounding cells will be overwritten. The callback function returns an object containing the status of the performed operation.">
+                <code id="writeSelectedDataTableGrades"><![CDATA[  
+/* Select an empty cell and click Run Code to write a table */
+
+// Create a TableData object.
+var myTable = new Office.TableData();
+myTable.headers = ["First Name","Last Name","Grade"];
+myTable.rows = [["Brittney","Booker","A"], 
+                ["Sanjit","Pandit","C"],
+                ["Naomi","Peacock","B"]];
+	
+// Set the myTable in the document.
+Office.context.document.setSelectedDataAsync(
+  myTable,
+  {coercionType: Office.CoercionType.Table},
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Check out your new table, then click next to learn another API call.");
+    }
+  }
+);
+        ]]></code>
+            </task>
+            <task title="Step 2 of 2. Read a table from user selection" id="readSelectedDataTable" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read the currently selected table. The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Table&lt;/a&gt; parameter specifies the expected data type. The callback function returns an object containing the data currently selected by the user, which can be accessed by the asyncResult.value property.">
+                <code id="readSelectedDataTable"><![CDATA[
+/* Select a table in the document and click Run Code to read it */
+     
+// Read a table from the document and display its contents.
+Office.context.document.getSelectedDataAsync(
+  Office.CoercionType.Table, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Headers: " + asyncResult.value.headers + 
+      " Rows: " + asyncResult.value.rows);
+    }
+  }
+);
+        ]]></code>
+            </task>
+        </tasks>
+    </scenario>
+    <scenario title="Update a Row in a Table">
+        <tasks>
+            <task title="Step 1 of 3. Write a table to user selection" id="writeSelectedDataTablePopulation" description="The first step in this tutorial is to write the sample table to work with. As shown in previous tutorials, the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='blank'&gt;setSelectedDataAsync&lt;/a&gt; method can be used to write the data.">
+                <code id="writeSelectedDataTablePopulation"><![CDATA[ 
+/* Select an empty cell and click Run Code to write a table showing City 
+and State data */
+      
+//Create a new table
+var myTable = new Office.TableData();
+myTable.headers = ["City", "State"];
+myTable.rows = [["Phoenix","AZ"],
+                ["Raleigh","NC"], 
+                ["Nashville","TN"], 
+                ["Boston","MA"]];
+
+//Write myTable to the document
+Office.context.document.setSelectedDataAsync(
+  myTable,
+  {coercionType: Office.CoercionType.Table},
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Table successfully written. Click next to move on.");
+    }
+});
+        ]]></code>
+            </task>
+            <task title="Step 2 of 3. Bind to the table" id="bindToTable" description="The next step is to bind to the table. Unlike the basic writing and reading methods, binding to a region in a document establishes a link between that region and the add-in that can be referenced later on. After a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161045' target='_blank'&gt;Binding&lt;/a&gt; object is created, you can access it at any time, read and write data to the region of the document associated with it, and handle selection and data change events. This example demonstrates binding to the user’s current selection using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142282' target='_blank'&gt; addFromSelectionAsync&lt;/a&gt; method. Be aware that bindings can also be created  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142150' target='_blank'&gt;based on selection from a prompt&lt;/a&gt; (Excel only), and &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp123590' target='_blank'&gt;from existing named items &lt;/a&gt; in the document and spreadsheet. The example also shows how a binding ID can be specified (‘MyTableBinding’) when you create the binding. The binding ID can then be used to retrieve the binding. The callback function returns an asyncResult object containing the binding, which can be accessed using the asyncResult.value property. ">
+                <code id="bindToTable"><![CDATA[  
+/* Select the table from the previous step and click Run Code. 
+This will create a binding to the table */
+      
+//Bind to the table in the document from user current selection
+Office.context.document.bindings.addFromSelectionAsync(
+  Office.BindingType.Table, 
+  { id: "MyTableBinding" }, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Added new binding with type: " + asyncResult.value.type + 
+      " and id: " + asyncResult.value.id);
+    }
+});
+        ]]></code>
+            </task>
+            <task title="Step 3 of 3. Update row in the binding" id="updateRowInBinding" description="Now we can use the binding object created in the previous step to update the table content. The example shows how to retrieve the table binding based on its ID using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161004' target='_blank'&gt;Office.select&lt;/a&gt; selector method and then calls the  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161120' target='_blank'&gt;setDataAsync&lt;/a&gt; method to write data into the binding object, which will be reflected in the table associated with the binding. First, a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object containing one row, is created. The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object is then passed as the &lt;i&gt;data&lt;/i&gt; parameter to the method along with a &lt;i&gt;startRow&lt;/i&gt;  parameter value to indicate the position in the table to replace with the supplied table. Be aware that the shape of the table used to update the binding must match the shape of the updated table in terms of the number of columns and rows. The callback function returns an asyncResult object containing the status of the performed operation.">
+                <code id="updateRowInBinding"><![CDATA[  
+      
+/* Click Run Code to replace the 3rd row with new data */
+
+//Creating the row to update 
+var table = new Office.TableData();
+table.rows = ["Seattle","WA"];
+var rowToUpdate = 2;
+	
+//Getting the table binding and setting data in 3rd row.
+Office.select("bindings#MyTableBinding", onBindingNotFound).setDataAsync(
+  table,
+  {coercionType: Office.CoercionType.Table, startRow: rowToUpdate}, 
+  function(asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Updated row number 3 with this data: " + table.rows);
+    }
+  }
+);  
+
+//Show error message in case the binding object wasn't found
+function onBindingNotFound(){
+  showMessage("The binding object was not found. " +
+  "Please return to previous step to create the binding");
+}
+]]></code>
+            </task>
+            <task title="Extra Credit: Add Column to the table" id="addColumnFromBinding" description="In addition to updating existing data in the table, the table binding object can be used to add new columns and rows. The example shows how to retrieve the table binding based on its ID using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161008' target='_blank'&gt;getById&lt;/a&gt; method exposed by the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp160966' target='_blank'&gt;Bindings&lt;/a&gt; object.  First, a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object containing a header and one column is created. Once the binding object is retrieved, the new table is passed as the &lt;i&gt;data&lt;/i&gt; parameter to the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp179822' target='_blank'&gt;addColumnsAsync&lt;/a&gt; method. Be aware, that just like updating table data, adding columns and rows requires that the shape of object added to the table matches the shape of the table (in this example, the new column created has the same number of rows as the table). The callback function returns an asyncResult object containing the status of the performed operation. &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161004' target='_blank'&gt;Office.select&lt;/a&gt; selector method and then calls the  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161120' target='_blank'&gt;setDataAsync&lt;/a&gt; method to write data into the binding object, which will reflect in the table.">
+                <code id="addColumnFromBinding"><![CDATA[  
+/* Click Run Code to add a column with population data */
+
+//Create a table with a single column
+var populationTable = new Office.TableData();
+populationTable.headers = [["Population"]];
+populationTable.rows = [["1593659"],["416468"],["616627"],["645169"]];
+	
+//Finding the binding by its id
+Office.context.document.bindings.getByIdAsync(
+  "MyTableBinding", 
+  function(asyncResult){
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      //getByIdAsync returns a binding object. 
+      //If the binding object was found, add a column to it
+      asyncResult.value.addColumnsAsync(populationTable, function(result){
+        if (result.status == "failed") {
+          showMessage("Action failed with error: " + result.error.message);
+        } else {
+          showMessage("Successfully added Population column!");
+        }
+      });
+    }
+});
+        ]]></code>
+            </task>
+        </tasks>
+    </scenario>
+  <scenario title="Get Selected Coordinates">
+    <tasks>
+      <task title="Step 1 of 3. Write a range to user selection" id="writeSelectedDataMatrix" description="The first step in this tutorial is to write a sample range of cells (matrix) into the document. As shown in previous tutorials, the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method can be used to write the data.">
+        <code id="writeSelectedDataMatrix">
+          <![CDATA[
+/* Select an empty cell and click Run Code to write a range of cells */
+
+// Create a matrix (array of arrays).
+var myMatrix = [["1","2","3"],["4","5","6"],["7","8","9"]];
+
+// Set myMatrix in the document.
+Office.context.document.setSelectedDataAsync(
+  myMatrix,
+  {CoercionType: Office.CoercionType.Matrix},
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("You wrote a matrix! Click Next to see how to bind to it.");
+    }
+});
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 3. Bind to range" id="bindToMatrix" description="The next step is to bind to the range (matrix). Binding to a region in a document establishes a link between that region and the add-in that can be referenced later on. After a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161045' target='_blank'&gt;Binding&lt;/a&gt; object is created, you can retrieve it at any time, read and write data to the region of the document associated with it, and handle selection and data change events. This example demonstrates binding by displaying a prompt using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142150' target='_blank'&gt;addFromPromptAsync&lt;/a&gt;  method, which prompts the user to make a selection in the document and binds to that selection. Be aware that bindings can also be created  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142282' target='_blank'&gt;based on current user selection&lt;/a&gt; (without displaying a prompt) and &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp123590' target='_blank'&gt;from existing named items &lt;/a&gt; in the document or spreadsheet. The example also shows how a binding ID can be specified when you create the binding. The binding ID, 'MyMatrixBinding', can then be used to retrieve the binding. The callback function returns an asyncResult object containing the binding object, which can be accessed by using the asyncResult.value property. ">
+        <code id="bindToMatrix">
+          <![CDATA[ 
+/* Click Run Code to show a prompt for cell selection. 
+Selecting a range from the prompt will bind to that range */
+
+//Bind to the matrix in the document from prompt
+Office.context.document.bindings.addFromPromptAsync(
+  Office.BindingType.Matrix, 
+  {id: "MyMatrixBinding"}, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Added new binding with type: " + asyncResult.value.type + 
+      " and id: " + asyncResult.value.id);
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+      <task title="Step 3 of 3. Detect selection changes" id="detectCoordinateSelectionChangeEventMatrix" description="After binding to the matrix, the next step is to detect when a user changes selection in that range and then read the selected cell coordinates. This can be done by adding an event handler function to the binding to detect selection change events. Once the event is triggered, the event handler function, onBindingSelectionChanged(), is called and gets data from the binding using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161073' target='_blank'&gt;Binding.getDataAsync&lt;/a&gt; method. By default, the getDataAsync method returns all the data contained in a text, matrix, or table binding. However, it is possible to get a partial set of the data by specifying the &lt;i&gt;startRow&lt;/i&gt;, &lt;i&gt;startColumn&lt;/i&gt;, &lt;i&gt;rowCount&lt;/i&gt; and &lt;i&gt;columnCount&lt;/i&gt; parameters of the method. The data is then returned by the asyncResult object and can be accessed through the value property.">
+        <code id="detectCoordinateSelectionChangeEventMatrix">
+          <![CDATA[  
+/* Click Run Code to add an event handler to the Matrix binding. 
+Then select different cells in the Matrix to trigger the event 
+and read the current selected cell. */
+
+//Get the binding and add an event handler to detect selection change events
+Office.select("bindings#MyMatrixBinding", onBindingNotFound).addHandlerAsync(
+  Office.EventType.BindingSelectionChanged, 
+  onBindingSelectionChanged, 
+  function(AsyncResult){
+		showMessage("Event handler was added successfully!"+ 
+    " Change the matrix current selection to trigger the event");
+});
+
+//Trigger on selection change, get partial data from the matrix
+function onBindingSelectionChanged(eventArgs) {
+  eventArgs.binding.getDataAsync(
+    {CoercionType: Office.CoercionType.Matrix, 
+      startRow:eventArgs.startRow, 
+      startColumn:eventArgs.startColumn, 
+      rowCount:1, columnCount:1
+    }, 
+    function(asyncResult) {
+      if (asyncResult.status == "failed") {
+        showMessage("Action failed with error: " + asyncResult.error.message);
+      } else{
+        showMessage(asyncResult.value[0].toString());
+      }
+    });
+}
+
+//Show error message in case the binding object wasn't found
+function onBindingNotFound(){
+  showMessage("The binding object was not found."+ 
+  " Please return to previous step to create the binding");
+}
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+    <scenario title="Persist Settings">
+        <tasks>
+            <task title="Step 1 of 3. Set Setting" id="setSettings" description="The Settings object makes it possible to store data associated with the user or the app. The data is saved in the document file and can be retrieved at any point later. Be aware that settings are saved per document and not per add-in, so it's only possible to retrieve settings saved in the current document. This is very useful for caching data specific to the add-in state for the current document. This example shows how to use the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161063' target='_blank'&gt;Settings.set&lt;/a&gt; method to store a key value pair of strings. This setting will be made available during the entire add-in session.">
+                <code id="setSettings"><![CDATA[  
+/* Click Run Code to set a setting */
+
+// Set a setting in the document
+Office.context.document.settings.set("mySetting", "mySetting value");
+showMessage("You have saved a new setting. Click next to retrieve it.");
+
+
+        ]]></code>
+            </task>
+            <task title="Step 2 of 3. Get Settings" id="getSettings" description="To get a setting previously set or saved by the add-in, use the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142180' target='_blank'&gt;Settings.get&lt;/a&gt; method.">
+                <code id="getSettings"><![CDATA[  
+/* Click Run Code to get a setting */
+
+//Get a setting previously set in the document
+var settingsValue = Office.context.document.settings.get("mySetting");
+showMessage("mySetting value is: " + settingsValue);
+        ]]></code>
+            </task>
+            <task title="Step 3 of 3. Save Settings" id="saveSettings" description="Any setting previously saved by an add-in is loaded when the document is initialized, so during the lifetime of the session you can just use the set and get methods to read and write settings. When you want to persist the settings so that they are available the next time the add-in is used with the document, use the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161133' target='_blank'&gt;saveAsync &lt;/a&gt; method.">
+                <code id="saveSettings"><![CDATA[  
+/* Click Run Code to save a setting in the document */
+
+//Save a setting in the document to make it available in future sessions
+Office.context.document.settings.saveAsync(function (asyncResult) {
+  if (asyncResult.status == "failed") {
+    showMessage("Action failed with error: " + asyncResult.error.message);
+  } else {
+    showMessage("Settings saved with status: " + asyncResult.status);
+  }
+});
+        ]]></code>
+            </task>
+        </tasks>
+    </scenario>
+  <scenario title="Active view">
+    <tasks>
+      <task title= "Step 1 of 3. Get the current active view" id="getActiveView"
+                description = "Gets the current active view (read or edit) that the presentation is in.  Try this method out by switching between reading views (slideshow) or edit views.">
+        <code id="getActiveView">
+
+          <![CDATA[  
+/* Click Run Code to get the active view */
+
+Office.context.document.getActiveViewAsync(function (asyncResult) {
+  if (asyncResult.status == "failed") {
+    showMessage("Action failed with error: " + asyncResult.error.message);
+  } else {
+    showMessage("Active view: " + asyncResult.value +
+    ". Continue to the next step to add an event handler to the active view.");
+  }
+});
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 2 of 3. Register to the active view changed event"  id="registerActiveViewChanged"
+            description= "This event will be fired whenever the view is changed.  Try registering to the event and switching between edit and any other view, the event should be fired with the correct edit/read value.">
+        <code id="registerActiveViewChanged">
+
+          <![CDATA[  
+/* Click Run Code to register the active view changed event */
+/* Switch between slide show and edit view to see event fire */
+
+Globals.activeViewHandler = function (args) {
+  showMessage(JSON.stringify(args));
+}
+
+Office.context.document.addHandlerAsync(
+  Office.EventType.ActiveViewChanged,
+  Globals.activeViewHandler, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage(asyncResult.status);
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 3 of 3. Unregister to the active view changed event"  id="unregisterActiveViewChanged"
+            description= "After successfully unregistering the event, active view changed event should not be fired anymore.  Run the code and try switching views.">
+        <code id="unregisterActiveViewChanged">
+
+          <![CDATA[  
+/* Click Run Code to unregister the active view changed event */
+
+Office.context.document.removeHandlerAsync(
+  Office.EventType.ActiveViewChanged,
+  {handler: Globals.activeViewHandler },
+  function (asyncResult) {  
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage(asyncResult.status);
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Selection Changed">
+    <tasks>
+      <task title= "Step 1 of 2. Register to the document selection changed event"  id="registerDocumentSelectionChanged"
+            description= "This event will be fired whenever a new document selection is made.">
+        <code id="registerDocumentSelectionChanged">
+
+          <![CDATA[  
+/* Click Run Code to register the document selection changed event which gets the current selection*/
+
+//For more practice, try changing this function to use Office.context.document.setSelectedDataAsync creatively!
+Globals.documentSelectionHandler = function (args) {
+  Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult) {
+    if (asyncResult.status == "succeeded") {
+      showMessage("DocumentSelectionChanged: " + asyncResult.value);
+    }
+  });
+}
+
+Office.context.document.addHandlerAsync(
+  Office.EventType.DocumentSelectionChanged,
+  Globals.documentSelectionHandler,
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("DocumentSelectionChanged handler added successfully." +
+        " Click Next to learn how to remove it.");
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 2 of 2. Unregister to the active view changed event"  id="unregisterDocumentSelectionChanged"
+            description= "The document selection event should no longer be fired once this code is ran.">
+        <code id="unregisterDocumentSelectionChanged">
+
+          <![CDATA[  
+/* Click Run Code to unregister the active view changed event */
+
+Office.context.document.removeHandlerAsync(
+  Office.EventType.DocumentSelectionChanged,
+  {handler: Globals.documentSelectionHandler},
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("DocumentSelectionChanged handler remove succeeded");
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Navigation">
+    <tasks>
+      <task title= "Step 1 of 4. Get the current/selected slide(s) info" id="getSlideId"
+            description= "This is the way to get id/index/title of selected slides, the first slide returned should be the current active slide.">
+        <code id="getSlideId">
+
+          <![CDATA[  
+/* Click Run Code to get the selected slide and store it as the first slide */
+
+Globals.firstSlideId = 0;
+
+Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange,
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      //Record the ID of the first slide
+      Globals.firstSlideId = asyncResult.value.slides[0].id;
+      showMessage("Slide info: " + JSON.stringify(asyncResult.value));
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 2 of 4. Go to a slide by id"  id="goToByIdSlideId"
+          description="You can navigate to a slide by a specific slide id.  For a content add-in, this method is not as useful as it is for a taskpane add-in.  You can either find a slide id through the previous step, or through VBA.">
+        <code id="goToByIdSlideId">
+
+          <![CDATA[  
+/* Click Run Code to go to the slide by id.
+   Works best if you navigate to a slide which is not the current slide */
+
+Office.context.document.goToByIdAsync(Globals.firstSlideId, Office.GoToType.Slide, 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Navigation successful!");
+    }
+  }
+);
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 3 of 4. Go to the next slide" id="goToByIdEnum"
+          description= "You can go to a first/last/next/previous slide by using their keyword.  This is the most useful navigation for content add-ins.  Try using different keywords.">
+        <code id="goToByIdEnum">
+
+          <![CDATA[  
+/* Click Run Code to go to the first/last/previous/next slide */
+
+var goToFirst = Office.Index.First;
+var goToLast = Office.Index.Last;
+var goToPrevious = Office.Index.Previous;
+var goToNext = Office.Index.Next;
+
+Office.context.document.goToByIdAsync(goToNext, Office.GoToType.Index,
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Navigation successful!");
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+      <task title= "Step 4 of 4. Go to slide by index" id="goToByIdIndex"
+          description= "You can go to a slide by a specific index.">
+        <code id="goToByIdIndex">
+
+          <![CDATA[  
+/* Click Run Code to go to the first/last/previous/next slide */
+
+var index = 1;
+
+Office.context.document.goToByIdAsync(index, Office.GoToType.Index,
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+        showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+        showMessage("Navigation successful!");
+    }
+});
+        ]]>
+
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Navigate to Binding">
+    <tasks>
+      <task title= "Step 1 of 2. Create a table and binding" id="createTableAndBind"
+            description= "Start by creating a simple table and a binding to that table that can be reused in the next step.">
+        <code id="createTableAndBind">
+          <![CDATA[
+// Create a TableData object.
+var myTable = new Office.TableData();
+myTable.headers = ["First Name", "Last Name", "Balance"];
+myTable.rows = [["Brittney", "Booker", "1223.10"],
+                ["Sanjit", "Pandit", "34234.99"],
+                ["Naomi", "Peacock", "-50.78"]];
+
+// Set the myTable in the document.
+Office.context.document.setSelectedDataAsync(myTable, {coercionType: Office.CoercionType.Table},
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      //Create a new table binding for the selected table.
+      Office.context.document.bindings.addFromSelectionAsync(Office.CoercionType.Table, {id: "MyTableBinding"},
+        function (asyncResult) {
+          if (asyncResult.status == "failed") {
+            showMessage("Action failed with error: " + asyncResult.error.message);
+          } else {
+            showMessage("Added new binding with type: " + asyncResult.value.type + " and id: " + asyncResult.value.id +
+            ". Click next to learn how to navigate to this new binding.");
+          }
+        }
+      )
+    }                                                     
+  }
+);
+]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 2. Navigate to table" id="gotoByID"
+      description= "Set focus to the table by using the &lt;a href='https://msdn.microsoft.com/en-us/library/office/dn482498.aspx' target='_blank'&gt;Document.goToByIdAsync&lt;/a&gt; method.">
+        <code id="gotoByID">
+          <![CDATA[
+//Go to binding by ID. Scroll so the binding is off-screen, then click Run Code
+Office.context.document.goToByIdAsync("MyTableBinding", Office.GoToType.Binding,
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message +
+                  ". Try going back to the previous step to set a binding.");
+    } else {
+      showMessage("Navigation successful!");
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Get File Location">
+    <tasks>
+      <task title= "Step 1 of 1. Get file location" id="Properties"
+            description= "Get the location of the document by using getFilePropertiesAsync.">
+        <code id="getFileProperties">
+          <![CDATA[
+// Make the async call to get the file properties
+//Note: This will return "undefined" when the document is embedded in a webpage.
+Office.context.document.getFilePropertiesAsync(
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("The document location is: " + asyncResult.value.url);
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Set Formatting">
+    <tasks>
+      <task title= "Step 1 of 1. Set formatting on a table" id="setDataFormat"
+            description= "Set the format for a table at the same time the data is set.">
+        <code id="setDataFormat">
+          <![CDATA[
+// Create a TableData object.
+var myTable = new Office.TableData();
+myTable.headers = ["First Name", "Last Name", "Balance"];
+myTable.rows = [["Brittney", "Booker", "1223.10"],
+                ["Sanjit", "Pandit", "34234.99"],
+                ["Naomi", "Peacock", "-50.78"]];
+
+// Set the myTable in the document.
+Office.context.document.setSelectedDataAsync(myTable, 
+  {
+    coercionType: Office.CoercionType.Table,
+    cellFormat: [
+      //Set the font color to yellow in the header
+      { cells: Office.Table.Headers, format: { fontColor: "yellow" } },
+      //Set the data cells to gray background with blue font color
+      { cells: Office.Table.Data, format: { fontColor: "blue", backgroundColor: "gray" } },
+      //Set the number format for Currency
+      { cells: { column: 2 }, format: { numberFormat: "$#,##0.00_);[Red]($#,##0.00)" } },
+      //Auto fit the column widths
+      { cells: Office.Table.All, format: { width: "auto fit" } }
+    ]
+  },
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Check out your fancy new table!");
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <!--Outlook only Tutorials-->
+  <scenario title="API Calls in Compose Mode">
+    <tasks>
+      <task title= "Step 1 of 5. Get the type of the email body" id="bodyGetType"
+            description= "Inside a mailbox item, use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/dn482486.aspx' target='_blank'&gt;body&lt;/a&gt; object to access the body of your email. Call &lt;a href='https://msdn.microsoft.com/EN-US/library/office/dn482492.aspx' target='_blank'&gt;body.getTypeAsync&lt;/a&gt; to determine the type of the email body, which is either HTML or text.">
+        <code id="bodyGetType">
+          <![CDATA[
+/* Get the type of the email body */
+
+Office.context.mailbox.item.body.getTypeAsync(
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Body type: " + asyncResult.value + 
+      ". Click Next to learn another API call.");
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 5. Set message subject" id="setSubject"
+            description= "When composing an email, set the message subject to a specific string using the &lt;a href='https://msdn.microsoft.com/en-us/library/office/dn482531.aspx' target='_blank'&gt;subject.setAsync&lt;/a&gt; method.">
+        <code id="setSubject">
+          <![CDATA[ 
+  
+/* Click Run Code to set message subject */
+
+Office.context.mailbox.item.subject.setAsync("New subject!", 
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("You successfully updated the email subject.");
+    }
+  }
+);
+  ]]>
+        </code>
+      </task>
+      <task title= "Step 3 of 5. Prepend text to the email body" id="bodyPrependText"
+            description= "When composing an email, use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/dn482486.aspx' target='_blank'&gt;body&lt;/a&gt; object to access the body of your email. Call &lt;a href='https://msdn.microsoft.com/EN-US/library/office/dn482491.aspx' target='_blank'&gt;body.prependAsync&lt;/a&gt; to write the specified text at the start of the email body.">
+        <code id="bodyPrependText">
+          <![CDATA[
+/* Click Run Code to add text to the start of the email body */
+
+Office.context.mailbox.item.body.prependAsync("Add-ins rule!",
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Body prepend successful. Click Next to learn a more general method.")
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+      <task title= "Step 4 of 5. Write text in email body" id="writeBodySelectedDataText"
+            description= "When composing an email, use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/dn482486.aspx' target='_blank'&gt;body&lt;/a&gt; object to access the body of your email. Call &lt;a href='https://msdn.microsoft.com/EN-US/library/office/dn482493.aspx' target='_blank'&gt;body.setSelectedDataAsync&lt;/a&gt; to write the specified text at the currently selected location. note that this will only write to the body of the email, not the subject line.">
+        <code id="writeBodySelectedDataText">
+          <![CDATA[
+/* Select a location in the body of the email and click Run Code to write text there,
+or highlight some text in the body of the email and click Run Code to overwrite it */
+
+Office.context.mailbox.item.body.setSelectedDataAsync("Hello World!",
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("You successfully wrote in the email body. Click Next to learn more.");
+    }
+  }
+);
+]]>
+        </code>
+      </task>
+      <task title= "Step 5 of 5. Set entire email body" id="itemBodySetAsync" description="When composing an email, use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/mt269090.aspx' target='_blank'&gt;body.setAsync&lt;/a&gt; method to write the entire body of the email. This method can be used to set the body to plaintext, but it can also set HTML, as seen in the example.">
+        <code id="itemBodySetAsync">
+          <![CDATA[  
+Office.context.mailbox.item.body.setAsync(
+	"new <b>body</b> here",
+	{ asyncContext: null,
+    coercionType : Office.CoercionType.Html },
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+      showMessage("Success! Now you know how to compose emails using API calls.");
+    }
+	}
+);
+          ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+
+  <scenario title="Create Email Reply">
+    <tasks>
+      <task title= "Step 1 of 2. Display reply form" id="displayReply"
+            description= "The &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp161175.aspx' target='_blank'&gt;Message&lt;/a&gt; object gives access to the current message, exposing the &lt;a href='https://msdn.microsoft.com/en-us/library/office/jj715286.aspx' target='_blank'&gt;displayReplyForm&lt;/a&gt; method. The simplest way to create a reply email is to call the displayReplyForm method with a single string parameter representing the reply text.">
+        <code id="displayReply">
+          <![CDATA[ 
+Office.context.mailbox.item.displayReplyForm("This is my reply");
+        
+  ]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 2. Display reply all form" id="bodyReplyAll"
+            description= "The &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp161175.aspx' target='_blank'&gt;Message&lt;/a&gt; object gives access to the current message, exposing the &lt;a href='https://msdn.microsoft.com/en-us/library/office/jj715290.aspx' target='_blank'&gt;displayReplyAllForm&lt;/a&gt; method. The simplest way to create a reply all email is to call the displayReplyAllForm method with a single string parameter representing the reply text.">
+        <code id="bodyReplyAll">
+          <![CDATA[ 
+Office.context.mailbox.item.displayReplyAllForm("This is my reply ALL");
+        
+
+  ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+
+  <scenario title="Make EWS Calls">
+    <tasks>
+      <task title= "Step 1 of 3. Get available email IDs" id="getEwsIds"
+            description= "Using &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142295' target='_blank'&gt;Office.content.mailbox.item&lt;/a&gt;, retrieve the ID of the single email being read using the &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp142193.aspx' target='_blank'&gt;itemId&lt;/a&gt; property, and the conversation to which it belongs using the &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp142253.aspx' target='_blank'&gt;conversationId&lt;/a&gt; property.">
+        <code id="getEwsIds">
+          <![CDATA[ 
+ 
+/* Click Run Code to display available EWS IDs */
+
+showMessage("EWS ID: " + Office.context.mailbox.item.itemId +
+  " Conversation ID: " + Office.context.mailbox.item.conversationId + 
+  ". Click next to learn how to use these IDs.");
+        
+
+  ]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 3. Send an email" id="sendMessage"
+            description= "Send an email using the &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp161019.aspx' target='_blank'&gt;Mailbox.makeEwsRequestAsync&lt;/a&gt; method. Specify messages to send and intended recipients. Note: Your Add-in must have ReadWriteMailbox permissions to use this method!">
+        <code id="sendMessage">
+          <![CDATA[ 
+  
+/* Click Run Code to send an email to yourself */
+
+var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
+	'  <soap:Header><t:RequestServerVersion Version="Exchange2010" /></soap:Header>'+
+	'  <soap:Body>'+
+	'    <m:CreateItem MessageDisposition="SendAndSaveCopy">'+
+	'      <m:SavedItemFolderId><t:DistinguishedFolderId Id="sentitems" /></m:SavedItemFolderId>'+
+	'      <m:Items>'+
+	'        <t:Message>'+
+	'          <t:Subject>Hello, Outlook!</t:Subject>'+
+	'          <t:Body BodyType="HTML">I sent this message to myself using the Outlook API!</t:Body>'+
+	'          <t:ToRecipients>'+
+	'            <t:Mailbox><t:EmailAddress>' + Office.context.mailbox.userProfile.emailAddress + '</t:EmailAddress></t:Mailbox>'+
+	'          </t:ToRecipients>'+
+	'        </t:Message>'+
+	'      </m:Items>'+
+	'    </m:CreateItem>'+
+	'  </soap:Body>'+
+	'</soap:Envelope>';
+
+Office.context.mailbox.makeEwsRequestAsync(request,
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Message sent! Check your inbox.");
+    }
+});
+        
+
+  ]]>
+        </code>
+      </task>
+      <task title= "Step 3 of 3. Get callback token" id="getCallbackToken"
+            description= "Use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/jj984589.aspx' target='_blank'&gt;mailbox.getCallbackTokenAsync&lt;/a&gt; method to retrieve a token which authorizes future EWS calls. After the callback token is retrieved, it can be used for the next five minutes to make &lt;a href='https://msdn.microsoft.com/en-us/library/office/aa494316.aspx' target='_blank'&gt;GetAttachment&lt;/a&gt; or &lt;a href='https://msdn.microsoft.com/en-us/library/office/aa565934.aspx' target='_blank'&gt;GetItem&lt;/a&gt; requests.">
+        <code id="getCallbackToken">
+          <![CDATA[ 
+/* Get the callback token to use with EWS */
+
+Office.context.mailbox.getCallbackTokenAsync(
+  function (asyncResult) {
+    if (asyncResult.status == "failed") {
+      showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+      showMessage("Token: " + asyncResult.value);
+    }
+});
+        
+
+  ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  
+  <scenario title="Get Contents of an Email">
+    <tasks>
+      <task title= "Step 1 of 2. Get email subject" id="getSubject"
+            description= "When in read mode, subject can be easily retrieved via the &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp142177.aspx' target='_blank'&gt;item&lt;/a&gt; subject property. In compose mode, use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/dn482529.aspx' target='_blank'&gt;subject.getAsync&lt;/a&gt; method to retrieve the subject.">
+        <code id="getSubject">
+          <![CDATA[ 
+  
+/* Click Run Code to get message subject */
+
+if(Office.context.mailbox.item.subject.getAsync){
+  Office.context.mailbox.item.subject.getAsync(
+    function (asyncResult) {
+      if (asyncResult.status == "failed") {
+        showMessage("Action failed with error: " + asyncResult.error.message);
+      }
+      else {
+        showMessage("Composed subject is: " + asyncResult.value);
+      }
+  });
+}
+else {
+  showMessage("Subject is: " + Office.context.mailbox.item.subject);
+};
+  ]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 2. Get email body" id="itemBodyGetAsync" description="Retrieve the entire body of an email using the &lt;a href='https://msdn.microsoft.com/en-us/library/office/mt269089.aspx' target='_blank'&gt;body.getAsync&lt;/a&gt; method. Specify whether to retrieve the body in HTML or plaintext format.">
+      <code id="itemBodyGetAsync">
+        <![CDATA[  
+Office.context.mailbox.item.body.getAsync(
+  {coercionType: "text"},
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+			showMessage("Body: " + asyncResult.value);
+		}
+	}
+);
+          ]]>
+      </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Notification messages">
+    <tasks>
+      <task title= "Step 1 of 4. item.notificationMessages.addAsync" id="itemNotificationMessagesAddAsync" description="Use &lt;a href='https://msdn.microsoft.com/EN-US/library/office/mt269092.aspx' target='_blank'&gt;notificationMessages.addAsync&lt;/a&gt; to append a notification to the top of a message. Each notification message must have a unique key, plus a JSON object designating type, icon, message, and persistence of the notification. The types of notification message are progressIndicator (seen in this example), informationalMessage, and errorMessage.">
+        <code id="itemNotificationMessagesAddAsync">
+          <![CDATA[  
+//NOTE: NotificationMessage API calls are currently unsupported in Outlook Web Access (OWA)
+//Please run this code in Outlook
+Office.context.mailbox.item.notificationMessages.addAsync(
+	"foo", 
+  { 
+    type: "progressIndicator",
+    message: "this operation is in progress", 
+  },
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+      showMessage("Check out the new progress indicator at the top of the email, then click Next.");
+    }
+	}
+);
+        ]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 4. item.notificationMessages.replaceAsync" id="itemNotificationMessagesReplaceAsync" description="Like addAsync, &lt;a href='https://msdn.microsoft.com/EN-US/library/office/mt269095.aspx' target='_blank'&gt;notificationMessages.replaceAsync&lt;/a&gt; takes in a unique key and a JSON object, but rather than creating a new notification message, it replaces the current message with the designated key with the new notification message.">
+        <code id="itemNotificationMessagesReplaceAsync">
+          <![CDATA[  
+//NOTE: NotificationMessage API calls are currently unsupported in Outlook Web Access (OWA)
+//Please run this code in Outlook
+Office.context.mailbox.item.notificationMessages.replaceAsync(
+	"foo", 
+  { 
+    type: "informationalMessage",
+    icon: "icon_24", 
+    message: "this operation is complete", 
+    persistent: false 
+  },
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+      showMessage("Success! Click next to learn another API call.");
+    }
+	}
+);
+        ]]>
+        </code>
+      </task>
+      <task title= "Step 3 of 4. item.notificationMessages.getAllAsync" id="itemNotificationMessagesGetAllAsync" description="To see the details of every notification linked to the current item, use the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/mt269093.aspx' target='_blank'&gt;notificationMessages.getAllAsync&lt;/a&gt; method.">
+        <code id="itemNotificationMessagesGetAllAsync">
+          <![CDATA[  
+//NOTE: NotificationMessage API calls are currently unsupported in Outlook Web Access (OWA)
+//Please run this code in Outlook
+Office.context.mailbox.item.notificationMessages.getAllAsync(
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+			showMessage("notification messages: " + JSON.stringify(asyncResult.value));
+		}
+	}
+);
+        ]]>
+        </code>
+      </task>
+      <task title= "Step 4 of 4. item.notificationMessages.removeAsync" id="itemNotificationMessagesRemoveAsync" description="Like the add and replace methods, &lt;a href='https://msdn.microsoft.com/EN-US/library/office/mt269094.aspx' target='_blank'&gt;notificationMessages.removeAsync&lt;/a&gt; takes in a unique notification key. It then deletes the notification message with that key.">
+        <code id="itemNotificationMessagesRemoveAsync">
+          <![CDATA[  
+//NOTE: NotificationMessage API calls are currently unsupported in Outlook Web Access (OWA)
+//Please run this code in Outlook
+Office.context.mailbox.item.notificationMessages.removeAsync(
+	"foo", 
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+      showMessage("Notification successfully removed");
+    }
+	}
+);
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Persist Outlook Settings">
+    <tasks>
+      <task title="Step 1 of 3. Set Setting" id="setSettings" description="The set or saved by the add-in, use the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/jj220083.aspx' target='_blank'&gt;RoamingSettings&lt;/a&gt; object makes it possible to store data associated with the user or the add-in via &lt;a href='https://msdn.microsoft.com/EN-US/library/office/jj220083.aspx' target='_blank'&gt;RoamingSettings.set&lt;/a&gt;.">
+        <code id="setSettings">
+          <![CDATA[  
+/* Click Run Code to set a setting in the mailbox*/
+
+ Office.context.roamingSettings.set("mySetting", "mySetting value");
+ showMessage("Now that you've set a setting, click Next to learn how to retrieve it");
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 3. Get Settings" id="getSettings" description="To get a setting previously set or saved by the add-in, use the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/jj220059.aspx' target='_blank'&gt;RoamingSettings.get&lt;/a&gt; method.">
+        <code id="getSettings">
+          <![CDATA[  
+/* Click Run Code to retrieve a setting  in the mailbox*/
+
+var settingsValue = Office.context.roamingSettings.get("mySetting");
+showMessage("mySetting value is: " + settingsValue);
+        ]]>
+        </code>
+      </task>
+      <task title="Step 3 of 3. Save Settings" id="saveSettings" description="RoamingSettings.set only creates or modifies a setting in the current session. When you want to persist the settings so that they are available the next time the add-in is used, use the &lt;a href='https://msdn.microsoft.com/en-us/library/office/jj220070.aspx' target='_blank'&gt;RoamingSettings.saveAsync&lt;/a&gt; method.">
+        <code id="saveSettings">
+          <![CDATA[  
+/* Click Run Code to save a setting in the mailbox to make it available in future sessions*/
+
+Office.context.roamingSettings.saveAsync(
+  function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+    } else {
+			showMessage("Settings saved with status: " + asyncResult.status);
+		}
+});
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Save and Close Draft">
+    <tasks>
+      <task title= "Step 1 of 2. Save draft" id="itemSaveAsync" description="Use &lt;a href='https://msdn.microsoft.com/EN-US/library/office/mt269096.aspx' target='_blank'&gt;item.saveAsync&lt;/a&gt; method to save the current draft. This method is only available in compose mode.">
+        <code id="itemSaveAsync">
+          <![CDATA[  
+Office.context.mailbox.item.saveAsync(
+	function (asyncResult) {
+		if (asyncResult.status == "failed") {
+			showMessage("Action failed with error: " + asyncResult.error.message);
+		} else {
+			showMessage("Saved successfully, EWS ID is: " + asyncResult.value);
+		}
+	});
+        ]]>
+        </code>
+      </task>
+      <task title= "Step 2 of 2. Close draft" id="itemClose" description="Use the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/mt269091.aspx' target='_blank'&gt;item.Close&lt;/a&gt; method to close the current email draft. If there are unsaved changes, the user will be prompted to save. This method is only available in compose mode.">
+        <code id="itemClose">
+          <![CDATA[  
+Office.context.mailbox.item.close();
+            ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <!--Project only Tutorials-->
+  <scenario title="Retrieve Project Data">
+    <tasks>
+      <task title="Step 1 of 3. Read text of user selection" id="projectReadSelectedData" description="The &lt;a href='https://msdn.microsoft.com/en-us/library/office/fp160982.aspx' target='_blank'&gt;ProjectDocument&lt;/a&gt; object exposes the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp179812.aspx' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read from the user's current selection. This example uses the method to read text from Project by specifying the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp161141.aspx' target='_blank'&gt;coercionType&lt;/a&gt; parameter as &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Text&lt;/a&gt;. You can also use the getSelectedDataAsync method to read range (matrix) and table data in Excel or Word, specifying either of those data types as the coercionType parameter of the method. The callback function returns an object containing the data currently selected by the user, which can use the asyncResult.value property to access the selected data.">
+        <code id="projectGetSelectedDataAsync">
+          <![CDATA[
+Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
+  function (result) {
+    if (result.status === Office.AsyncResultStatus.Failed) {
+      showMessage(result.error);
+    } else {
+      showMessage(result.value);
+    }
+  }
+);
+          ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 3. Read task ID from user selection" id="readSelectedTaskID" description="Use the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp179825.aspx' target='_blank'&gt;ProjectDocument.getSelectedTaskAsync&lt;/a&gt; method to retrieve the currently selected task. The return value is a GUID which uniquely identifies the task object.">
+        <code id="readSelectedTaskID">
+          <![CDATA[
+/*After creating a task, select the row of a task and
+click Run Code to retrieve the unique ID of the task*/
+
+Office.context.document.getSelectedTaskAsync(
+ 	function (result) {
+ 	  if (result.status === Office.AsyncResultStatus.Failed) {
+      showMessage("Task retrieval failed");
+    } else {
+      showMessage("Task ID: " + result.value +
+        ". Click Next to learn more about task retrieval.");
+    }
+  }
+);
+        ]]>
+        </code>
+      </task>
+      <task title="Step 3 of 3. Read task data from user selection" id="readSelectedTask" description="After retrieving a task ID, use the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp179818.aspx' target='_blank'&gt;ProjectDocument.getTaskAsync&lt;/a&gt; method to retrieve the data from a given task. Enter in a task ID and the return value is an object containing all of the meaninful data from that task.">
+        <code id="readSelectedTask">
+          <![CDATA[
+Office.context.document.getSelectedTaskAsync(
+ 	function (result) {
+ 	  if (result.status === Office.AsyncResultStatus.Failed) {
+      showMessage("Task ID retrieval failed");
+    } else {
+      Office.context.document.getTaskAsync(result.value,
+        function (result2){
+          if (result2.status === Office.AsyncResultStatus.Failed) {
+       				 showMessage("Task retrieval failed");
+          } else{
+            showMessage("Task data: " + JSON.stringify(result2.value));
+          }
+        }
+      )
+    }
+  }
+);
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+</content>
