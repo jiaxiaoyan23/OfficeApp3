@@ -441,8 +441,8 @@ Word.run(function (context) {
 
   <scenario title="Clear Content">
     <tasks>
-      <task title="Step 1 of 1. Set multiple values in range" id="writeSelectedDataMatrix">
-        <code id="writeSelectedDataMatrix">
+      <task title="Step 1 of 1. Clear all contents in the document body" id="clearContent">
+        <code id="clearContent">
           <![CDATA[
 // Run a batch operation against the Word object model.
 Word.run(function (ctx) {

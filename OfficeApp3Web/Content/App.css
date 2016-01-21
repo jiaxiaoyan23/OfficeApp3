@@ -453,10 +453,15 @@ li.listItem:hover{
     height: 100%;    
 }
 
-.snippetbuttonclass {
+#buttonWrapper {
    position:absolute;
    bottom:0px;
-   right:10px;
+   height:50px;
+   width:80%;
+   background-color:white;
+}
+
+.snippetbuttonclass {   
     background-color:#337147;
     color: white;
     padding: 5px 10px 5px 10px;

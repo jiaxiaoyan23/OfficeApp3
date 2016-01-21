@@ -26,12 +26,14 @@
     </div>
     <div class="hidden" id="codeSnippet">
         <div id="TxtRichApiScript">
-        </div>
-        <button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()" class="snippetbuttonclass">Run Code</button>
+        </div>        
         <div>
             <!--ng-hide="!insideOffice"-->
             <!--<textarea id="console"></textarea>-->
         </div>
+    </div>
+    <div id="buttonWrapper" ng-hide="!insideOffice || !isSnippet">
+        <button id="runButton" ng-click="runSelectedSample()" class="snippetbuttonclass">Run Code</button>
     </div>
 </div>
 
