@@ -137,7 +137,8 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
                 $("#TxtRichApiScript").hide();
             }
 
-            appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
+            //appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
+            writeLog("Try to load code sample " + { name: $scope.selectedSample.name });
             $scope.isSnippet = true;
             $("#TxtRichApiScript").show();
             $("#headercontent").empty();
@@ -165,6 +166,7 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 	            $scope.insideOffice = insideOffice;
 	            CodeEditorIntegration.setJavaScriptText($scope.selectedSample.code);
 	            CodeEditorIntegration.resizeEditor();
+	            writeLog("Code sample loaded successfully for " + { name: $scope.selectedSample.name });
 	        });
         }
 	};
@@ -189,7 +191,8 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 	    InteractiveTutorial.App.showList();
 	}
 
-	$scope.runSelectedSample = function() {
+	$scope.runSelectedSample = function () {
+	    writeLog("Run sample " + { name: $scope.selectedSample.name });
 		var script = CodeEditorIntegration.getJavaScriptToRun().replace(/console.log/g, "logComment");
 		
 		if (isTrulyJavaScript(script)) {
@@ -219,8 +222,7 @@ officeJsSnippetApp.controller("TestAllController", function($scope, $q, snippetF
 	});
 
 	$scope.loadSampleCode = function() {
-		appInsights.trackEvent("SampleLoaded", {name:$scope.selectedSample.name});
-
+	    appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
 	};
 
 	$scope.runSamples = function() {

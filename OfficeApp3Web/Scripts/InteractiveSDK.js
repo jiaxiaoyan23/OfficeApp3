@@ -130,11 +130,12 @@ InteractiveTutorial.App = new function () {
         
         if ((_appHost.toLowerCase() == "excel" || _appHost.toLowerCase() == "word") && _appVersion == "16") {
             $("#tutorialMain").attr("class", "divWrapperInside");
+            $("#bottomMenu").removeClass("hidden");
+            writeLog("ShowCodeSnippets for " + _appHost + ", " + _appBitness + ", " + _appVersion);
         }
         else {
             $("#tutorialMain").attr("class", "divWrapperInsideFull");
         }
-        $("#codeSnippetBlock").show();
     }
 
     this.navigateToDefaultStartLocation = function InteractiveTutorial_App$navigateToDefaultStartLocation() {
@@ -380,7 +381,7 @@ InteractiveTutorial.App = new function () {
         $("#headercontent").attr("class", "apiPageHeader");
         $("#content").attr("class", "apiPageContent");
 
-        $("#codeSnippetBlock").hide();
+        $("#bottomMenu").addClass("hidden");
         _currentContentIndex = event.data.index;
         _currentScenario = event.data.content[_currentContentIndex].scenario;
         _currentLink = event.data.content[_currentContentIndex].link;
@@ -631,7 +632,7 @@ function initAppHostInfo() {
             _appVersion = infoBits[2];
         }
 
-        if (_appHost == "" && window.external && window.external.GetContext) {
+        if (_appHost == "" && window.external != "undefined" && window.external.GetContext != "undefined") {
             var appType = window.external.GetContext().GetAppType()
             switch (appType) {
                 case 1:

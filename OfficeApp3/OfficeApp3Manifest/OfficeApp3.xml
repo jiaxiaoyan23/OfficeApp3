@@ -5,8 +5,8 @@
   <Version>1.0.0.0</Version>
   <ProviderName>[Provider name]</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="OfficeApp3" />
-  <Description DefaultValue="OfficeApp3"/>
+  <DisplayName DefaultValue="OfficeApp3Web" />
+  <Description DefaultValue="OfficeApp3Web Description"/>
   <AppDomains>
     <AppDomain>https://officeapitutorial-staging.azurewebsites.net</AppDomain>
   </AppDomains>
@@ -17,7 +17,7 @@
     <Host Name="Document" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="~remoteAppUrl/index.html" />
+    <SourceLocation DefaultValue="~remoteAppUrl/" />
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>
