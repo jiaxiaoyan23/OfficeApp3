@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
 	var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet().load("name");
 	return ctx.sync().then(function () {
