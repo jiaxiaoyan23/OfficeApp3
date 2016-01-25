@@ -1,3 +1,4 @@
+// Please create a table first
 Excel.run(function (ctx) {
 	var rows = ctx.workbook.tables.getItem("Table1").rows.load("values");
 	return ctx.sync()
