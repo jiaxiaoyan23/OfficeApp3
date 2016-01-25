@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
 	var rows = ctx.workbook.tables.getItem("Table1").rows.load("values");
 	return ctx.sync()
@@ -17,7 +16,10 @@ Excel.run(function (ctx) {
 			largestRowRng.format.fill.color = "#ff0000";
 			
 		})
-		.then(ctx.sync);	
+		.then(ctx.sync)
+    .then(function () {
+        console.log("Success! Formatted row of a table based on a specific column's largest value.");
+    });
 }).catch(function (error) {
 	console.log(error);
 });

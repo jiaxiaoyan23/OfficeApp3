@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
 	var sheet = ctx.workbook.worksheets.getActiveWorksheet();
 	
@@ -19,7 +18,9 @@ Excel.run(function (ctx) {
 	dataRange.formulas = "=RAND()*17";
 	dataRange.numberFormat = "#0";
 	
-	return ctx.sync();	
+	return ctx.sync().then(function () {
+	    console.log("Success! Data added for creating a chart.");
+	});
 }).catch(function (error) {
 	console.log(error);
 });

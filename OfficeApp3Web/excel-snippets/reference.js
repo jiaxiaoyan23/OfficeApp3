@@ -5,7 +5,7 @@ Excel.run(function (ctx) {
     newRange.format.fill.color = "Yellow";
     return ctx.sync().then(function () {
         console.log("Success! Inserted yellow range above red range.");
-    });;
+    });
 }).catch(function (error) {
 	console.log(error);
 });

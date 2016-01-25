@@ -1,4 +1,4 @@
-
+// Please make sure your working sheet has a chart
 Excel.run(function (ctx) {
 	var title = ctx.workbook.worksheets.getActiveWorksheet().charts.getItemAt(0).title.load("text");
 	return ctx.sync().then(function() {

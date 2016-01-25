@@ -1,6 +1,12 @@
-
+// Please run Add Chart Data first
 Excel.run(function (ctx) {
-	ctx.workbook.worksheets.getItem("Sheet1").charts.add("ColumnClustered", "Sheet1!A1:D5", Excel.ChartSeriesBy.auto);
+    var worksheet = ctx.workbook.worksheets.getActiveWorksheet();
+    var chartsource = worksheet.getRange("A1:D5");
+    worksheet.charts.add("ColumnClustered", chartsource, Excel.ChartSeriesBy.auto);
+
+    return ctx.sync().then(function () {
+        console.log("Success! Chart added.");
+    });
 }).catch(function (error) {
 	console.log(error);
 });

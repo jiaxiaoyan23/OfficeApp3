@@ -1,4 +1,3 @@
-
 //Create Table1
 Excel.run(function (ctx) {
     var table = ctx.workbook.tables.add("Sheet1!A1:C4", true).load("name");
@@ -10,6 +9,7 @@ Excel.run(function (ctx) {
                 } else {
                     // If succeeded, then add event handler to the table binding.
                     Office.select("bindings#myBinding").addHandlerAsync(Office.EventType.BindingDataChanged, onBindingDataChanged);
+                    console.log("Event handler added to the table binding successfully. Now try to change values in the table.");
                 }
             });
         });
@@ -23,7 +23,8 @@ function onBindingDataChanged(eventArgs) {
         var fill = ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.load("color");
         return ctx.sync()
             .then(function () {
-                if (fill.color == "#FFA500") { 
+                if (fill.color == "#FFA500") {
+                    console.log("Data in the table is changed.");
                     return; 
                 } else {
                     ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = "orange";

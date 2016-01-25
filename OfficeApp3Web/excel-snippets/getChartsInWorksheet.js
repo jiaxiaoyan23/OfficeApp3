@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
     var charts = ctx.workbook.worksheets.getActiveWorksheet().charts.load("name");
     var result = '';

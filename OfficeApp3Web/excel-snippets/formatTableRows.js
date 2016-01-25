@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
 	var rows = ctx.workbook.tables.getItem("Table1").rows.load("values");
 	return ctx.sync()
@@ -15,7 +14,10 @@ Excel.run(function (ctx) {
 				}
 			}	
 		})
-		.then(ctx.sync);
+		.then(ctx.sync)
+        .then(function () {
+            console.log("Success! Format rows of 'Table1' with 2nd cell greater than 2 in green, other rows in red.");
+		});
 }).catch(function (error) {
 	console.log(error);
 });

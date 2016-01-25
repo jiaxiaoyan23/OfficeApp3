@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
 	var sheet = ctx.workbook.worksheets.getItem("Sheet1");
 	
@@ -30,7 +29,9 @@ Excel.run(function (ctx) {
 	points.getItemAt(0).format.fill.setSolidColor("8FBC8F");
 	points.getItemAt(1).format.fill.setSolidColor("D87093");
 	
-	return ctx.sync();
+	return ctx.sync().then(function () {
+	    console.log("Success! Write data and created pie chart, then formatted the chart.");
+	});
 }).catch(function (error) {
 	console.log(error);
 });
