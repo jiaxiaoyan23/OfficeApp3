@@ -1,4 +1,3 @@
-
 Excel.run(function (ctx) {
     var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();
 	activeWorksheet.getRange("A1:C3").values = 7;
