@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <scenario title="Insert HTML">
+    <scenario title="Insert HTML and Picture">
         <tasks>
-            <task title="Step 1 of 1. Insert HTML" id="insertHtml">
+            <task title="Step 1 of 2. Insert HTML content" id="insertHtml">
                 <code id="insertHtml">
                   <![CDATA[
 // Run a batch operation against the Word object model.
@@ -29,7 +29,39 @@ Word.run(function (context) {
     
 
         ]]></code>
-            </task>                             
+            </task>
+
+          <task title="Step 2 of 2. Insert an inline picture" id="insertHtml">
+            <code id="insertHtml">
+              <![CDATA[
+// Run a batch operation against the Word object model.
+Word.run(function (context) {
+
+    // Create a proxy object for the document body.
+    var body = context.document.body;
+
+    // Queue a commmand to insert inline picture to the end of the body.
+    body.insertInlinePictureFromBase64("iVBORw0KGgoAAAANSUhEUgAAADIAAAApAgMAAAAKQJJ6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAJUExURQAAAP/yAP///1XtZyMAAAClSURBVCjPvdIxDoUgDAbgOngE76ODuybgwOTsfdhZHPSUr39bNMX9kRD5UkHbQjdGjAmPQgql6IRilQBBSEMIQtl0iAz8Kuuq2qC6jTey8qOD9SAmp60QDul4jq1iofOjOrx2yv/QIMsA8dd70WL/MotWiHOYRJNpFc2W34JjQg9xJQINMpPWbCSiTmuGBFlWwctV93aVb3rk++d72/Td34n3vvwAWFTaWcfNhIUAAAAASUVORK5CYII=", Word.InsertLocation.end);
+
+    // Synchronize the document state by executing the queued commands, 
+    // and return a promise to indicate task completion.
+    return context.sync().then(function () {
+        showMessage('Inline picture added to the end of the document body successfully.');        
+    });  
+})
+.catch(function (error) {
+    showMessage('Error: ' + JSON.stringify(error));
+    if (error instanceof OfficeExtension.Error) {
+        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+    }
+});   
+    
+
+        ]]>
+            </code>
+          </task>
+          
+          
         </tasks>
     </scenario>
   <scenario title="Create Content Control">
