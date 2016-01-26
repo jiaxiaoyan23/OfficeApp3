@@ -9,7 +9,7 @@ Word.run(function (context) {
     options.matchCase = false
 
     // Queue a commmand to search the document.
-    var searchResults = context.document.body.search('video', options);
+    var searchResults = context.document.body.search('this', options);
 
     // Queue a commmand to load the results.
     context.load(searchResults, 'text, font');
