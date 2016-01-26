@@ -10,7 +10,7 @@ Word.run(function (context) {
     myContentControl.title = 'Enter Customer Address Here:';
     myContentControl.style = 'Heading 2';
     myContentControl.insertText('One Microsoft Way, Redmond, WA 98052', 'replace');
-    myContentControl.cannotEdit = true;
+    myContentControl.cannotEdit = false;
     myContentControl.appearance = 'tags';
     
     // Queue a command to load the id property for the content control you created.
