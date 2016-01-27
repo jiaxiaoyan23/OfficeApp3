@@ -10,12 +10,14 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued-up commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
+        var result = '';
         if (thisDocument.contentControls.items.length !== 0) {
             for (var i = 0; i < thisDocument.contentControls.items.length; i++) {
-                console.log(thisDocument.contentControls.items[i].id);
-                console.log(thisDocument.contentControls.items[i].text);
-                console.log(thisDocument.contentControls.items[i].tag);
+                result += 'Id: ' + thisDocument.contentControls.items[i].id + ' ';
+                result += 'Text: ' + thisDocument.contentControls.items[i].text + ' ';
+                result += 'Tag: ' + thisDocument.contentControls.items[i].tag + ' ';
             }
+            console.log(result);
         } else {
             console.log('No content controls in this document.');
         }
