@@ -129,18 +129,19 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 
     $scope.loadSampleCode = function () {
         if (($scope.selectedSample == null || !($scope.selectedSample.description)) && $scope.isSnippet) {        
-            $("#TxtRichApiScript").hide();
+            $("#TxtRichApiScript").addClass("hidden");
         }
         else {
             if ($scope.selectedSample == null) {
                 $scope.selectedSample = { description: "(Please choose a group and sample above.)" };
-                $("#TxtRichApiScript").hide();
+                $("#TxtRichApiScript").addClass("hidden");
             }
 
+           
             //appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
             writeLog("Try to load code sample " + { name: $scope.selectedSample.name });
             $scope.isSnippet = true;
-            $("#TxtRichApiScript").show();
+            $("#TxtRichApiScript").removeClass("hidden");;
             $("#headercontent").empty();
             $("#tutorial").hide();
             $("#headerString").hide();
@@ -164,6 +165,13 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
             snippetFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
 	            $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);
 	            $scope.insideOffice = insideOffice;
+	            $("#TxtRichApiScript").empty();
+	            CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
+                            "/editorIntelliSense/ExcelLatest.txt",
+                            "/editorIntelliSense/WordLatest.txt",
+                            "/editorIntelliSense/OfficeCommon.txt",
+                            "/editorIntelliSense/OfficeDocument.txt"
+	            ]);
 	            CodeEditorIntegration.setJavaScriptText($scope.selectedSample.code);
 	            CodeEditorIntegration.resizeEditor();
 	            writeLog("Code sample loaded successfully for " + { name: $scope.selectedSample.name });

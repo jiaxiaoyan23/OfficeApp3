@@ -81,6 +81,9 @@ InteractiveTutorial.App = new function () {
                 }
             }
         });
+
+       // self.setCodeWindow();
+
         AppsTelemetry.perfEnd("Initialize");
     }
 
@@ -233,7 +236,8 @@ InteractiveTutorial.App = new function () {
         try {
             // Execute the code found in the code textarea
             AppsTelemetry.perfStart("RunCode [" + _currentScenario +", " + _currentTask + "]");
-            eval(_editor.getValue());
+            // eval(_editor.getValue());
+            eval($.trim(_tasks[_currentTaskIndex].code));
             AppsTelemetry.perfEnd("RunCode [" + _currentScenario + ", " + _currentTask + "]");
             if (_firstRun) { AppsTelemetry.perfEnd("Time to first Run"); _firstRun = false; }
             writeLog("RunTask: Succeeded [" + _currentScenario + ", " + _currentTask + "]");
@@ -248,15 +252,26 @@ InteractiveTutorial.App = new function () {
 
     //Uses third party library for code formatting and styling of code snippet
     this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) {
-        $('#codeWindow').val($.trim(code));
-        _editor = CodeMirror.fromTextArea(document.getElementById('codeWindow'), {
-            lineWrapping: true,
-            mode: "javascript",
-            lineNumbers: false,
-            matchBrackets: true
-        });
-        $("#codeLayout").addClass("codeLayoutBorder");
-        self.sizeCodeEditor();
+      
+        CodeEditorIntegration.initializeJsEditor('codeWindow', [
+			"/editorIntelliSense/ExcelLatest.txt",
+			"/editorIntelliSense/WordLatest.txt",
+			"/editorIntelliSense/OfficeCommon.txt",
+			"/editorIntelliSense/OfficeDocument.txt"
+        ]);
+
+        CodeEditorIntegration.setJavaScriptText($.trim(code));           
+        CodeEditorIntegration.resizeEditor();
+
+        //$('#codeWindow').val($.trim(code));
+        //_editor = CodeMirror.fromTextArea(document.getElementById('codeWindow'), {
+        //    lineWrapping: true,
+        //    mode: "javascript",
+        //    lineNumbers: false,
+        //    matchBrackets: true
+        //});
+        //$("#codeLayout").addClass("codeLayoutBorder");
+        //self.sizeCodeEditor();
     }
 
     //Check existence of the method/object
@@ -399,9 +414,9 @@ InteractiveTutorial.App = new function () {
         $("#scenariolabel").change(self.changeTutorial);
         $("#scenariolabel")[0].options[_currentContentIndex].selected = true;
         $("#mainBtnInTutorial").click(self.showList);
-
-        self.showTask();
+                
         $("#tutorialMain").attr("class", "divWrapperInsideFull");
+        self.showTask();
     }
 
     //Show current step code and description.
@@ -430,7 +445,8 @@ InteractiveTutorial.App = new function () {
 
             //var codeMenu = $("#codeMenu").click(self.showCode);
             //var descriptionMenu = $("#descriptionMenu").click(self.showDescription);
-            var code = $("<div id='codeLayout'><textarea id='codeWindow' name='codeWindow' spellcheck='false'></textarea></div>").appendTo(APILayout);
+            //  var code = $("<div id='codeLayout'><div id='codeWindow' name='codeWindow' spellcheck='false'></div></div>").appendTo(APILayout);
+            var code = $("<div id='codeLayout'><div id='codeWindow' style='height:800px; padding-top:10px;'></div></div>").appendTo(APILayout);
 
             self.setCodeWindow(_tasks[_currentTaskIndex].code);
             //var description = $("<div id='description'>" + self.htmlEncode(taskDescription, true) + "</div>").hide().appendTo(APILayout);

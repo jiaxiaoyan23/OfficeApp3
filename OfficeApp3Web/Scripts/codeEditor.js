@@ -16,24 +16,24 @@ var CodeEditorIntegration;
                     mode: editorMode,
                     wrappingColumn: 0,
                     tabSize: 4,
-                    insertSpaces: false
+                    insertSpaces: false,
+                    scrollbar: {
+                    vertical: "auto",
+                    horizontal: "auto"
+                    },
                 });
                 document.getElementById(textAreaId).addEventListener('keyup', function () {
                     storeCurrentJSBuffer();
+                });        
+
+                intellisensePaths = intellisensePaths.map(function (path) {
+                    if (path.indexOf("?") < 0) {
+                        path += '?';
+                    } else {
+                        path += '&';
+                    }
+                    return path += 'refresh=' + Math.floor(Math.random() * 1000000000);
                 });
-        
-                if (window.parent.document.location.protocol == "file:") {
-                    intellisensePaths = [];
-                } else {
-                    intellisensePaths = intellisensePaths.map(function (path) {
-                        if (path.indexOf("?") < 0) {
-                            path += '?';
-                        } else {
-                            path += '&';
-                        }
-                        return path += 'refresh=' + Math.floor(Math.random() * 1000000000);
-                    });
-                }
             
                 require(['vs/platform/platform', 'vs/editor/modes/modesExtensions'], function (Platform, ModesExt) {
                     Platform.Registry.as(ModesExt.Extensions.EditorModes).configureMode(editorMode, {
@@ -64,16 +64,17 @@ var CodeEditorIntegration;
     CodeEditorIntegration.getEditorTextAsJavaScript = getEditorTextAsJavaScript;
 
     function setJavaScriptText(text) {
-        require(["vs/editor/contrib/snippet/snippet"], function (snippet) {
-            jsCodeEditor.setSelection(jsCodeEditor.getModel().getFullModelRange());
-            snippet.get(jsCodeEditor).run(new snippet.CodeSnippet(text), 0, 0);
-            jsCodeEditor.setPosition({ lineNumber: 0, column: 0 });
-            jsCodeEditor.focus();
-        });
+        jsCodeEditor.getModel().setValue(text);
+        //require(["vs/editor/contrib/snippet/snippet"], function (snippet) {
+        //    jsCodeEditor.setSelection(jsCodeEditor.getModel().getFullModelRange());
+        //    snippet.get(jsCodeEditor).run(new snippet.CodeSnippet(text), 0, 0);
+        //    jsCodeEditor.setPosition({ lineNumber: 0, column: 0 });
+        //    jsCodeEditor.focus();
+        //});
     }
     CodeEditorIntegration.setJavaScriptText = setJavaScriptText;
 
-    function resizeEditor(scrollUp) {
+    function resizeEditor(scrollUp) {       
         if (typeof scrollUp === "undefined") { scrollUp = false; }
         jsCodeEditor.layout();
         if (scrollUp) {

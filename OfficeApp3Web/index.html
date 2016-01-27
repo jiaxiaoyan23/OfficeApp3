@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="Content/codemirror.css" />
     <link rel="stylesheet" type="text/css" href="Content/FancyBox.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <script src="https://appsforoffice.microsoft.com/telemetry/lib/1.0/hosted/AppsTelemetry.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
     <script src="https://ajax.microsoft.com/ajax/4.0/1/MicrosoftAjax.js"></script>
@@ -39,7 +40,7 @@
                 return 'worker-loader-proxy.js?label=' + label;
             }
         };
-    </script>
+    </script>   
 
     <!--<script type="text/javascript">
         var appInsights = window.appInsights || function (config) {
@@ -66,8 +67,8 @@
                 <div id="content">
                     <div id="tabs">
                     </div>
-                    <div id='codeLayout'>
-                        <textarea id="codeWindow" name="codeWindow" spellcheck="false"></textarea>
+                    <div id="codeLayout">
+                        <div id="codeWindow"></div>
                     </div>
                 </div>
                 <div id="navigation">

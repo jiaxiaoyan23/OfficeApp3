@@ -1,4 +1,4 @@
-// If you don’t have any formular in the sheet yet, create one
+// If you don't have any formular in the sheet yet, create one
 Excel.run(function (ctx) {
     var range = ctx.workbook.worksheets.getActiveWorksheet().getRange("A1:C3").load("formulas");
     var result = '';

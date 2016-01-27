@@ -328,11 +328,6 @@ li.listItem:hover{
 
 }
 
-#codeWindow {
-    visibility:hidden;
-    display:none;
-}
-
 #navigation h2 {
     margin-top:0px;
 }
@@ -522,7 +517,7 @@ li.listItem:hover{
 }
 
 #TxtRichApiScript {
-    height:60%; 
+    height:70%; 
     overflow: hidden; 
     display:flex; 
     flex-direction: column; 
