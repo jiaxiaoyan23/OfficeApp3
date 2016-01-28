@@ -12,7 +12,7 @@ Word.run(function (context) {
     return context.sync().then(function () {
         
         // Create a proxy object for the first paragraph.
-        var paragraph = paragraphs._GetItem(0);
+        var paragraph = paragraphs.items[0];
         
         // Queue a change to the paragraph's line spacing.
         paragraph.linespacing = 36;

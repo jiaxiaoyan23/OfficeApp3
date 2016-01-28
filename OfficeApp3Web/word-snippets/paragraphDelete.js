@@ -12,7 +12,7 @@ Word.run(function (context) {
     return context.sync().then(function () {
         
         // Queue a command to delete the first paragraph.
-        paragraphs._GetItem(0).delete();    
+        paragraphs.items[0].delete();    
         
         // Synchronize the document state by executing the queued-up commands, 
         // and return a promise to indicate task completion.

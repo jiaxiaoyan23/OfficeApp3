@@ -12,7 +12,7 @@ Word.run(function (context) {
     return context.sync().then(function () {
         
         // Queue a command to clear the contents of the first paragraph.
-        paragraphs._GetItem(0).clear();    
+        paragraphs.items[0].clear();    
         
         // Synchronize the document state by executing the queued-up commands, 
         // and return a promise to indicate task completion.

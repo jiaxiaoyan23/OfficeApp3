@@ -10,10 +10,13 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued-up commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
+        var result = '';
         
         for (var i = 0; i < paragraphs.items.length; i++) {
-            console.log("paragraphs[" + i + "].content  = " + paragraphs.items[i].text);
-        }   
+            result += "paragraphs[" + i + "].content  = " + paragraphs.items[i].text + "; ";
+        }
+
+        console.log(result);
     });  
 })
 .catch(function (error) {

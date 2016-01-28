@@ -12,7 +12,7 @@ Word.run(function (context) {
     return context.sync().then(function () {
         
         // Queue a a set of commands to get the HTML of the first paragraph.
-        var html = paragraphs._GetItem(0).getHtml();    
+        var html = paragraphs.items[0].getHtml();    
         
         // Synchronize the document state by executing the queued-up commands, 
         // and return a promise to indicate task completion.
