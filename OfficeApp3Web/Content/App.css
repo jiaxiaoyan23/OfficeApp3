@@ -5,11 +5,19 @@
 }
 
 #APILayout {
-   height:100%;
-   width:100%;
+    height:80%; 
+    overflow: hidden; 
+    display:flex; 
+    flex-direction: column; 
+    position: relative; 
+    top:45px; 
+    bottom:0px; 
+    left: 0px; 
+    right: 0px; 
+    padding: 5px;
 }
 
-#content {
+#tutorialList {
     position: absolute;
     top:42px;
     bottom:45px;
@@ -347,21 +355,21 @@ li.listItem:hover{
     padding:10px;   
 }
 
-#content.list {
+#tutorialList.list {
     padding-top:0px;
     margin-top:0px;
     padding-left: 10px;
     bottom: 0px;
 }
 
-#content.listPageContent {
+#tutorialList.listPageContent {
     margin-top: 40px;
     padding-left: 10px;
     bottom: 0px;
     overflow-y:auto;
 }
 
-#content.apiPageContent {    
+#tutorialList.apiPageContent {    
     margin-top: 10px;
     padding-right: 20px;
     padding-left: 20px;
@@ -374,7 +382,7 @@ li.listItem:hover{
     height:80px;
 }
 
-#content.APIPage1 {
+#tutorialList.APIPage1 {
     margin-top: 0;
     padding-right: 30px;
     padding-left: 20px;

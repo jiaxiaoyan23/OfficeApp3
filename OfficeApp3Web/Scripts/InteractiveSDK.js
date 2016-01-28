@@ -82,7 +82,12 @@ InteractiveTutorial.App = new function () {
             }
         });
 
-       // self.setCodeWindow();
+        CodeEditorIntegration.initializeJsEditor('codeWindow', [
+           "/editorIntelliSense/ExcelLatest.txt",
+           "/editorIntelliSense/WordLatest.txt",
+           "/editorIntelliSense/OfficeCommon.txt",
+           "/editorIntelliSense/OfficeDocument.txt"
+        ]);
 
         AppsTelemetry.perfEnd("Initialize");
     }
@@ -97,9 +102,10 @@ InteractiveTutorial.App = new function () {
         }
         else
         {
-            $("#content").empty();
+            // $("#content").empty();
+            $("#APILayout").addClass("hidden");
             $("#headercontent").empty();
-            $("#content").attr("class", "listPageContent");
+            $("#tutorialList").attr("class", "listPageContent");
             if (_detectOutlook) {
                 if (self.objExists("Office.context.mailbox.item.displayReplyForm")) {
                     $("#headercontent").append('<h1 >Select a Tutorial (Read)</h1>');
@@ -111,7 +117,8 @@ InteractiveTutorial.App = new function () {
             }
             $("#headercontent").attr("class", "listHeader");
             $("#navigation").hide();
-            $("#content").append("<ul id='scenarioList'></ul>");
+            $("#tutorialList").empty();
+            $("#tutorialList").append("<ul id='scenarioList'></ul>");
             var list = $("#scenarioList");
             for (var i = 0; i < iTutorialCount; i++) {
                 var scenario = _contentList[i].scenario;
@@ -129,7 +136,7 @@ InteractiveTutorial.App = new function () {
                 }
             }
         }
-        $("#content").removeClass("loading");
+        $("#tutorialList").removeClass("loading");
         
         if ((_appHost.toLowerCase() == "excel" || _appHost.toLowerCase() == "word") && _appVersion == "16") {
             $("#tutorialMain").attr("class", "divWrapperInside");
@@ -211,7 +218,7 @@ InteractiveTutorial.App = new function () {
         document.cookie = "firstTryItOut=false;expires=" + new Date(Date.now() + 365*86400000).toGMTString();
 
         $("#headercontent").attr("class", "apiPageHeader");
-        $("#content").attr("class", "apiPageContent");
+        $("#tutorialList").attr("class", "apiPageContent");
         _currentContentIndex = scenarioNumber;
         _currentScenario = _contentList[scenarioNumber].scenario;
         _currentLink = _contentList[scenarioNumber].link;
@@ -251,15 +258,7 @@ InteractiveTutorial.App = new function () {
     }
 
     //Uses third party library for code formatting and styling of code snippet
-    this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) {
-      
-        CodeEditorIntegration.initializeJsEditor('codeWindow', [
-			"/editorIntelliSense/ExcelLatest.txt",
-			"/editorIntelliSense/WordLatest.txt",
-			"/editorIntelliSense/OfficeCommon.txt",
-			"/editorIntelliSense/OfficeDocument.txt"
-        ]);
-
+    this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) { 
         CodeEditorIntegration.setJavaScriptText($.trim(code));           
         CodeEditorIntegration.resizeEditor();
 
@@ -394,7 +393,9 @@ InteractiveTutorial.App = new function () {
     //Loads current tutorial and associated next steps.
     this.showAPIPage = function InteractiveTutorial_App$showAPIPage(event) {
         $("#headercontent").attr("class", "apiPageHeader");
-        $("#content").attr("class", "apiPageContent");
+        // $("#content").attr("class", "apiPageContent");
+        $("#tutorialList").addClass("hidden");
+        $("#APILayout").removeClass("hidden");
 
         $("#bottomMenu").addClass("hidden");
         _currentContentIndex = event.data.index;
@@ -422,8 +423,10 @@ InteractiveTutorial.App = new function () {
     //Show current step code and description.
     this.showTask = function InteractiveTutorial_App$showTask() {
 
-        $("#content").html("");
-        var APILayout = $("<div id='APILayout'></div>").appendTo("#content");
+        // $("#content").html("");
+        $("#tutorialList").addClass("hidden");
+        $("#task").empty();
+        //var APILayout = $("<div id='APILayout'></div>").appendTo("#tutorialList");
         var navigation = $("#navigation").html("").show();
         var hasNapaLink = (typeof _currentLink != "undefined");
         var isOnlyStep = (_currentTaskIndex == 0) && (_tasks.length == 1);
@@ -441,12 +444,13 @@ InteractiveTutorial.App = new function () {
             writeLog("ShowTask [" + taskId + "]");
             //var menu = $("<div id='tabs'><ul'><li id='codeMenu' class='tabSelected'><a href='#' tabindex='0' title='View the code window'>CODE</a></li><li id='descriptionMenu'><a href='#' tabindex='0' title='View the description window'>DESCRIPTION</a></li></ul>").appendTo(APILayout);
 
-            var menu = $("<div id='task'><h3>"+self.htmlEncode(taskTitle)+"</h3></div>").appendTo(APILayout);
+            // var menu = $("<div id='task'><h3>"+self.htmlEncode(taskTitle)+"</h3></div>").appendTo(APILayout);
+            var menu = $("<h3>" + self.htmlEncode(taskTitle) + "</h3>").appendTo("#task");
 
             //var codeMenu = $("#codeMenu").click(self.showCode);
             //var descriptionMenu = $("#descriptionMenu").click(self.showDescription);
             //  var code = $("<div id='codeLayout'><div id='codeWindow' name='codeWindow' spellcheck='false'></div></div>").appendTo(APILayout);
-            var code = $("<div id='codeLayout'><div id='codeWindow' style='height:800px; padding-top:10px;'></div></div>").appendTo(APILayout);
+           // var code = $("<div id='codeLayout'><div id='codeWindow' style='height:800px; padding-top:10px;'></div></div>").appendTo(APILayout);
 
             self.setCodeWindow(_tasks[_currentTaskIndex].code);
             //var description = $("<div id='description'>" + self.htmlEncode(taskDescription, true) + "</div>").hide().appendTo(APILayout);

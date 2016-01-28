@@ -183,6 +183,7 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 	    $scope.isSnippet = false;
 	    $("#codeSnippet").addClass("hidden");
 	    $("#tutorial").show();
+	    $("#tutorialList").removeClass("hidden");
 	    $("#groupSelector").removeClass("codeSnippetsMenu");	    
 	    $("#sampleSelector").removeClass("codeSnippetsMenu");
 	    $("#samplesContainer").removeClass("mainMenu");
