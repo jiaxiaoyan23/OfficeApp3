@@ -15,7 +15,7 @@ Word.run(function (context) {
         // Queue a set of commands to change the font for each found item.
         for (var i = 0; i < searchResults.items.length; i++) {
             searchResults.items[i].font.color = 'purple';
-            searchResults.items[i].font.highlightColor = '#FFFF00'; //Yellow
+            searchResults.items[i].font.highlightColor = 'yellow'; 
             searchResults.items[i].font.bold = true;
         }
         
