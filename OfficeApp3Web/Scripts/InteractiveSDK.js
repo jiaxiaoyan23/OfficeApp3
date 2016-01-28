@@ -244,7 +244,19 @@ InteractiveTutorial.App = new function () {
             // Execute the code found in the code textarea
             AppsTelemetry.perfStart("RunCode [" + _currentScenario +", " + _currentTask + "]");
             // eval(_editor.getValue());
-            eval($.trim(_tasks[_currentTaskIndex].code));
+            //  eval($.trim(_tasks[_currentTaskIndex].code));
+            var script = CodeEditorIntegration.getJavaScriptToRun();
+
+            if (isTrulyJavaScript(script)) {
+                try {
+                    eval(script);
+                } catch (e) {
+                    showMessage(e.name + ": " + e.message);
+                }
+            } else {
+                showMessage("Invalid JavaScript / TypeScript. Please fix the errors in the code editor and try again.");
+            }
+
             AppsTelemetry.perfEnd("RunCode [" + _currentScenario + ", " + _currentTask + "]");
             if (_firstRun) { AppsTelemetry.perfEnd("Time to first Run"); _firstRun = false; }
             writeLog("RunTask: Succeeded [" + _currentScenario + ", " + _currentTask + "]");
@@ -258,7 +270,14 @@ InteractiveTutorial.App = new function () {
     }
 
     //Uses third party library for code formatting and styling of code snippet
-    this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) { 
+    this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) {
+        $("#codeWindow").empty();
+        CodeEditorIntegration.initializeJsEditor('codeWindow', [
+                            "/editorIntelliSense/ExcelLatest.txt",
+                            "/editorIntelliSense/WordLatest.txt",
+                            "/editorIntelliSense/OfficeCommon.txt",
+                            "/editorIntelliSense/OfficeDocument.txt"
+        ]);
         CodeEditorIntegration.setJavaScriptText($.trim(code));           
         CodeEditorIntegration.resizeEditor();
 
