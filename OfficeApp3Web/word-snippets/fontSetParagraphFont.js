@@ -17,8 +17,8 @@ Word.run(function (context) {
         // Queue a set of property value changes on the font proxy object.
         font.size = 32;
         font.bold = true;
-        font.color = '#0000ff';
-        font.highlightColor = '#ffff00';
+        font.color = 'red';
+        font.highlightColor = 'yellow';
         
         // Synchronize the document state by executing the queued-up commands, 
         // and return a promise to indicate task completion.
