@@ -280,16 +280,6 @@ InteractiveTutorial.App = new function () {
         ]);
         CodeEditorIntegration.setJavaScriptText($.trim(code));           
         CodeEditorIntegration.resizeEditor();
-
-        //$('#codeWindow').val($.trim(code));
-        //_editor = CodeMirror.fromTextArea(document.getElementById('codeWindow'), {
-        //    lineWrapping: true,
-        //    mode: "javascript",
-        //    lineNumbers: false,
-        //    matchBrackets: true
-        //});
-        //$("#codeLayout").addClass("codeLayoutBorder");
-        //self.sizeCodeEditor();
     }
 
     //Check existence of the method/object
