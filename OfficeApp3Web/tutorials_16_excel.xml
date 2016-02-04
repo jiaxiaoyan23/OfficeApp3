@@ -92,92 +92,73 @@ Excel.run(function (ctx) {
     </scenario>
   <scenario title="Bind to Data">
     <tasks>
-      <task title="Step 1 of 3. Create data source" id="1">
-        <code id="writeSelectedDataText">
+      <task title="Step 1 of 3. Create a table" id="1">
+        <code id="createATable">
           <![CDATA[
-// Create a range to be the data source of the chart
-Excel.run(function (ctx) {
-    var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-
-    var categoriesRange = sheet.getRange("A2:A5");
-    categoriesRange.values = [
-        ["Category 1"],
-        ["Category 2"],
-        ["Category 3"],
-        ["Category 4"]
-    ];
-
-    var seriesRange = sheet.getRange("B1:D1");
-    seriesRange.values = [
-        ["Series 1", "Series 2", "Series 3", ]
-    ];
-
-    var dataRange = sheet.getRange("B2:D5");
-    dataRange.values = [
-        [2, 8, 7],
-        [15, 11, 13],
-        [1, 9, 7],
-        [14, 14, 8]
-    ];
-
-    return ctx.sync()
-        .then(function () {
-            showMessage("Success! Click the Next button to move on.");
-        })
-        .catch(function (error) {
-            if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
-            }
-        });
+// Create a table
+Excel.run(function (ctx) { 
+    ctx.workbook.tables.add("A1:C4", true);
+    return ctx.sync().then(function() {
+             showMessage("My Table Created!");
+    })
+    .catch(function (error) {
+             showMessage(JSON.stringify(error));
+    });
 });
 
         ]]>
         </code>
       </task>
-      <task title="Step 2 of 3. Create chart" id="2">
-        <code id="readSelectedDataTextIntro">
+      <task title="Step 2 of 3. Create a new table binding for the table" id="2">
+        <code id="createBindingForTheTable">
           <![CDATA[
-// Create a column clustered chart named Chart1
-Excel.run(function (ctx) {
-    var chartsource = ctx.workbook.worksheets.getActiveWorksheet().getRange("A1:D5");
-    var chart = ctx.workbook.worksheets.getActiveWorksheet().charts.add("ColumnClustered", chartsource, Excel.ChartSeriesBy.auto);
-    chart.name = "Chart1";
-    chart.load("name");
-
-    return ctx.sync()
-        .then(function () {
-            showMessage("Success! " + chart.name + " was added. Click the Next button to move on.");
-        })
-        .catch(function (error) {
-            if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+Office.context.document.bindings.addFromNamedItemAsync('Table1', Office.CoercionType.Table, { id: "myBinding" }, function (asyncResult) {
+    if (asyncResult.status == "failed") {
+        showMessage("Action failed with error: " + asyncResult.error.message);
+    }
+    else {
+        // If successful, add the event handler to the table binding.
+        Office.select("bindings#myBinding").addHandlerAsync(Office.EventType.BindingDataChanged, 
+        onBindingDataChanged,
+        function (asyncResult) {
+            if (asyncResult.status == "failed") {
+              showMessage("Action failed with error: " + asyncResult.error.message);
+            } else {
+              showMessage("Event handler added successfully." +
+                " Now try to change some data in the table.");
             }
-        });
+		  });
+	 }
 });
 
+// When data in the table is changed, this event is triggered.
+function onBindingDataChanged(eventArgs) {
+    Excel.run(function (ctx) { 
+        // Highlight the table in orange to indicate data changed.
+        ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = "Orange";
+        return ctx.sync().then(function() {
+             showMessage("The value in this table got changed!");
+        })
+        .catch(function (error) {
+             showMessage(JSON.stringify(error));
+        });
+    });
+}
 
         ]]>
         </code>
       </task>
-      <task title="Step 3 of 3. Read the chart name" id="3">
-        <code id="readSelectedDataTextIntro">
+      <task title="Step 3 of 3. Remove the binding" id="3">
+        <code id="removeTableBinding">
           <![CDATA[
-// Read back the name of the chart added in the previous step.
-Excel.run(function (ctx) {
-    var chart = ctx.workbook.worksheets.getActiveWorksheet().charts.getItem("Chart1");
-    chart.load("name");
-
-    return ctx.sync()
-        .then(function () {
-            showMessage("Success! " + chart.name + " is the name of the chart added in the previous step.");
-        })
-        .catch(function (error) {
-            if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
-            }
-        });
+Office.context.document.bindings.releaseByIdAsync("myBinding", 
+    function (asyncResult) {
+      if (asyncResult.status == "failed") {
+        showMessage("Action failed with error: " + asyncResult.error.message);
+      } else {
+        showMessage("Event handler remove succeeded");
+      }
 });
-
         ]]>
         </code>
       </task>
