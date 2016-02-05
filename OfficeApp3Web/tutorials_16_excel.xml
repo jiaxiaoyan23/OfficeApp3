@@ -1,10 +1,139 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <scenario title="Write and Read a Chart">
+    <scenario title="Create a Range with Data">
         <tasks>
-            <task title="Step 1 of 3. Create data source" id="createDataSource">
-                <code id="createDataSource">
+            <task title="Step 1 of 2. Create a range with data" id="createRangeWithData">
+                <code id="createRangeWithData">
                   <![CDATA[
+// Run a batch operation against the Excel object model
+Excel.run(function (ctx) {
+
+	// Create a proxy object for the active worksheet
+	var sheet = ctx.workbook.worksheets.getActiveWorksheet();
+
+	//Queue commands to set the report title in the worksheet
+	sheet.getRange("A1").values = "Quarterly Sales Report";
+	sheet.getRange("A1").format.font.name = "Century";
+	sheet.getRange("A1").format.font.size = 26;
+
+	//Create an array containing sample data
+	var values = [["Product", "Qtr1", "Qtr2", "Qtr3", "Qtr4"],
+					["Frames", 5000, 7000, 6544, 4377],
+					["Saddles", 400, 323, 276, 651],
+					["Brake levers", 12000, 8766, 8456, 9812],
+					["Chains", 1550, 1088, 692, 853],
+					["Mirrors", 225, 600, 923, 544],
+					["Spokes", 6005, 7634, 4589, 8765]];
+
+	//Queue a command to write the sample data to the specified range
+	//in the worksheet and bold the header row
+	var range = sheet.getRange("A2:E8");
+	range.values = values;
+	sheet.getRange("A2:E2").format.font.bold = true;	
+
+	//Run the queued-up commands, and return a promise to indicate task completion
+	return ctx.sync();
+  })
+	.then(function () {
+		showMessage("Success! Range created. Click Next to see how to remove the range data and format.");
+	})
+  .catch(function (error) {
+		// Always be sure to catch any accumulated errors that bubble up from the Excel.run execution
+		showMessage("Error: " + error);
+		if (error instanceof OfficeExtension.Error) {
+		    showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+		}
+});
+
+        ]]></code>
+            </task>
+
+          <task title="Step 2 of 2. Remove the data and format in the range" id="removeDataAndFormat">
+            <code id="removeDataAndFormat">
+              <![CDATA[
+Excel.run(function (ctx) { 
+  // Create a proxy object for the active worksheet
+	var sheet = ctx.workbook.worksheets.getActiveWorksheet();
+  var range = sheet.getRange("A1:E8");   
+  range.clear();
+  return ctx.sync(); 
+  })
+  .then(function () {
+		showMessage("Success! Removed range data and format.");
+	})
+  .catch(function(error) {
+    console.log("Error: " + error);
+    if (error instanceof OfficeExtension.Error) {
+        console.log("Debug info: " + JSON.stringify(error.debugInfo));
+    }
+});
+
+        ]]>
+            </code>
+          </task>
+        </tasks>
+    </scenario>
+  <scenario title="Create a Table with Data">
+    <tasks>
+      <task title="Step 1 of 2. Create a table with data" id="1">
+        <code id="createATable">
+          <![CDATA[
+// Create a table
+Excel.run(function (ctx) { 
+	  var sheet = ctx.workbook.worksheets.getActiveWorksheet();
+	  var expenseTable = ctx.workbook.tables.add('E6:G6', true);
+	  expenseTable.name = 'expenseTable';
+	  expenseTable.getHeaderRowRange().values = [['Description','Cost','Category']];
+	  var tableRows = expenseTable.rows;
+	  tableRows.add(null,[['Rent','$600','Housing']]);
+      tableRows.add(null, [["Movie Club", "$75", "Entertainment"]]);
+	  tableRows.add(null, [["Food", "$450", "Food"]]);
+	  tableRows.add(null, [["Car", "$150", "Transportation"]]);
+	  tableRows.add(null, [["Tuition", "$800", "School costs"]]);
+	  tableRows.add(null, [["Books", "$150", "School costs"]]);
+	  tableRows.add(null, [["Gift", "$100", "Other"]]);
+	  tableRows.add(null, [["Loan", "$250", "Loans/Payments"]]);
+    
+    return ctx.sync().then(function() {
+        showMessage("Success! My monthly expense table created! Click Next to see how to remove the table.");
+    })
+    .catch(function (error) {
+        showMessage(JSON.stringify(error));
+    });
+});
+
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 2. Remove the data and format in the table" id="removeDataAndFormat">
+        <code id="removeDataAndFormat">
+          <![CDATA[
+Excel.run(function (ctx) { 
+    var tableName = 'expenseTable';
+    var table = ctx.workbook.tables.getItem(tableName);
+    table.delete();
+    return ctx.sync(); 
+    })
+    .then(function () {
+		showMessage("Success! Removed table.");
+	  })
+    .catch(function(error) {
+      console.log("Error: " + error);
+      if (error instanceof OfficeExtension.Error) {
+          console.log("Debug info: " + JSON.stringify(error.debugInfo));
+      }
+});
+
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Create and Read a Chart">
+    <tasks>
+      <task title="Step 1 of 3. Create data source" id="createDataSource">
+        <code id="createDataSource">
+          <![CDATA[
 // Create a range to be the data source of the chart
 Excel.run(function (ctx) {
     var sheet = ctx.workbook.worksheets.getActiveWorksheet();
@@ -41,11 +170,12 @@ Excel.run(function (ctx) {
         });
 });
 
-        ]]></code>
-            </task>
-            <task title="Step 2 of 3. Create chart" id="createChart">
-                <code id="createChart">
-                  <![CDATA[
+        ]]>
+        </code>
+      </task>
+      <task title="Step 2 of 3. Create chart" id="createChart">
+        <code id="createChart">
+          <![CDATA[
 // Create a column clustered chart named Chart1
 Excel.run(function (ctx) {
     var chartsource = ctx.workbook.worksheets.getActiveWorksheet().getRange("A1:D5");
@@ -65,11 +195,12 @@ Excel.run(function (ctx) {
 });
 
 
-        ]]></code>
-            </task>
-            <task title="Step 3 of 3. Read the chart name" id="readChartName">
-                <code id="readChartName">
-                  <![CDATA[
+        ]]>
+        </code>
+      </task>
+      <task title="Step 3 of 3. Read the chart name" id="readChartName">
+        <code id="readChartName">
+          <![CDATA[
 // Read back the name of the chart added in the previous step.
 Excel.run(function (ctx) {
     var chart = ctx.workbook.worksheets.getActiveWorksheet().charts.getItem("Chart1");
@@ -86,78 +217,97 @@ Excel.run(function (ctx) {
         });
 });
 
-        ]]></code>
-            </task>                      
-        </tasks>
-    </scenario>
-  <scenario title="Bind to Data">
+        ]]>
+        </code>
+      </task>
+    </tasks>
+  </scenario>
+  <scenario title="Format a Table">
     <tasks>
-      <task title="Step 1 of 3. Create a table" id="1">
-        <code id="createATable">
+      <task title="Step 1 of 3. Create a table with data" id="createTable">
+        <code id="createTable">
           <![CDATA[
 // Create a table
 Excel.run(function (ctx) { 
-    ctx.workbook.tables.add("A1:C4", true);
+	  var sheet = ctx.workbook.worksheets.getActiveWorksheet();
+	  var expenseTable = ctx.workbook.tables.add('E6:G6', true);
+	  expenseTable.name = 'expenseTable';
+	  expenseTable.getHeaderRowRange().values = [['Description','Cost','Category']];
+	  var tableRows = expenseTable.rows;
+	  tableRows.add(null,[['Rent','$600','Housing']]);
+      tableRows.add(null, [["Movie Club", "$75", "Entertainment"]]);
+	  tableRows.add(null, [["Food", "$450", "Food"]]);
+	  tableRows.add(null, [["Car", "$150", "Transportation"]]);
+	  tableRows.add(null, [["Tuition", "$800", "School costs"]]);
+	  tableRows.add(null, [["Books", "$150", "School costs"]]);
+	  tableRows.add(null, [["Gift", "$100", "Other"]]);
+	  tableRows.add(null, [["Loan", "$250", "Loans/Payments"]]);
+    
     return ctx.sync().then(function() {
-             showMessage("My Table Created!");
+        showMessage("Success! My monthly expense table created! Click Next to see how to format the table.");
     })
     .catch(function (error) {
-             showMessage(JSON.stringify(error));
+        showMessage(JSON.stringify(error));
     });
 });
-
         ]]>
         </code>
       </task>
-      <task title="Step 2 of 3. Create a new table binding for the table" id="2">
-        <code id="createBindingForTheTable">
+      <task title="Step 2 of 3. Get and format the header range of the table" id="formatTableHeader">
+        <code id="formatTableHeader">
           <![CDATA[
-Office.context.document.bindings.addFromNamedItemAsync('Table1', Office.CoercionType.Table, { id: "myBinding" }, function (asyncResult) {
-    if (asyncResult.status == "failed") {
-        showMessage("Action failed with error: " + asyncResult.error.message);
-    }
-    else {
-        // If successful, add the event handler to the table binding.
-        Office.select("bindings#myBinding").addHandlerAsync(Office.EventType.BindingDataChanged, 
-        onBindingDataChanged,
-        function (asyncResult) {
-            if (asyncResult.status == "failed") {
-              showMessage("Action failed with error: " + asyncResult.error.message);
-            } else {
-              showMessage("Event handler added successfully." +
-                " Now try to change some data in the table.");
-            }
-		  });
-	 }
-});
-
-// When data in the table is changed, this event is triggered.
-function onBindingDataChanged(eventArgs) {
-    Excel.run(function (ctx) { 
-        // Highlight the table in orange to indicate data changed.
-        ctx.workbook.bindings.getItem(eventArgs.binding.id).getTable().getDataBodyRange().format.fill.color = "Orange";
-        return ctx.sync().then(function() {
-             showMessage("The value in this table got changed!");
-        })
-        .catch(function (error) {
-             showMessage(JSON.stringify(error));
+Excel.run(function (ctx) { 
+    var tableName = 'expenseTable';
+    var table = ctx.workbook.tables.getItem(tableName);
+    var tableHeaderRange = table.getHeaderRowRange();
+    tableHeaderRange.load('address');
+    return ctx.sync().then(function() {
+      tableHeaderRange.format.font.size = 15;
+      tableHeaderRange.format.font.color = "white";
+      tableHeaderRange.format.font.name = "Rockwell";		
+      tableHeaderRange.format.fill.color = "blue";	
+      tableHeaderRange.format.borders.getItem("InsideHorizontal").style = "Continuous";
+      tableHeaderRange.format.borders.getItem('EdgeBottom').style = 'Continuous';
+      tableHeaderRange.format.borders.getItem('EdgeTop').style = 'Continuous';
+			
+      return ctx.sync().then(function() {      
+          showMessage("Successfully formatted table header at " +tableHeaderRange.address + ". Click Next to see how to format the table data.");
         });
     });
-}
-
+}).catch(function(error) {
+        showMessage("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+});
         ]]>
         </code>
       </task>
-      <task title="Step 3 of 3. Remove the binding" id="3">
-        <code id="removeTableBinding">
+      <task title="Step 3 of 3. Get and format the data body of the table" id="formatTableData">
+        <code id="formatTableData">
           <![CDATA[
-Office.context.document.bindings.releaseByIdAsync("myBinding", 
-    function (asyncResult) {
-      if (asyncResult.status == "failed") {
-        showMessage("Action failed with error: " + asyncResult.error.message);
-      } else {
-        showMessage("Event handler remove succeeded");
-      }
+Excel.run(function (ctx) { 
+    var tableName = 'expenseTable';
+    var table = ctx.workbook.tables.getItem(tableName);
+    var tableDataRange = table.getDataBodyRange();
+    tableDataRange.load('address')
+    return ctx.sync().then(function() {
+      tableDataRange.format.font.size = 12;
+      tableDataRange.format.font.color = "black";
+      tableDataRange.format.font.name = "Rockwell";			
+      tableDataRange.format.borders.getItem("InsideHorizontal").style = "Continuous";
+      tableDataRange.format.borders.getItem('EdgeBottom').style = 'Continuous';
+      tableDataRange.format.borders.getItem('EdgeTop').style = 'Continuous';
+			
+      return ctx.sync().then(function() {      
+          showMessage("Successfully formatted table data at " +tableDataRange.address);
+        });
+    });
+}).catch(function(error) {
+        showMessage("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+        }
 });
         ]]>
         </code>
@@ -209,143 +359,54 @@ Excel.run(function (ctx) {
 
         ]]>
         </code>
-      </task>     
-    </tasks>
-  </scenario>
-  <scenario title="Write and Read Text">
-    <tasks>
-      <task title="Step 1 of 2. Write text to user selection" id="writeSelectedDataText">
-        <code id="writeSelectedDataText">
-          <![CDATA[
-//Write text to the current user selection
-Office.context.document.setSelectedDataAsync(
-  "Hello World!", 
-  function (asyncResult) {
-    if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
-    } else {
-      showMessage("Success! Click the Next button to move on.");
-  }
-});
-        ]]>
-        </code>
-      </task>
-      <task title="Step 2 of 2. Read text from user selection" id="readSelectedDataText" description="The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142295' target='_blank'&gt;Document&lt;/a&gt; object also exposes the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read from the user's current selection in a document or spreadsheet. The following example uses this method to read text from the spreadsheet by specifying the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp161141.aspx' target='_blank'&gt;coercionType&lt;/a&gt; parameter as &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Text&lt;/a&gt;. You can also use the getSelectedDataAsync method to read range (matrix) and table data in Excel and Word, specifying either of those data types as the coercionType parameter of the method. The callback function returns an object containing the data currently selected by the user, which can use the asyncResult.value property to access the selected data.">
-        <code id="readSelectedDataTextIntro">
-          <![CDATA[
-//Read text from the user current selection
-Office.context.document.getSelectedDataAsync(
-  Office.CoercionType.Text, 
-  function (asyncResult) {
-    if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
-    } else {
-      showMessage("Selected data: " + asyncResult.value +
-      ". Click the Next button to choose a new tutorial.");
-  }
-});
-        ]]>
-        </code>
       </task>
     </tasks>
   </scenario>
-  <scenario title="Write and Read a Range">
+  <scenario title="Get Used Range">
     <tasks>
-      <task title="Step 1 of 2. Set multiple values in range" id="writeSelectedDataMatrix">
-        <code id="writeSelectedDataMatrix">
-          <![CDATA[
-// Create a range to be the data source of the chart
-Excel.run(function (ctx) {
-    var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-    var range = sheet.getRange("A1:C3");
-    range.values = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-
-    return ctx.sync()
-        .then(function () {
-            showMessage("Success! Click the Next button to move on.");
-        })
-        .catch(function (error) {
-            if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
-            }
-        });
-});
-
-        ]]>
-        </code>
-      </task>
-      <task title="Step 2 of 2. Get value of the range" id="readSelectedDataMatrix">
-        <code id="readSelectedDataMatrix">
+      <task title="Step 1 of 2. Get used range of a sheet" id="getUsedRange">
+        <code id="getUsedRange">
           <![CDATA[
 Excel.run(function (ctx) {
-	var range = ctx.workbook.worksheets.getActiveWorksheet().getRange("A1:C3").load("values");
-  var result = '';
-	return ctx.sync().then(function () {
-		for (var i = 0; i < range.values.length; i++) {
-			for (var j = 0; j < range.values[i].length; j++) {
-				result += range.values[i][j] + ', ';
-			}
-		}
-		showMessage(result);
-	});
-}).catch(function(error) {
-	showMessage("Error: " + error);
-	if (error instanceof OfficeExtension.Error) {
-		showMessage("Debug info: " + JSON.stringify(error.debugInfo));
-	}
+  // Create a proxy object for the active worksheet
+  var sheet = ctx.workbook.worksheets.getActiveWorksheet();  
+  var rangeUR = sheet.getUsedRange();
+  rangeUR.load('address');
+  return ctx.sync()
+     .then(function () {
+       showMessage(rangeUR.address);
+      })
+     .catch(function (error) {
+         if (error instanceof OfficeExtension.Error) {
+             showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+         }
+     });
 });
 
         ]]>
         </code>
       </task>
-    </tasks>
-  </scenario>
-  <scenario title="Write and Read a table">
-    <tasks>
-      <task title="Step 1 of 2. Create a new table" id="writeSelectedDataMatrix">
-        <code id="writeSelectedDataMatrix">
-          <![CDATA[
-Excel.run(function (ctx) { 
-    
-    var table = ctx.workbook.tables.add('A1:C3', true);
-    table.load('name');
-    ctx.workbook.tables.getItem(table.name).tableRows.getItemAt(2).values = [["Brittney", "Booker", "A"]];
-    return ctx.sync().then(function() {
-        showMessage(table.name);
-    });
-}).catch(function(error) {
-        showMessage("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            showMessage("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-});
-
-        ]]>
-        </code>
-      </task>
-      <task title="Step 2 of 2. Get value of the range" id="readSelectedDataMatrix">
-        <code id="readSelectedDataMatrix">
-          <![CDATA[
+      <task title="Step 2 of 2. Clear the used range" id="clearUsedRange">
+          <code id="clearUsedRange">
+            <![CDATA[
 Excel.run(function (ctx) {
-	var range = ctx.workbook.worksheets.getActiveWorksheet().getRange("A1:C3").load("values");
-	return ctx.sync().then(function () {
-		for (var i = 0; i < range.values.length; i++) {
-			for (var j = 0; j < range.values[i].length; j++) {
-				showMessage(range.values[i][j]);
-			}
-		}
-		showMessage("done");
-	});
-}).catch(function(error) {
-	showMessage("Error: " + error);
-	if (error instanceof OfficeExtension.Error) {
-		showMessage("Debug info: " + JSON.stringify(error.debugInfo));
-	}
+  // Create a proxy object for the active worksheet
+  var sheet = ctx.workbook.worksheets.getActiveWorksheet();  
+  sheet.getUsedRange().clear();
+  return ctx.sync()
+     .then(function () {
+       showMessage("Success! Used range cleared.");
+      })
+     .catch(function (error) {
+         if (error instanceof OfficeExtension.Error) {
+             showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+         }
+     });
 });
 
         ]]>
-        </code>
-      </task>
-    </tasks>
+          </code>
+        </task>
+      </tasks>
   </scenario>
 </content>
