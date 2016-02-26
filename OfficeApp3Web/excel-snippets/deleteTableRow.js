@@ -1,4 +1,4 @@
-// // Please run Create a table first in order to run this example
+// Please run Create a table first in order to run this example
 Excel.run(function (ctx) {
 	ctx.workbook.tables.getItem('Table1').rows.getItemAt(3).delete();
 	return ctx.sync().then(function () {

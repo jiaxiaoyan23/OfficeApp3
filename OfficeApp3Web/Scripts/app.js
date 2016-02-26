@@ -163,7 +163,7 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
             }
    
             snippetFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
-	            $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);
+                $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);                
 	            $scope.insideOffice = insideOffice;
 	            $("#TxtRichApiScript").empty();
 	            CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
@@ -288,7 +288,8 @@ function addDeferredErrorHandling(sampleCode) {
 }
 
 function addErrorHandling(sampleCode) {
-	return sampleCode.replace("\r\n}).catch(function (error) {\r\n	console.log(error);\r\n});", "\r\n}).catch(function(error) {\r\n    console.log(\"Error: \" + error);\r\n    if (error instanceof OfficeExtension.Error) {\r\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\r\n    }\r\n});");
+   // return sampleCode.replace("\r\n}).catch(function (error) {\r\n	console.log(error);\r\n});", "\r\n}).catch(function(error) {\r\n    console.log(\"Error: \" + error);\r\n    if (error instanceof OfficeExtension.Error) {\r\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\r\n    }\r\n});");
+    return sampleCode.replace("\r\n}).catch(function (error) {\r\n	console.log(error);\r\n});", "\r\n}).catch(function(error) {\r\n    console.log(\"Error: \" + error);\r\n });");
 }
 
 function addErrorHandlingIfNeeded(sampleCode) {

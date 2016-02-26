@@ -11,7 +11,7 @@ Office.context.document.setSelectedDataAsync(
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Success! Click the Next button to move on.");
+      showMessage("Success! Select the arrow button to move on.");
   }
 });
         ]]></code>
@@ -26,7 +26,7 @@ Office.context.document.getSelectedDataAsync(
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
       showMessage("Selected data: " + asyncResult.value +
-      ". Click the Next button to choose a new tutorial.");
+      ". Select the arrow button to choose a new tutorial.");
   }
 });
         ]]></code>
@@ -50,7 +50,7 @@ Office.context.document.setSelectedDataAsync(
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You successfully wrote a matrix! Click Next to learn how to read one.");
+      showMessage("You successfully wrote a matrix! Select the arrow button to learn how to read one.");
     }
   }
 );
@@ -79,7 +79,8 @@ Office.context.document.getSelectedDataAsync(
     <scenario title="Write and Read a Table">
         <tasks>
             <task title="Step 1 of 2. Write a table to user selection" id="writeSelectedDataTableGrades" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method to write a table into the current selection in the spreadsheet. The table data type is represented by the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object. We first instantiate the object, add sample headers and rows and then pass it as the &lt;i&gt;data&lt;/i&gt; parameter to the method. Be aware that a table can only be written into the spreadsheet if no other data in the surrounding cells will be overwritten. The callback function returns an object containing the status of the performed operation.">
-                <code id="writeSelectedDataTableGrades"><![CDATA[  
+                <code id="writeSelectedDataTableGrades">
+      <![CDATA[  
 /* Select an empty cell and click Run Code to write a table */
 
 // Create a TableData object.
@@ -97,7 +98,7 @@ Office.context.document.setSelectedDataAsync(
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Check out your new table, then click next to learn another API call.");
+      showMessage("Check out your new table, then select the arrow button to learn how to run one.");
     }
   }
 );
@@ -126,7 +127,8 @@ Office.context.document.getSelectedDataAsync(
     <scenario title="Update a Row in a Table">
         <tasks>
             <task title="Step 1 of 3. Write a table to user selection" id="writeSelectedDataTablePopulation" description="The first step in this tutorial is to write the sample table to work with. As shown in previous tutorials, the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='blank'&gt;setSelectedDataAsync&lt;/a&gt; method can be used to write the data.">
-                <code id="writeSelectedDataTablePopulation"><![CDATA[ 
+                <code id="writeSelectedDataTablePopulation">
+      <![CDATA[ 
 /* Select an empty cell and click Run Code to write a table showing City 
 and State data */
       
@@ -146,7 +148,7 @@ Office.context.document.setSelectedDataAsync(
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Table successfully written. Click next to move on.");
+      showMessage("Table successfully written. Select the arrow button to move on.");
     }
 });
         ]]></code>
@@ -249,7 +251,7 @@ Office.context.document.setSelectedDataAsync(
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You wrote a matrix! Click Next to see how to bind to it.");
+      showMessage("You wrote a matrix! Select the arrow button to see how to bind to it.");
     }
 });
         ]]>
@@ -328,7 +330,7 @@ function onBindingNotFound(){
 
 // Set a setting in the document
 Office.context.document.settings.set("mySetting", "mySetting value");
-showMessage("You have saved a new setting. Click next to retrieve it.");
+showMessage("You have saved a new setting. Select the arrow button to retrieve it.");
 
 
         ]]></code>
@@ -454,7 +456,7 @@ Office.context.document.addHandlerAsync(
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
       showMessage("DocumentSelectionChanged handler added successfully." +
-        " Click Next to learn how to remove it.");
+        " Select the arrow button to learn how to remove it.");
     }
 });
         ]]>
@@ -603,7 +605,7 @@ Office.context.document.setSelectedDataAsync(myTable, {coercionType: Office.Coer
             showMessage("Action failed with error: " + asyncResult.error.message);
           } else {
             showMessage("Added new binding with type: " + asyncResult.value.type + " and id: " + asyncResult.value.id +
-            ". Click next to learn how to navigate to this new binding.");
+            ". Select the arrow button to learn how to navigate to this new binding.");
           }
         }
       )
@@ -711,7 +713,7 @@ Office.context.mailbox.item.body.getTypeAsync(
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
       showMessage("Body type: " + asyncResult.value + 
-      ". Click Next to learn another API call.");
+      ". Select the arrow button to learn another API call.");
     }
   }
 );
@@ -748,7 +750,7 @@ Office.context.mailbox.item.body.prependAsync("Add-ins rule!",
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Body prepend successful. Click Next to learn a more general method.")
+      showMessage("Body prepend successful. Select the arrow button to learn a more general method.")
     }
   }
 );
@@ -767,7 +769,7 @@ Office.context.mailbox.item.body.setSelectedDataAsync("Hello World!",
     if (asyncResult.status == "failed") {
       showMessage("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You successfully wrote in the email body. Click Next to learn more.");
+      showMessage("You successfully wrote in the email body. Select the arrow button to learn more.");
     }
   }
 );
@@ -830,7 +832,7 @@ Office.context.mailbox.item.displayReplyAllForm("This is my reply ALL");
 
 showMessage("EWS ID: " + Office.context.mailbox.item.itemId +
   " Conversation ID: " + Office.context.mailbox.item.conversationId + 
-  ". Click next to learn how to use these IDs.");
+  ". Select the arrow button to learn how to use these IDs.");
         
 
   ]]>
@@ -957,7 +959,7 @@ Office.context.mailbox.item.notificationMessages.addAsync(
 		if (asyncResult.status == "failed") {
 			showMessage("Action failed with error: " + asyncResult.error.message);
 		} else {
-      showMessage("Check out the new progress indicator at the top of the email, then click Next.");
+      showMessage("Check out the new progress indicator at the top of the email, then select the arrow button.");
     }
 	}
 );
@@ -981,7 +983,7 @@ Office.context.mailbox.item.notificationMessages.replaceAsync(
 		if (asyncResult.status == "failed") {
 			showMessage("Action failed with error: " + asyncResult.error.message);
 		} else {
-      showMessage("Success! Click next to learn another API call.");
+      showMessage("Success! Select the arrow button to learn another API call.");
     }
 	}
 );
@@ -1033,7 +1035,7 @@ Office.context.mailbox.item.notificationMessages.removeAsync(
 /* Click Run Code to set a setting in the mailbox*/
 
  Office.context.roamingSettings.set("mySetting", "mySetting value");
- showMessage("Now that you've set a setting, click Next to learn how to retrieve it");
+ showMessage("Now that you've set a setting, select the arrow button to learn how to retrieve it");
         ]]>
         </code>
       </task>
@@ -1120,7 +1122,7 @@ Office.context.document.getSelectedTaskAsync(
       showMessage("Task retrieval failed");
     } else {
       showMessage("Task ID: " + result.value +
-        ". Click Next to learn more about task retrieval.");
+        ". Select the arrow button to learn more about task retrieval.");
     }
   }
 );

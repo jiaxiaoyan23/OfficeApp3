@@ -35,14 +35,11 @@ Excel.run(function (ctx) {
 	return ctx.sync();
   })
 	.then(function () {
-		showMessage("Success! Range created. Click Next to see how to remove the range data and format.");
+		showMessage("Success! Range created. Select the arrow button to see how to remove the range data and format.");
 	})
   .catch(function (error) {
 		// Always be sure to catch any accumulated errors that bubble up from the Excel.run execution
-		showMessage("Error: " + error);
-		if (error instanceof OfficeExtension.Error) {
-		    showMessage("Debug info: " + JSON.stringify(error.debugInfo));
-		}
+		showMessage("Error: " + error);		
 });
 
         ]]></code>
@@ -63,9 +60,6 @@ Excel.run(function (ctx) {
 	})
   .catch(function(error) {
     console.log("Error: " + error);
-    if (error instanceof OfficeExtension.Error) {
-        console.log("Debug info: " + JSON.stringify(error.debugInfo));
-    }
 });
 
         ]]>
@@ -95,7 +89,7 @@ Excel.run(function (ctx) {
 	  tableRows.add(null, [["Loan", "$250", "Loans/Payments"]]);
     
     return ctx.sync().then(function() {
-        showMessage("Success! My monthly expense table created! Click Next to see how to remove the table.");
+        showMessage("Success! My monthly expense table created! Select the arrow button to see how to remove the table.");
     })
     .catch(function (error) {
         showMessage(JSON.stringify(error));
@@ -118,10 +112,7 @@ Excel.run(function (ctx) {
 		showMessage("Success! Removed table.");
 	  })
     .catch(function(error) {
-      console.log("Error: " + error);
-      if (error instanceof OfficeExtension.Error) {
-          console.log("Debug info: " + JSON.stringify(error.debugInfo));
-      }
+      console.log("Error: " + error);      
 });
 
         ]]>
@@ -161,7 +152,7 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! Click the Next button to move on.");
+            showMessage("Success! Select the arrow button to move on.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
@@ -185,7 +176,7 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! " + chart.name + " was added. Click the Next button to move on.");
+            showMessage("Success! " + chart.name + " was added. Select the arrow button to move on.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
@@ -244,7 +235,7 @@ Excel.run(function (ctx) {
 	  tableRows.add(null, [["Loan", "$250", "Loans/Payments"]]);
     
     return ctx.sync().then(function() {
-        showMessage("Success! My monthly expense table created! Click Next to see how to format the table.");
+        showMessage("Success! My monthly expense table created! Select the arrow button to see how to format the table.");
     })
     .catch(function (error) {
         showMessage(JSON.stringify(error));
@@ -271,7 +262,7 @@ Excel.run(function (ctx) {
       tableHeaderRange.format.borders.getItem('EdgeTop').style = 'Continuous';
 			
       return ctx.sync().then(function() {      
-          showMessage("Successfully formatted table header at " +tableHeaderRange.address + ". Click Next to see how to format the table data.");
+          showMessage("Success! Formatted table header at " +tableHeaderRange.address + ". Select the arrow button to see how to format the table data.");
         });
     });
 }).catch(function(error) {
@@ -300,7 +291,7 @@ Excel.run(function (ctx) {
       tableDataRange.format.borders.getItem('EdgeTop').style = 'Continuous';
 			
       return ctx.sync().then(function() {      
-          showMessage("Successfully formatted table data at " +tableDataRange.address);
+          showMessage("Success! Formatted table data at " +tableDataRange.address);
         });
     });
 }).catch(function(error) {
@@ -326,7 +317,7 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! " + myWorksheet.name + " was added. Click the Next button to move on.");
+            showMessage("Success! " + myWorksheet.name + " was added. Select the arrow button to move on.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {

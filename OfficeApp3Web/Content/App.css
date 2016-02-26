@@ -5,7 +5,7 @@
 }
 
 #APILayout {
-    height:80%; 
+    height:90%; 
     overflow: hidden; 
     display:flex; 
     flex-direction: column; 
@@ -59,14 +59,14 @@
 
 #toastMessage {
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     position: absolute;
     height: 90px;
     right:0px;
     left: 0px;
     z-index: 100;
     background-color: #EFEBEF;
-    bottom: 50px;
+    bottom: 45px;
     display: none;
     border-top-style:solid;
     border-top-width:1px;
@@ -460,7 +460,7 @@ li.listItem:hover{
    position:absolute;
    bottom:0px;
    height:50px;
-   width:80%;
+   width:100%;
    background-color:white;
 }
 

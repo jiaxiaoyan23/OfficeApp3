@@ -17,7 +17,7 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('HTML added to the beginning of the document body successfully. Click Next button to move on.');        
+        showMessage('Success! HTML added to the beginning of the document body. Select the arrow button button to move on.');        
     });  
 })
 .catch(function (error) {
@@ -46,7 +46,7 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Inline picture added to the end of the document body successfully.');        
+        showMessage('Success! Added inline picture  to the end of the document body.');        
     });  
 })
 .catch(function (error) {
@@ -90,7 +90,7 @@ Word.run(function (context) {
                 
             return context.sync().then(function () {
                 contentControlId = contentControl.id;
-                showMessage('ContentControl: ' + contentControlId + ' inserted successfully. Click Next button to move on.');
+                showMessage('Success! ContentControl: ' + contentControlId + ' inserted successfully. Select the arrow button to move on.');
             })
         });                
 })
@@ -106,7 +106,7 @@ Word.run(function (context) {
 
         </code>
       </task>
-      <task title= "Step 2 of 3. change contents of the content control"  id="changeContentsofTheContentControl">
+      <task title= "Step 2 of 3. Change contents of the content control"  id="changeContentsofTheContentControl">
         <code id="changeContentsofTheContentControl">
 
           <![CDATA[  
@@ -128,7 +128,7 @@ Word.run(function (context) {
             contentControls.items[0].insertText("New text in the content control", Word.InsertLocation.replace);                
       
          return context.sync().then(function () {               
-                showMessage('Changed contents in the content control successfully. Click Next button to move on.');
+                showMessage('Success! You’ve changed the contents of the content control. Select the arrow button to move on.');
             })
         });
 })
@@ -172,7 +172,7 @@ Word.run(function (context) {
             // Synchronize the document state by executing the queued commands, 
             // and return a promise to indicate task completion.
             return context.sync().then(function () {
-               showMessage('Content control deleted successfully.');
+               showMessage('Success! You deleted the content control.');
             });      
         }
 
@@ -207,7 +207,7 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Added text to the beginning of the document body successfully. Click Next button to move on.');
+        showMessage('Success! Added text to the beginning of the document body. Select the arrow button to move on.');
     });  
 })
 .catch(function (error) {
@@ -241,7 +241,7 @@ Word.run(function (context) {
                       '; Font name: ' + body.font.name +
                       '; Font color: ' + body.font.color +
                       '; Body style: ' + body.style;
-        results += ' Click Next button to move on.';
+        results += ' Select the arrow button to move on.';
         showMessage(results);
     });  
 })
@@ -326,7 +326,7 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Added a new paragraph at the end of the document body successfully. Click Next button to move on.');
+        showMessage('Success! Added a new paragraph at the end of the document body. Select the arrow button to move on.');
     });  
 })
 .catch(function (error) {
@@ -366,7 +366,7 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage('Selected the last paragraph successfully.');
+            showMessage('Success! Selected the last paragraph.');
         });      
     });  
 })
@@ -412,7 +412,7 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage('Added Header and Footer successfully. Click Next button to move on.');
+            showMessage('Success! Added Header and Footer. Select the arrow button to move on.');
         }); 
      });  
 })
@@ -454,7 +454,7 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage('Removed Header and Footer successfully.');
+            showMessage('Success! Removed Header and Footer.');
         }); 
     });
 })
@@ -488,7 +488,7 @@ Word.run(function (ctx) {
     // Synchronize the document state by executing the queued-up commands, 
     // and return a promise to indicate task completion.
     return ctx.sync().then(function () {
-        showMessage('Cleared the body contents.');
+        showMessage('Success! Cleared the body contents.');
     });  
 })
 .catch(function (error) {
