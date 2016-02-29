@@ -60,6 +60,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\officeapitutorial - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial-staging - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial-staging - Web Deploy %282%29.pubxml" />
     <None Include="Web.Debug.config">

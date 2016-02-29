@@ -43,17 +43,20 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="OfficeApp3Manifest\SharePointProjectItem.spdata">
+    <Content Include="Prod Manifests\ContentManifest.xml" />
+    <Content Include="Prod Manifests\OutlookManifest.xml" />
+    <Content Include="Prod Manifests\TaskpaneManifest.xml" />
+    <None Include="APITutorialManifest\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3eb962da-d8cb-4ba8-8a6f-70649ba58a27}</SharePointProjectItemId>
     </None>
-    <Content Include="OfficeApp3Manifest\OfficeApp3.xml">
+    <Content Include="APITutorialManifest\APITuturial.xml">
       <OpcRelationship>manifest-oemanifest</OpcRelationship>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OfficeApp3Web\OfficeApp3Web.csproj">
+    <ProjectReference Include="..\OfficeApp3Web\APITutorialWeb.csproj">
       <Project>{ACBC11B4-4AE7-4516-AA14-C28330183F70}</Project>
-      <Name>OfficeApp3Web</Name>
+      <Name>APITutorialWeb</Name>
       <Private>True</Private>
       <RoleType>Web</RoleType>
       <OutputItemType>SharePointWebProjectOutput</OutputItemType>
@@ -61,6 +64,7 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

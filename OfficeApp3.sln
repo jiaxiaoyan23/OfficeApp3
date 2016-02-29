@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApp3", "OfficeApp3\OfficeApp3.csproj", "{ED477080-1FD6-4E4A-8BC3-D040E237D836}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITutorial", "OfficeApp3\APITutorial.csproj", "{ED477080-1FD6-4E4A-8BC3-D040E237D836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeApp3Web", "OfficeApp3Web\OfficeApp3Web.csproj", "{ACBC11B4-4AE7-4516-AA14-C28330183F70}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITutorialWeb", "OfficeApp3Web\APITutorialWeb.csproj", "{ACBC11B4-4AE7-4516-AA14-C28330183F70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

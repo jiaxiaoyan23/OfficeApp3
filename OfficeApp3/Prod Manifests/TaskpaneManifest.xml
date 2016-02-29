@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TaskPaneApp">
+  <Id>e285e19f-74cb-468f-a2e8-950079854f95</Id>
+  <Version>1.1</Version>
+  <ProviderName>Microsoft Corporation</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="API Tutorial (Taskpane)" />
+  <Description DefaultValue="Explore the API to build Office Add-ins in an interactive taskpane tutorial."/>
+  <IconUrl DefaultValue="https://officeapitutorial.azurewebsites.net/images/InteractiveAPI32x32.png" />
+  <SupportUrl DefaultValue="http://go.microsoft.com/fwlink/?LinkId=615105"/>
+  <AppDomains>
+    <AppDomain>https://officeapitutorial.azurewebsites.net</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Workbook" />
+    <Host Name="Presentation" />
+    <Host Name="Project" />
+    <Host Name="Document" />
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://officeapitutorial.azurewebsites.net/index.html" />
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+</OfficeApp>
