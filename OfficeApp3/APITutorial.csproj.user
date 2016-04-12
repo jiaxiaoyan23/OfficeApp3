@@ -9,7 +9,7 @@
     <GeneratedProductId>{9db2e8af-e300-4544-b282-559bbc53ab35}</GeneratedProductId>
     <GeneratedAppVersion>1.0.0.0</GeneratedAppVersion>
     <GeneratedClientSecret>+ogn65SSpEte/NWZe5+u3L5+nWt13xs1cZxcZ2aAPJw=</GeneratedClientSecret>
-    <OfficeAndSharePointStartAction>Google Chrome</OfficeAndSharePointStartAction>
+    <OfficeAndSharePointStartAction>OfficeDesktopClient</OfficeAndSharePointStartAction>
     <OfficeAppStartDocument>&lt;NewExcelWorkbook&gt;</OfficeAppStartDocument>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>

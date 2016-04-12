@@ -72,7 +72,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\App.css" />
+    <Content Include="Content\AppV2.css" />
     <Content Include="Content\AppAccess.css" />
     <Content Include="Content\AppOutlook.css" />
     <Content Include="Content\AppPPT.css" />
@@ -188,7 +188,7 @@
     <Content Include="excel-snippets\upperCaseRange.js" />
     <Content Include="Scripts\codemirror.js" />
     <Content Include="Scripts\FancyBox.js" />
-    <Content Include="Scripts\InteractiveSDK.js" />
+    <Content Include="Scripts\InteractiveSDKv2.js" />
     <Content Include="Scripts\javascript.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.debug.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.js" />
@@ -544,7 +544,9 @@
     <Content Include="word-snippets\sectionInsertTextHeader.js" />
     <Content Include="word-snippets\_template.js" />
     <Content Include="Scripts\_officeintellisense.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
