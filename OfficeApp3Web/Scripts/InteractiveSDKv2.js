@@ -113,7 +113,7 @@ InteractiveTutorial.App = new function () {
                     $("#headercontent").append('<h1 >Select a Tutorial (Compose)</h1>');
                 }
             } else {
-                $("#headercontent").append("<h2>New to Office add-ins? Get started with step-by-step tutorials:</h2>");
+                $("#headercontent").append("<h2>(Staging) New to Office add-ins? Get started with step-by-step tutorials:</h2>");
             }
             $("#headercontent").attr("class", "listHeader");
             $("#navigation").hide();
@@ -218,7 +218,10 @@ InteractiveTutorial.App = new function () {
         document.cookie = "firstTryItOut=false;expires=" + new Date(Date.now() + 365*86400000).toGMTString();
 
         $("#headercontent").attr("class", "apiPageHeader");
-        $("#tutorialList").attr("class", "apiPageContent");
+        $("#tutorialList").addClass("hidden");
+        $("#APILayout").removeClass("hidden");
+
+        $("#bottomMenu").addClass("hidden");
         _currentContentIndex = scenarioNumber;
         _currentScenario = _contentList[scenarioNumber].scenario;
         _currentLink = _contentList[scenarioNumber].link;
@@ -228,9 +231,20 @@ InteractiveTutorial.App = new function () {
         }else{
             _currentTaskIndex = 0;
         }
-        $("#headercontent").html("<div id='scenario'><span id='scenarioimg'><img src='Images/backwhite.png' role='button' tabindex='0' title='Back to Tutorial List' height='30px' alt='Back' /></span><span><div id='scenariolabel'><h4>" + self.htmlEncode(_currentScenario) + "</h4></div><div id='task'></div></span></div>").show();
-       
-        $("#mainBtn").click(self.showList);
+        $("#headercontent").html("<div id='scenario'><button id='mainBtnInTutorial' class='codeSnippetsMenu' >Main </button><span class='codeSnippetsMenu'>&nbsp; > </span><select id='scenariolabel' class='codeSnippetsMenu'></span>").show();
+        var html = '';
+        for (var i = 0; i < _contentList.length; i++) {
+            html += '<option value="' + _contentList[i].scenario + '">' + _contentList[i].scenario + '</option>';
+        }
+        $("#scenariolabel").append(html);
+        $("#scenariolabel").change(self.changeTutorial);
+        $("#scenariolabel")[0].options[_currentContentIndex].selected = true;
+        $("#mainBtnInTutorial").click(self.showList);
+
+        $("#tutorialMain").attr("class", "divWrapperInsideFull");
+
+
+        
         self.showTask();
         if (firstTryItOut) {
             setAndShowFancyBox();
@@ -272,14 +286,23 @@ InteractiveTutorial.App = new function () {
     //Uses third party library for code formatting and styling of code snippet
     this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) {
         $("#codeWindow").empty();
-        CodeEditorIntegration.initializeJsEditor('codeWindow', [
-                            "/editorIntelliSense/ExcelLatest.txt",
-                            "/editorIntelliSense/WordLatest.txt",
-                            "/editorIntelliSense/OfficeCommon.txt",
-                            "/editorIntelliSense/OfficeDocument.txt"
-        ]);
-        CodeEditorIntegration.setJavaScriptText($.trim(code));           
-        CodeEditorIntegration.resizeEditor();
+        initialCodeEditorAsync(function () {
+            CodeEditorIntegration.setJavaScriptText($.trim(code));
+            CodeEditorIntegration.resizeEditor();
+        });
+    }
+
+    function initialCodeEditorAsync(callback) {
+        setTimeout(function () {
+            CodeEditorIntegration.initializeJsEditor('codeWindow', [
+                                        "/editorIntelliSense/ExcelLatest.txt",
+                                        "/editorIntelliSense/WordLatest.txt",
+                                        "/editorIntelliSense/OfficeCommon.txt",
+                                        "/editorIntelliSense/OfficeDocument.txt"
+            ]);
+
+            callback();
+        }, 0);
     }
 
     //Check existence of the method/object
