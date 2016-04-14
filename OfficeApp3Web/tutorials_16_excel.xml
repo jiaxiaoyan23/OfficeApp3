@@ -75,7 +75,7 @@ Excel.run(function (ctx) {
 // Create a table
 Excel.run(function (ctx) { 
 	  var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-	  var expenseTable = ctx.workbook.tables.add('E6:G6', true);
+	  var expenseTable = ctx.workbook.tables.add('Sheet1!N6:P6', true);
 	  expenseTable.name = 'expenseTable';
 	  expenseTable.getHeaderRowRange().values = [['Description','Cost','Category']];
 	  var tableRows = expenseTable.rows;
@@ -221,7 +221,7 @@ Excel.run(function (ctx) {
 // Create a table
 Excel.run(function (ctx) { 
 	  var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-	  var expenseTable = ctx.workbook.tables.add('E6:G6', true);
+	  var expenseTable = ctx.workbook.tables.add('Sheet1!N6:P6', true);
 	  expenseTable.name = 'expenseTable';
 	  expenseTable.getHeaderRowRange().values = [['Description','Cost','Category']];
 	  var tableRows = expenseTable.rows;
