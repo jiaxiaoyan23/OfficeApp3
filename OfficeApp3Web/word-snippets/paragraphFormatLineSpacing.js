@@ -15,7 +15,7 @@ Word.run(function (context) {
         var paragraph = paragraphs.items[0];
         
         // Queue a change to the paragraph's line spacing.
-        paragraph.linespacing = 36;
+        paragraph.lineSpacing = 36;
         
         // Synchronize the document state by executing the queued-up commands, 
         // and return a promise to indicate task completion.

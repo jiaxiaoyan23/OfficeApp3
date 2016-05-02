@@ -2,7 +2,7 @@
 Word.run(function (context) {
     
     // Queue a command to search the document based on a prefix.
-    var searchResults = context.document.body.search('vid', {matchPrefix: true});
+    var searchResults = context.document.body.search('pre', {matchPrefix: true});
 
     // Queue a command to load the search results and get the font property values.
     context.load(searchResults, 'font');
