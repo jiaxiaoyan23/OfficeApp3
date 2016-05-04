@@ -60,10 +60,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\officeapitutorial - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\officeapitutorial-staging - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\officeapitutorial-staging - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial-staging - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial-staging - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -322,6 +322,7 @@
     <Content Include="Scripts\Office\1\nl-nl\outlook_strings.js" />
     <Content Include="Scripts\Office\1\o15apptofilemappingtable.debug.js" />
     <Content Include="Scripts\Office\1\o15apptofilemappingtable.js" />
+    <Content Include="worker-loader-proxy.js" />
     <None Include="Scripts\Office\1\office-vsdoc.js" />
     <Content Include="Scripts\Office\1\office.debug.js" />
     <Content Include="Scripts\Office\1\office.js" />
@@ -455,10 +456,6 @@
     </Content>
     <Content Include="tutorials_16_word.xml" />
     <Content Include="word-snippets\samples.json" />
-    <None Include="Properties\PublishProfiles\officeapitutorial - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\officeapitutorial-staging - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\officeapitutorial-staging - Web Deploy.pubxml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Content\OfficeThemes.css" />
     <Content Include="word-snippets\bodyClear.js" />

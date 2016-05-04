@@ -90,7 +90,10 @@ officeJsSnippetApp.factory("snippetFactory", ['$http', function ($http) {
 	var factory = {};
 	
 	factory.getSamples = function () {
-	    GetAppHostInfo();	   
+	    GetAppHostInfo();
+	    if (hostName == "") {
+	        return $http.get('excel-snippets/samples.json');
+	    }
 	    return $http.get(hostName + '-snippets/samples.json');
 	};
 	
