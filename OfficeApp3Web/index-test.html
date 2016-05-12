@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Monaco Editor Standalone Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+        #editor {
+            position: relative;
+            left: 20px;
+            top: 20px;
+            width: 600px;
+            height: 400px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+
+    <script type="text/javascript" src="/Scripts/vs/loader.js"></script>
+
+    <script type="text/javascript">
+        require.config({
+            baseUrl: "/Scripts"
+        });
+        require(["vs/editor/editor.main"], function () {
+            var editor = Monaco.Editor.create(document.getElementById("editor"), {
+                value: "console.log('Hello world!')",
+                mode: "javascript"
+            });
+        });
+    </script>
+
+</body>
+</html>

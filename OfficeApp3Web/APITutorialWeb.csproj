@@ -60,7 +60,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\officeapitutorial - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial-staging - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\officeapitutorial-staging - Web Deploy.pubxml" />
@@ -84,6 +86,7 @@
     <Content Include="Content\FancyBox.css" />
     <Content Include="Content\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox_sprite.png" />
+    <Content Include="editorIntelliSense\OfficeJS2015May.txt" />
     <Content Include="Images\arrow.png" />
     <Content Include="Images\arrowWhite.png" />
     <Content Include="Images\back-translucent.png" />
@@ -116,6 +119,7 @@
     <Content Include="Images\right.png" />
     <Content Include="Images\signup.gif" />
     <Content Include="index.html" />
+    <Content Include="index-test.html" />
     <Content Include="partials\add-in.html" />
     <Content Include="partials\snippet-browser.html" />
     <Content Include="Content\Office.css" />
@@ -190,6 +194,7 @@
     <Content Include="Scripts\FancyBox.js" />
     <Content Include="Scripts\InteractiveSDKv2.js" />
     <Content Include="Scripts\javascript.js" />
+    <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.debug.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.js" />
     <Content Include="Scripts\Office\1\ar-sa\office_strings.debug.js" />
@@ -322,6 +327,144 @@
     <Content Include="Scripts\Office\1\nl-nl\outlook_strings.js" />
     <Content Include="Scripts\Office\1\o15apptofilemappingtable.debug.js" />
     <Content Include="Scripts\Office\1\o15apptofilemappingtable.js" />
+    <Content Include="Scripts\vs\base\browser\ui\findinput\case-sensitive-dark.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\findinput\case-sensitive.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\findinput\regex-dark.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\findinput\regex.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\findinput\whole-word-dark.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\findinput\whole-word.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\octiconLabel\octicons\octicons.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-down-dark.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-down.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-left-dark.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-left.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-right-dark.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-right.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-up-dark.png" />
+    <Content Include="Scripts\vs\base\browser\ui\scrollbar\media\arrow-up.png" />
+    <Content Include="Scripts\vs\base\browser\ui\splitview\arrow-collapse-dark.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\splitview\arrow-collapse.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\splitview\arrow-expand-dark.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\splitview\arrow-expand.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\toolbar\ellipsis-inverse.svg" />
+    <Content Include="Scripts\vs\base\browser\ui\toolbar\ellipsis.svg" />
+    <Content Include="Scripts\vs\base\common\worker\simpleWorker.js" />
+    <Content Include="Scripts\vs\base\common\worker\simpleWorker.nls.js" />
+    <Content Include="Scripts\vs\base\common\worker\workerServer.js" />
+    <Content Include="Scripts\vs\base\common\worker\workerServer.nls.js" />
+    <Content Include="Scripts\vs\base\parts\tree\browser\loading-dark.svg" />
+    <Content Include="Scripts\vs\base\parts\tree\browser\loading.svg" />
+    <Content Include="Scripts\vs\base\worker\workerMain.js" />
+    <Content Include="Scripts\vs\base\worker\workerMainCompatibility.html" />
+    <Content Include="Scripts\vs\css.js" />
+    <Content Include="Scripts\vs\editor\browser\viewParts\lineNumbers\flipped-cursor.svg" />
+    <Content Include="Scripts\vs\editor\browser\widget\media\diagonal-fill.png" />
+    <Content Include="Scripts\vs\editor\browser\widget\media\green-squiggly.svg" />
+    <Content Include="Scripts\vs\editor\browser\widget\media\red-squiggly.svg" />
+    <Content Include="Scripts\vs\editor\common\services\editorSimpleWorker.js" />
+    <Content Include="Scripts\vs\editor\common\services\editorSimpleWorker.nls.js" />
+    <Content Include="Scripts\vs\editor\common\worker\editorWorkerServer.js" />
+    <Content Include="Scripts\vs\editor\common\worker\editorWorkerServer.nls.js" />
+    <Content Include="Scripts\vs\editor\contrib\defineKeybinding\browser\info.svg" />
+    <Content Include="Scripts\vs\editor\contrib\defineKeybinding\browser\status-error.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\cancelSelectionFind-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\cancelSelectionFind.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\close-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\close.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\expando-collapsed-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\expando-collapsed.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\expando-expanded-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\expando-expanded.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\next-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\next.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\previous-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\previous.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\replace-all-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\replace-all.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\replace-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\find\browser\images\replace.svg" />
+    <Content Include="Scripts\vs\editor\contrib\folding\browser\arrow-collapse-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\folding\browser\arrow-collapse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\folding\browser\arrow-expand-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\folding\browser\arrow-expand.svg" />
+    <Content Include="Scripts\vs\editor\contrib\gotoError\browser\lightbulp-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\gotoError\browser\lightbulp.svg" />
+    <Content Include="Scripts\vs\editor\contrib\iPadShowKeyboard\browser\keyboard-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\iPadShowKeyboard\browser\keyboard.svg" />
+    <Content Include="Scripts\vs\editor\contrib\parameterHints\browser\arrow-down-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\parameterHints\browser\arrow-down.svg" />
+    <Content Include="Scripts\vs\editor\contrib\parameterHints\browser\arrow-up-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\parameterHints\browser\arrow-up.svg" />
+    <Content Include="Scripts\vs\editor\contrib\quickFix\browser\lightbulp-dark.svg" />
+    <Content Include="Scripts\vs\editor\contrib\quickFix\browser\lightbulp.svg" />
+    <Content Include="Scripts\vs\editor\contrib\quickOpen\browser\symbol-sprite.svg" />
+    <Content Include="Scripts\vs\editor\contrib\suggest\browser\symbol-sprite.svg" />
+    <Content Include="Scripts\vs\editor\contrib\zoneWidget\browser\media\close-inverse.svg" />
+    <Content Include="Scripts\vs\editor\contrib\zoneWidget\browser\media\close.svg" />
+    <Content Include="Scripts\vs\editor\editor.main.css" />
+    <Content Include="Scripts\vs\editor\editor.main.js" />
+    <Content Include="Scripts\vs\editor\editor.main.nls.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\bat.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\coffee.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\cpp.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\csharp.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\dockerfile.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\fsharp.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\go.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\ini.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\jade.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\java.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\lua.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\objective-c.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\powershell.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\python.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\r.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\ruby.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\sql.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\swift.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\vb.js" />
+    <Content Include="Scripts\vs\editor\standalone-languages\xml.js" />
+    <Content Include="Scripts\vs\languages\css\common\css.js" />
+    <Content Include="Scripts\vs\languages\css\common\cssWorker.js" />
+    <Content Include="Scripts\vs\languages\css\common\cssWorker.nls.js" />
+    <Content Include="Scripts\vs\languages\css\common\services\browsers.js" />
+    <Content Include="Scripts\vs\languages\handlebars\common\handlebars.js" />
+    <Content Include="Scripts\vs\languages\html\common\html.js" />
+    <Content Include="Scripts\vs\languages\html\common\htmlWorker.js" />
+    <Content Include="Scripts\vs\languages\html\common\htmlWorker.nls.js" />
+    <Content Include="Scripts\vs\languages\javascript\common\javascript.js" />
+    <Content Include="Scripts\vs\languages\javascript\common\javascriptWorker.js" />
+    <Content Include="Scripts\vs\languages\json\common\json.js" />
+    <Content Include="Scripts\vs\languages\json\common\json.nls.js" />
+    <Content Include="Scripts\vs\languages\json\common\jsonWorker.js" />
+    <Content Include="Scripts\vs\languages\json\common\jsonWorker.nls.js" />
+    <Content Include="Scripts\vs\languages\less\common\less.js" />
+    <Content Include="Scripts\vs\languages\less\common\lessWorker.js" />
+    <Content Include="Scripts\vs\languages\less\common\lessWorker.nls.js" />
+    <Content Include="Scripts\vs\languages\lib\common\beautify-html.js" />
+    <Content Include="Scripts\vs\languages\markdown\common\markdown.js" />
+    <Content Include="Scripts\vs\languages\markdown\common\markdownWorker.js" />
+    <Content Include="Scripts\vs\languages\php\common\php.js" />
+    <Content Include="Scripts\vs\languages\razor\common\razor.js" />
+    <Content Include="Scripts\vs\languages\razor\common\razorWorker.js" />
+    <Content Include="Scripts\vs\languages\sass\common\sass.js" />
+    <Content Include="Scripts\vs\languages\sass\common\sassWorker.js" />
+    <Content Include="Scripts\vs\languages\sass\common\sassWorker.nls.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\js\angularServiceRewriter.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\js\defineRewriter.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\js\es6PropertyDeclarator.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\js\globalVariableRewriter.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\js\importAndExportRewriter.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\js\requireRewriter.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\lib\typescriptServices.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\typescript.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\typescriptMode.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\typescriptMode.nls.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\typescriptWorker2.js" />
+    <Content Include="Scripts\vs\languages\typescript\common\typescriptWorker2.nls.js" />
+    <Content Include="Scripts\vs\loader.js" />
+    <Content Include="Scripts\vs\nls.js" />
+    <Content Include="Scripts\vs\text.js" />
     <Content Include="worker-loader-proxy.js" />
     <None Include="Scripts\Office\1\office-vsdoc.js" />
     <Content Include="Scripts\Office\1\office.debug.js" />
@@ -548,6 +691,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\vs\languages\typescript\common\lib\lib.d.ts" />
+    <TypeScriptCompile Include="Scripts\vs\languages\typescript\common\lib\lib.es6.d.ts" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -581,4 +728,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AddTsToContent" AfterTargets="CompileTypeScript" Condition="'$(BuildingProject)' != 'false'">
+    <ItemGroup>
+      <Content Include="@(TypeScriptCompile)" />
+    </ItemGroup>
+  </Target>
 </Project>

@@ -10,7 +10,7 @@ var CodeEditorIntegration;
         }
 
         require(['vs/editor/editor.main'], function () {
-                var editorMode = 'text/typescript';
+                var editorMode = 'text/javascript';
                 jsCodeEditor = Monaco.Editor.create(document.getElementById(textAreaId), {
                     value: defaultJsText,
                     mode: editorMode,
@@ -34,14 +34,24 @@ var CodeEditorIntegration;
                     }
                     return path += 'refresh=' + Math.floor(Math.random() * 1000000000);
                 });
-            
-                require(['vs/platform/platform', 'vs/editor/modes/modesExtensions'], function (Platform, ModesExt) {
-                    Platform.Registry.as(ModesExt.Extensions.EditorModes).configureMode(editorMode, {
-                        "validate": {
-                            "extraLibs": intellisensePaths
-                        }
-                    });  
+
+                $.ajax("/editorIntelliSense/OfficeJS2015May.txt").then(function (intelliSenseContents) {
+                    require(['vs/languages/javascript/common/javascript'], function () {
+                        var jsExt = require('vs/languages/javascript/common/javascript.extensions');
+                        jsExt.Defaults.addExtraLib(intelliSenseContents);
+                        jsExt.Defaults.setCompilerOptions({
+                            target: 2
+                        })
+                    })
+
                 });
+                //require(['vs/platform/platform', 'vs/editor/modes/modesExtensions'], function (Platform, ModesExt) {
+                //    Platform.Registry.as(ModesExt.Extensions.EditorModes).configureMode(editorMode, {
+                //        "validate": {
+                //            "extraLibs": intellisensePaths
+                //        }
+                //    });  
+                //});
             
           
         });
