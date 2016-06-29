@@ -22,6 +22,8 @@
     <ProjectMode>OfficeApp</ProjectMode>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <MinimumOfficeToolsVersion>12.2</MinimumOfficeToolsVersion>
+    <IsAutoDeployedWebApplication>False</IsAutoDeployedWebApplication>
+    <AutohostedOfficeAppProductId>{96214dfb-a722-4da2-9d6f-b8d075fa18d6}</AutohostedOfficeAppProductId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,7 +51,7 @@
     <None Include="APITutorialManifest\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3eb962da-d8cb-4ba8-8a6f-70649ba58a27}</SharePointProjectItemId>
     </None>
-    <Content Include="APITutorialManifest\APITuturial.xml">
+    <Content Include="APITutorialManifest\APITutorial.xml">
       <OpcRelationship>manifest-oemanifest</OpcRelationship>
     </Content>
   </ItemGroup>
