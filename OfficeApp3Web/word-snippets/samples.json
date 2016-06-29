@@ -11,7 +11,7 @@
         { "done": true, "filename": "bodyinsertParagraph.js", "name": "Insert a paragraph", "group": "Body", "description": "Inserts a paragraph at the end of the body." },
         { "done": true, "filename": "bodyinsertText.js", "name": "Insert text in to the body", "group": "Body", "description": "Inserts text at the beginning of the body." },
         { "done": true, "filename": "bodyload.js", "name": "Load font and style properties", "group": "Body", "description": "Loads the font and style properties of the body." },
-        { "done": true, "filename": "bodysearch.js", "name": "Search the body", "group": "Body", "description": "Search the body for the string 'Video'." },
+        { "done": true, "filename": "bodysearch.js", "name": "Search the body", "group": "Body", "description": "Search the body for the string 'this'." },
         { "done": true, "filename": "bodyselect.js", "name": "Select the last paragraph", "group": "Body", "description": "Selects the entire body." },
 
         { "done": true, "filename": "contentControlClear.js", "name": "Clear a content control", "group": "ContentControl", "description": "Clears the contents of the content control." },
@@ -77,9 +77,9 @@
         { "done": true, "filename": "rangeload.js", "name": "Load the range", "group": "Range", "description": "Load the range and then show its property values." },
         { "done": true, "filename": "rangeselect.js", "name": "Select a range", "group": "Range", "description": "Insert HTML content, and then select the range of the inserted HTML content." },
 
-        { "done": true, "filename": "searchText.js", "name": "Search the document (matchCase)", "group": "Search", "description": "Perform a case insensitive search for the word 'video' and highlight the results." },
-        { "done": true, "filename": "searchWholeWord.js", "name": "Search the document text (matchWholeWord)", "group": "Search", "description": "Perform a whole word search for the word 'Click' and highlight the results." },
-        { "done": true, "filename": "searchPrefix.js", "name": "Search the document text (matchPrefix)", "group": "Search", "description": "Perform a search for the prefix 'pro' and highlight the results." },
+        { "done": true, "filename": "searchText.js", "name": "Search the document (matchCase)", "group": "Search", "description": "Perform a case insensitive search for the word 'the' and highlight the results." },
+        { "done": true, "filename": "searchWholeWord.js", "name": "Search the document text (matchWholeWord)", "group": "Search", "description": "Perform a whole word search for the word 'video' and highlight the results." },
+        { "done": true, "filename": "searchPrefix.js", "name": "Search the document text (matchPrefix)", "group": "Search", "description": "Perform a search for the prefix 'pre' and highlight the results." },
         { "done": true, "filename": "searchSuffix.js", "name": "Search the document text (matchSuffix)", "group": "Search", "description": "Perform a search for the suffix 'ly' and highlight the results." },
         { "done": true, "filename": "searchIgnorePunctuation.js", "name": "Search the document text (ignorePunct)", "group": "Search", "description": "Perform a search for 'For example you' that ignores punctuation and highlight the results." },
         { "done": true, "filename": "searchWildCard.js", "name": "Search the document text (*)", "group": "Search", "description": "Perform a search for 'to*' and highlight the results." },

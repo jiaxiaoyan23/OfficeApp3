@@ -510,6 +510,8 @@ li.listItem:hover{
 
 #codeSnippet {
     margin:10px;
+    margin-left:-50px;
+    width:180%;
 }
 .mainMenu {
     height: auto;

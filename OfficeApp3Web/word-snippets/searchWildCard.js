@@ -1,3 +1,4 @@
+/// <reference path="searchWildCard.js" />
 // Run a batch operation against the Word object model.
 Word.run(function (context) {
     
