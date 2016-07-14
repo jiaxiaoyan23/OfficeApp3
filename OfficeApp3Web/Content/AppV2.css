@@ -539,3 +539,37 @@ li.listItem:hover{
     right: 0px; 
     padding: 5px;
 }
+
+@media screen and (-ms-high-contrast:none){
+    #imgNext2 {
+        display:none;
+    }
+    #imgBack2{
+        display:none;
+    }
+}
+@media screen and (-ms-high-contrast:active)
+{
+     #sampleSelector{
+     overflow: hidden; 
+     background:url("/Images/arrow.png");
+     border:1px solid #9E9E9E;
+    }
+     #groupSelector{
+     overflow: hidden; 
+     background:url("Images/next-translucent.png");
+     border:1px solid #9E9E9E;
+    }
+
+    li.listItem {
+    background-color:#337147;
+    color:white;
+    }
+
+    #imgNext{
+        display:none;
+    }
+    #imgBack{
+        display:none;
+    }
+}

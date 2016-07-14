@@ -469,11 +469,11 @@ InteractiveTutorial.App = new function () {
             //Loading last task with no Napa, show list button. Last step with Napa after, show next button 
             if (_currentTaskIndex == _tasks.length - 1 && !hasNapaLink) {
                 //show Next button as Tutorial List icon
-                $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to tutorial list'><img src='Images/list-translucent.png' alt='Tutorial List' /></div></div>").appendTo(navigation);
+                $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to tutorial list'><img id='imgNext' src='Images/list-translucent.png' alt='Tutorial List' /><img id='imgNext2' src='/Images/list-translucent-highContrast.png' alt='Tutorial List' /></div></div>").appendTo(navigation);
                 _checked[_currentScenario] = true;
             } else {
                 //show Next button as Next icon
-                $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to the next step'><img src='Images/next-translucent.png' alt='Next' /></div></div>").appendTo(navigation);
+                $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to the next step'><img id='imgNext' src='Images/next-translucent.png' alt='Next' /><img id='imgNext2' src='/Images/next-translucent-highContrast.png' alt='Next' /></div></div>").appendTo(navigation);
             }
 
 
@@ -502,7 +502,7 @@ InteractiveTutorial.App = new function () {
                     window.open(_currentLink, "_blank");
                 });
 
-                navigation.append("<div class='navigationButtons'><div id='previous' role='button' tabindex='0' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go back to tutorial list'><img src='Images/list-translucent.png' alt='Tutorials' /></div></div>");
+                navigation.append("<div class='navigationButtons'><div id='previous' role='button' tabindex='0' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go back to tutorial list'><img id='imgNext' src='Images/list-translucent.png' alt='Tutorial List' /><img id='imgNext2' src='/Images/list-translucent-highContrast.png' alt='Tutorial List' /></div></div>");
                 $('#next').click(function () {
                     $("#toastMessage").slideUp();
                     self.showList();
@@ -511,7 +511,7 @@ InteractiveTutorial.App = new function () {
         }
         //If not the 0th task, show previous button
         if (_currentTaskIndex != 0) {
-            $("<img src='Images/back-translucent.png' alt='Previous' /></div>").appendTo("#previous");
+            $("<img id='imgBack' src='Images/back-translucent.png' alt='Previous' /><img id='imgBack2' src='/Images/back-translucent-highContrast.png' alt='Previous' /></div>").appendTo("#previous");
             $("#previous").click(function () {
                 $("#toastMessage").slideUp();
                 _currentTaskIndex--;
