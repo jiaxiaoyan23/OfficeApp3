@@ -118,10 +118,6 @@
     <Content Include="Images\Progressbar.gif" />
     <Content Include="Images\right.png" />
     <Content Include="Images\signup.gif" />
-    <Content Include="Images\arrowGray.png" />
-    <Content Include="Images\list-translucent-highContrast.png" />
-    <Content Include="Images\back-translucent-highContrast.png" />
-    <Content Include="Images\next-translucent-highContrast.png" />
     <Content Include="index.html" />
     <Content Include="index-test.html" />
     <Content Include="partials\add-in.html" />
