@@ -541,23 +541,24 @@ li.listItem:hover{
 }
 
 @media screen and (-ms-high-contrast:none){
-    #imgNext2 {
+    #imgNext_BlackBackground {
         display:none;
     }
-    #imgBack2{
+    #imgBack_BlackBackground{
         display:none;
     }
 }
+ 
 @media screen and (-ms-high-contrast:active)
 {
      #sampleSelector{
      overflow: hidden; 
-     background:url("/Images/arrow.png");
+     background:url("/Images/arrowGray.png");
      border:1px solid #9E9E9E;
     }
      #groupSelector{
      overflow: hidden; 
-     background:url("Images/next-translucent.png");
+     background:url("/Images/arrowGray.png");
      border:1px solid #9E9E9E;
     }
 
@@ -566,10 +567,27 @@ li.listItem:hover{
     color:white;
     }
 
-    #imgNext{
+    #imgNext_WhiteBackground{
         display:none;
     }
-    #imgBack{
+    #imgBack_WhiteBackground{
         display:none;
-    }
+    } 
 }
+@media screen and (-ms-high-contrast:black-on-white) {
+    #imgNext_BlackBackground {
+        display:none;
+    }
+    #imgBack_BlackBackground{
+        display:none;
+    }
+    #imgNext_WhiteBackground{
+        display:block;
+        background-color: black;
+    }
+    #imgBack_WhiteBackground{
+        display:block;
+        background-color: black;
+    } 
+}
+
