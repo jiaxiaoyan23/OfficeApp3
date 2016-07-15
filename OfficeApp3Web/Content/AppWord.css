@@ -69,11 +69,3 @@ li.listItem:hover{
 .snippetbuttonclass {
     background-color: #2b579a;
 }
-
-@media screen and (-ms-high-contrast:active)
-{
-    li.listItem {
-    background-color:#2b579a;
-    color:white;
-    }
-}
