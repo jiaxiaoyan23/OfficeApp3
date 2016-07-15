@@ -1404,7 +1404,6 @@ function setAndShowFancyBox() {
 function showMessage(text) {
     $("#message").text(text);
     $("#toastMessage").slideDown();
-    $("#closeImage")[0].focus();
 }
 
 function writeLog(msg) {
