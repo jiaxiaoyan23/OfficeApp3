@@ -22,7 +22,6 @@
     <IISExpressUseClassicPipelineMode />
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
-    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
