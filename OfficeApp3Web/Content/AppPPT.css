@@ -61,11 +61,3 @@ li.listItem:hover{
      color: #b7472a;
 
 }
-
-@media screen and (-ms-high-contrast:active)
-{
-    li.listItem {
-    background-color:#b7472a;
-    color:white;
-    }
-}
