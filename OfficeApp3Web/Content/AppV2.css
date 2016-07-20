@@ -540,6 +540,18 @@ li.listItem:hover{
     padding: 5px;
 }
 
+#sampleSelector:focus {
+    border-color: black;
+    border-style: dotted;
+    border-width: 1.5px;
+}
+
+#groupSelector:focus {
+    border-color: black;
+    border-style: dotted;
+    border-width: 1.5px;
+}
+
 @media screen and (-ms-high-contrast:none){
     #imgNext_BlackBackground {
         display:none;
