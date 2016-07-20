@@ -92,10 +92,6 @@
     margin-right:1px;
 }
 
-#closeImage .focus { 
-    outline-style: dotted; 
-}
-
 #headercontent {
     z-index:1000;
     height:80px;
