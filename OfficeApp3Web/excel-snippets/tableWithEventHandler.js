@@ -1,6 +1,7 @@
 //Create Table1
 Excel.run(function (ctx) {
-    var table = ctx.workbook.tables.add("Sheet1!A1:C4", true).load("name");
+    var sheet = ctx.workbook.worksheets.get();
+    var table = sheet.tables.add("A1:C4", true).load("name");
     return ctx.sync()
         .then(function() {
             Office.context.document.bindings.addFromNamedItemAsync(table.name, Office.BindingType.Table, { id: "myBinding" }, function (asyncResult) {

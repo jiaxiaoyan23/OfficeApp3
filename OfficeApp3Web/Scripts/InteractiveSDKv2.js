@@ -98,7 +98,7 @@ InteractiveTutorial.App = new function () {
         writeLog("ShowList: Tutorial count=" + iTutorialCount);
         if (iTutorialCount == 0) {
             writeError("ShowList: No Supported Scenarios for host " + _appHost)
-            showMessage("Bummer! It doesn't look like any tutorials have been written for this application yet.");
+            console.log("Bummer! It doesn't look like any tutorials have been written for this application yet.");
         }
         else
         {
@@ -251,10 +251,10 @@ InteractiveTutorial.App = new function () {
                 try {
                     eval(script);
                 } catch (e) {
-                    showMessage(e.name + ": " + e.message);
+                    console.log(e.name + ": " + e.message);
                 }
             } else {
-                showMessage("Invalid JavaScript / TypeScript. Please fix the errors in the code editor and try again.");
+                console.log("Invalid JavaScript / TypeScript. Please fix the errors in the code editor and try again.");
             }
 
             AppsTelemetry.perfEnd("RunCode [" + _currentScenario + ", " + _currentTask + "]");
@@ -264,7 +264,7 @@ InteractiveTutorial.App = new function () {
         catch (err) {
             // Catch syntax and runtime errors
             writeError("RunTask: Error [" + err + "]");
-            showMessage('Error executing code: ' + err);
+            console.log('Error executing code: ' + err);
         }
 
     }
@@ -393,7 +393,7 @@ InteractiveTutorial.App = new function () {
             dataType: 'xml',
         }).error(function (jqXHR, textStatus, errorThrown) {
             writeError("Error retrieving XML [" + errorThrown + "]");
-            showMessage(textStatus + " : " + errorThrown);
+            console.log(textStatus + " : " + errorThrown);
         }).success(function (xml) {
             callback($(xml));
         });
@@ -610,6 +610,14 @@ InteractiveTutorial.App = new function () {
         
         InteractiveTutorial.App.showTask();
     }
+
+
+    var console = {};
+    console.log = function (text) {
+        $("#message").text(text);
+        $("#toastMessage").slideDown();
+        $("#closeImage")[0].focus();
+    };
 }
 
 //FancyBox appears over content, triggered upon first use of TryitOut
@@ -630,12 +638,13 @@ function setAndShowFancyBox() {
     });
 }
 
-// Display a message at the bottom of the task pane - called when code is executed in the window
-function showMessage(text) {
-    $("#message").text(text);
-    $("#toastMessage").slideDown();
-    $("#closeImage")[0].focus();
-}
+// Display a message at the bottom of the task pane - called when code is executed in the window. Use console.log (overriding the browser console.log so that if users copy code snippets, they can still run it without modifying
+//function showMessage(text) {
+//    $("#message").text(text);
+//    $("#toastMessage").slideDown();
+//    $("#closeImage")[0].focus();
+//}
+
 
 function writeLog(msg) {
     AppsTelemetry.sendLog(AppsTelemetry.TraceLevel.info, msg);

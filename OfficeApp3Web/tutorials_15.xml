@@ -3,29 +3,31 @@
     <scenario title="Write and Read Text">
         <tasks>
             <task title="Step 1 of 2. Write text to user selection" id="writeSelectedDataText" description="The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142295' target='_blank'&gt;Document&lt;/a&gt;  object exposes a method to write to the user's current selection in a document or spreadsheet. To do that, the Document object provides the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method. The following example uses this method to write text into the spreadsheet (see later tutorials to learn how to write matrix and table data structures). The callback function returns an object containing the status of the performed operation. ">
-                <code id="writeSelectedDataText"><![CDATA[
+                <code id="writeSelectedDataText">
+      <![CDATA[
 //Write text to the current user selection
 Office.context.document.setSelectedDataAsync(
   "Hello World!", 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Success! Select the arrow button to move on.");
+      console.log("Success! Select the arrow button to move on.");
   }
 });
         ]]></code>
             </task>
             <task title="Step 2 of 2. Read text from user selection" id="readSelectedDataText" description="The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142295' target='_blank'&gt;Document&lt;/a&gt; object also exposes the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read from the user's current selection in a document or spreadsheet. The following example uses this method to read text from the spreadsheet by specifying the &lt;a href='https://msdn.microsoft.com/EN-US/library/office/fp161141.aspx' target='_blank'&gt;coercionType&lt;/a&gt; parameter as &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Text&lt;/a&gt;. You can also use the getSelectedDataAsync method to read range (matrix) and table data in Excel and Word, specifying either of those data types as the coercionType parameter of the method. The callback function returns an object containing the data currently selected by the user, which can use the asyncResult.value property to access the selected data.">
-                <code id="readSelectedDataTextIntro"><![CDATA[
+                <code id="readSelectedDataTextIntro">
+      <![CDATA[
 //Read text from the user current selection
 Office.context.document.getSelectedDataAsync(
   Office.CoercionType.Text, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Selected data: " + asyncResult.value +
+      console.log("Selected data: " + asyncResult.value +
       ". Select the arrow button to choose a new tutorial.");
   }
 });
@@ -36,7 +38,8 @@ Office.context.document.getSelectedDataAsync(
     <scenario title="Write and Read a Range">
         <tasks>
             <task title="Step 1 of 2. Write a range (matrix) to user selection" id="writeSelectedDataMatrix" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142145' target='_blank'&gt;setSelectedDataAsync&lt;/a&gt; method to write a matrix data structure, which is a range of cells, into the current selection in the spreadsheet. To do so, pass an array of arrays that contains the data to write to the setSelectedAsync method as the &lt;i&gt;data&lt;/i&gt; parameter. Be aware that a matrix can only be written into the spreadsheet if no other data in the surrounding cells will be overwritten. The callback function returns an object containing the status of the performed operation.">
-                <code id="writeSelectedDataMatrix"><![CDATA[
+                <code id="writeSelectedDataMatrix">
+      <![CDATA[
 /* Select an empty cell and click Run Code to write a range of cells */
 
 // Create a matrix (array of arrays).
@@ -48,16 +51,17 @@ Office.context.document.setSelectedDataAsync(
   {coercionType: Office.CoercionType.Matrix},
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You successfully wrote a matrix! Select the arrow button to learn how to read one.");
+      console.log("You successfully wrote a matrix! Select the arrow button to learn how to read one.");
     }
   }
 );
         ]]></code>
             </task>
             <task title="Step 2 of 2. Read range (matrix) from user selection" id="readSelectedDataMatrix" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read the currently selected range of cells. To specify that the selection is read as a range of cells, specify the &lt;i&gt;coerctionType&lt;/i&gt; parameter as &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Matrix&lt;/a&gt;. The callback function returns an object containing the data currently selected by the user, which can use the asyncResult.value property to access the data. ">
-                <code id="readSelectedDataMatrix"><![CDATA[
+                <code id="readSelectedDataMatrix">
+      <![CDATA[
 /* Select a range of cells with data and click Run Code to read it */
 
 // Read a matrix from the current selection in the document and display 
@@ -66,9 +70,9 @@ Office.context.document.getSelectedDataAsync(
   Office.CoercionType.Matrix, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Selected data: " + asyncResult.value);
+      console.log("Selected data: " + asyncResult.value);
     }
   }
 );
@@ -96,16 +100,17 @@ Office.context.document.setSelectedDataAsync(
   {coercionType: Office.CoercionType.Table},
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Check out your new table, then select the arrow button to learn how to run one.");
+      console.log("Check out your new table, then select the arrow button to learn how to run one.");
     }
   }
 );
         ]]></code>
             </task>
             <task title="Step 2 of 2. Read a table from user selection" id="readSelectedDataTable" description="The following example uses the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142294' target='_blank'&gt;getSelectedDataAsync&lt;/a&gt; method to read the currently selected table. The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161141' target='_blank'&gt;CoercionType.Table&lt;/a&gt; parameter specifies the expected data type. The callback function returns an object containing the data currently selected by the user, which can be accessed by the asyncResult.value property.">
-                <code id="readSelectedDataTable"><![CDATA[
+                <code id="readSelectedDataTable">
+      <![CDATA[
 /* Select a table in the document and click Run Code to read it */
      
 // Read a table from the document and display its contents.
@@ -113,9 +118,9 @@ Office.context.document.getSelectedDataAsync(
   Office.CoercionType.Table, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Headers: " + asyncResult.value.headers + 
+      console.log("Headers: " + asyncResult.value.headers + 
       " Rows: " + asyncResult.value.rows);
     }
   }
@@ -146,15 +151,16 @@ Office.context.document.setSelectedDataAsync(
   {coercionType: Office.CoercionType.Table},
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Table successfully written. Select the arrow button to move on.");
+      console.log("Table successfully written. Select the arrow button to move on.");
     }
 });
         ]]></code>
             </task>
             <task title="Step 2 of 3. Bind to the table" id="bindToTable" description="The next step is to bind to the table. Unlike the basic writing and reading methods, binding to a region in a document establishes a link between that region and the add-in that can be referenced later on. After a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161045' target='_blank'&gt;Binding&lt;/a&gt; object is created, you can access it at any time, read and write data to the region of the document associated with it, and handle selection and data change events. This example demonstrates binding to the user’s current selection using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142282' target='_blank'&gt; addFromSelectionAsync&lt;/a&gt; method. Be aware that bindings can also be created  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142150' target='_blank'&gt;based on selection from a prompt&lt;/a&gt; (Excel only), and &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp123590' target='_blank'&gt;from existing named items &lt;/a&gt; in the document and spreadsheet. The example also shows how a binding ID can be specified (‘MyTableBinding’) when you create the binding. The binding ID can then be used to retrieve the binding. The callback function returns an asyncResult object containing the binding, which can be accessed using the asyncResult.value property. ">
-                <code id="bindToTable"><![CDATA[  
+                <code id="bindToTable">
+      <![CDATA[  
 /* Select the table from the previous step and click Run Code. 
 This will create a binding to the table */
       
@@ -164,16 +170,17 @@ Office.context.document.bindings.addFromSelectionAsync(
   { id: "MyTableBinding" }, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Added new binding with type: " + asyncResult.value.type + 
+      console.log("Added new binding with type: " + asyncResult.value.type + 
       " and id: " + asyncResult.value.id);
     }
 });
         ]]></code>
             </task>
             <task title="Step 3 of 3. Update row in the binding" id="updateRowInBinding" description="Now we can use the binding object created in the previous step to update the table content. The example shows how to retrieve the table binding based on its ID using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161004' target='_blank'&gt;Office.select&lt;/a&gt; selector method and then calls the  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161120' target='_blank'&gt;setDataAsync&lt;/a&gt; method to write data into the binding object, which will be reflected in the table associated with the binding. First, a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object containing one row, is created. The &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object is then passed as the &lt;i&gt;data&lt;/i&gt; parameter to the method along with a &lt;i&gt;startRow&lt;/i&gt;  parameter value to indicate the position in the table to replace with the supplied table. Be aware that the shape of the table used to update the binding must match the shape of the updated table in terms of the number of columns and rows. The callback function returns an asyncResult object containing the status of the performed operation.">
-                <code id="updateRowInBinding"><![CDATA[  
+                <code id="updateRowInBinding">
+      <![CDATA[  
       
 /* Click Run Code to replace the 3rd row with new data */
 
@@ -188,22 +195,23 @@ Office.select("bindings#MyTableBinding", onBindingNotFound).setDataAsync(
   {coercionType: Office.CoercionType.Table, startRow: rowToUpdate}, 
   function(asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Updated row number 3 with this data: " + table.rows);
+      console.log("Updated row number 3 with this data: " + table.rows);
     }
   }
 );  
 
 //Show error message in case the binding object wasn't found
 function onBindingNotFound(){
-  showMessage("The binding object was not found. " +
+  console.log("The binding object was not found. " +
   "Please return to previous step to create the binding");
 }
 ]]></code>
             </task>
             <task title="Extra Credit: Add Column to the table" id="addColumnFromBinding" description="In addition to updating existing data in the table, the table binding object can be used to add new columns and rows. The example shows how to retrieve the table binding based on its ID using the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161008' target='_blank'&gt;getById&lt;/a&gt; method exposed by the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp160966' target='_blank'&gt;Bindings&lt;/a&gt; object.  First, a &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161002' target='_blank'&gt;TableData&lt;/a&gt; object containing a header and one column is created. Once the binding object is retrieved, the new table is passed as the &lt;i&gt;data&lt;/i&gt; parameter to the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp179822' target='_blank'&gt;addColumnsAsync&lt;/a&gt; method. Be aware, that just like updating table data, adding columns and rows requires that the shape of object added to the table matches the shape of the table (in this example, the new column created has the same number of rows as the table). The callback function returns an asyncResult object containing the status of the performed operation. &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161004' target='_blank'&gt;Office.select&lt;/a&gt; selector method and then calls the  &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161120' target='_blank'&gt;setDataAsync&lt;/a&gt; method to write data into the binding object, which will reflect in the table.">
-                <code id="addColumnFromBinding"><![CDATA[  
+                <code id="addColumnFromBinding">
+      <![CDATA[  
 /* Click Run Code to add a column with population data */
 
 //Create a table with a single column
@@ -216,15 +224,15 @@ Office.context.document.bindings.getByIdAsync(
   "MyTableBinding", 
   function(asyncResult){
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
       //getByIdAsync returns a binding object. 
       //If the binding object was found, add a column to it
       asyncResult.value.addColumnsAsync(populationTable, function(result){
         if (result.status == "failed") {
-          showMessage("Action failed with error: " + result.error.message);
+          console.log("Action failed with error: " + result.error.message);
         } else {
-          showMessage("Successfully added Population column!");
+          console.log("Successfully added Population column!");
         }
       });
     }
@@ -249,9 +257,9 @@ Office.context.document.setSelectedDataAsync(
   {CoercionType: Office.CoercionType.Matrix},
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You wrote a matrix! Select the arrow button to see how to bind to it.");
+      console.log("You wrote a matrix! Select the arrow button to see how to bind to it.");
     }
 });
         ]]>
@@ -269,9 +277,9 @@ Office.context.document.bindings.addFromPromptAsync(
   {id: "MyMatrixBinding"}, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Added new binding with type: " + asyncResult.value.type + 
+      console.log("Added new binding with type: " + asyncResult.value.type + 
       " and id: " + asyncResult.value.id);
     }
   }
@@ -291,7 +299,7 @@ Office.select("bindings#MyMatrixBinding", onBindingNotFound).addHandlerAsync(
   Office.EventType.BindingSelectionChanged, 
   onBindingSelectionChanged, 
   function(AsyncResult){
-		showMessage("Event handler was added successfully!"+ 
+		console.log("Event handler was added successfully!"+ 
     " Change the matrix current selection to trigger the event");
 });
 
@@ -305,16 +313,16 @@ function onBindingSelectionChanged(eventArgs) {
     }, 
     function(asyncResult) {
       if (asyncResult.status == "failed") {
-        showMessage("Action failed with error: " + asyncResult.error.message);
+        console.log("Action failed with error: " + asyncResult.error.message);
       } else{
-        showMessage(asyncResult.value[0].toString());
+        console.log(asyncResult.value[0].toString());
       }
     });
 }
 
 //Show error message in case the binding object wasn't found
 function onBindingNotFound(){
-  showMessage("The binding object was not found."+ 
+  console.log("The binding object was not found."+ 
   " Please return to previous step to create the binding");
 }
         ]]>
@@ -325,35 +333,38 @@ function onBindingNotFound(){
     <scenario title="Persist Settings">
         <tasks>
             <task title="Step 1 of 3. Set Setting" id="setSettings" description="The Settings object makes it possible to store data associated with the user or the app. The data is saved in the document file and can be retrieved at any point later. Be aware that settings are saved per document and not per add-in, so it's only possible to retrieve settings saved in the current document. This is very useful for caching data specific to the add-in state for the current document. This example shows how to use the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161063' target='_blank'&gt;Settings.set&lt;/a&gt; method to store a key value pair of strings. This setting will be made available during the entire add-in session.">
-                <code id="setSettings"><![CDATA[  
+                <code id="setSettings">
+  <![CDATA[  
 /* Click Run Code to set a setting */
 
 // Set a setting in the document
 Office.context.document.settings.set("mySetting", "mySetting value");
-showMessage("You have saved a new setting. Select the arrow button to retrieve it.");
+console.log("You have saved a new setting. Select the arrow button to retrieve it.");
 
 
         ]]></code>
             </task>
             <task title="Step 2 of 3. Get Settings" id="getSettings" description="To get a setting previously set or saved by the add-in, use the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp142180' target='_blank'&gt;Settings.get&lt;/a&gt; method.">
-                <code id="getSettings"><![CDATA[  
+                <code id="getSettings">
+  <![CDATA[  
 /* Click Run Code to get a setting */
 
 //Get a setting previously set in the document
 var settingsValue = Office.context.document.settings.get("mySetting");
-showMessage("mySetting value is: " + settingsValue);
+console.log("mySetting value is: " + settingsValue);
         ]]></code>
             </task>
             <task title="Step 3 of 3. Save Settings" id="saveSettings" description="Any setting previously saved by an add-in is loaded when the document is initialized, so during the lifetime of the session you can just use the set and get methods to read and write settings. When you want to persist the settings so that they are available the next time the add-in is used with the document, use the &lt;a href='http://msdn.microsoft.com/en-us/library/office/apps/fp161133' target='_blank'&gt;saveAsync &lt;/a&gt; method.">
-                <code id="saveSettings"><![CDATA[  
+                <code id="saveSettings">
+    <![CDATA[  
 /* Click Run Code to save a setting in the document */
 
 //Save a setting in the document to make it available in future sessions
 Office.context.document.settings.saveAsync(function (asyncResult) {
   if (asyncResult.status == "failed") {
-    showMessage("Action failed with error: " + asyncResult.error.message);
+    console.log("Action failed with error: " + asyncResult.error.message);
   } else {
-    showMessage("Settings saved with status: " + asyncResult.status);
+    console.log("Settings saved with status: " + asyncResult.status);
   }
 });
         ]]></code>
@@ -371,9 +382,9 @@ Office.context.document.settings.saveAsync(function (asyncResult) {
 
 Office.context.document.getActiveViewAsync(function (asyncResult) {
   if (asyncResult.status == "failed") {
-    showMessage("Action failed with error: " + asyncResult.error.message);
+    console.log("Action failed with error: " + asyncResult.error.message);
   } else {
-    showMessage("Active view: " + asyncResult.value +
+    console.log("Active view: " + asyncResult.value +
     ". Continue to the next step to add an event handler to the active view.");
   }
 });
@@ -390,7 +401,7 @@ Office.context.document.getActiveViewAsync(function (asyncResult) {
 /* Switch between slide show and edit view to see event fire */
 
 Globals.activeViewHandler = function (args) {
-  showMessage(JSON.stringify(args));
+  console.log(JSON.stringify(args));
 }
 
 Office.context.document.addHandlerAsync(
@@ -398,9 +409,9 @@ Office.context.document.addHandlerAsync(
   Globals.activeViewHandler, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage(asyncResult.status);
+      console.log(asyncResult.status);
     }
 });
         ]]>
@@ -419,9 +430,9 @@ Office.context.document.removeHandlerAsync(
   {handler: Globals.activeViewHandler },
   function (asyncResult) {  
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage(asyncResult.status);
+      console.log(asyncResult.status);
     }
 });
         ]]>
@@ -443,7 +454,7 @@ Office.context.document.removeHandlerAsync(
 Globals.documentSelectionHandler = function (args) {
   Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, function (asyncResult) {
     if (asyncResult.status == "succeeded") {
-      showMessage("DocumentSelectionChanged: " + asyncResult.value);
+      console.log("DocumentSelectionChanged: " + asyncResult.value);
     }
   });
 }
@@ -453,9 +464,9 @@ Office.context.document.addHandlerAsync(
   Globals.documentSelectionHandler,
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("DocumentSelectionChanged handler added successfully." +
+      console.log("DocumentSelectionChanged handler added successfully." +
         " Select the arrow button to learn how to remove it.");
     }
 });
@@ -475,9 +486,9 @@ Office.context.document.removeHandlerAsync(
   {handler: Globals.documentSelectionHandler},
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("DocumentSelectionChanged handler remove succeeded");
+      console.log("DocumentSelectionChanged handler remove succeeded");
     }
 });
         ]]>
@@ -500,11 +511,11 @@ Globals.firstSlideId = 0;
 Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange,
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
       //Record the ID of the first slide
       Globals.firstSlideId = asyncResult.value.slides[0].id;
-      showMessage("Slide info: " + JSON.stringify(asyncResult.value));
+      console.log("Slide info: " + JSON.stringify(asyncResult.value));
     }
 });
         ]]>
@@ -522,9 +533,9 @@ Office.context.document.getSelectedDataAsync(Office.CoercionType.SlideRange,
 Office.context.document.goToByIdAsync(Globals.firstSlideId, Office.GoToType.Slide, 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Navigation successful!");
+      console.log("Navigation successful!");
     }
   }
 );
@@ -547,9 +558,9 @@ var goToNext = Office.Index.Next;
 Office.context.document.goToByIdAsync(goToNext, Office.GoToType.Index,
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Navigation successful!");
+      console.log("Navigation successful!");
     }
 });
         ]]>
@@ -568,9 +579,9 @@ var index = 1;
 Office.context.document.goToByIdAsync(index, Office.GoToType.Index,
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-        showMessage("Action failed with error: " + asyncResult.error.message);
+        console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-        showMessage("Navigation successful!");
+        console.log("Navigation successful!");
     }
 });
         ]]>
@@ -596,15 +607,15 @@ myTable.rows = [["Brittney", "Booker", "1223.10"],
 Office.context.document.setSelectedDataAsync(myTable, {coercionType: Office.CoercionType.Table},
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
       //Create a new table binding for the selected table.
       Office.context.document.bindings.addFromSelectionAsync(Office.CoercionType.Table, {id: "MyTableBinding"},
         function (asyncResult) {
           if (asyncResult.status == "failed") {
-            showMessage("Action failed with error: " + asyncResult.error.message);
+            console.log("Action failed with error: " + asyncResult.error.message);
           } else {
-            showMessage("Added new binding with type: " + asyncResult.value.type + " and id: " + asyncResult.value.id +
+            console.log("Added new binding with type: " + asyncResult.value.type + " and id: " + asyncResult.value.id +
             ". Select the arrow button to learn how to navigate to this new binding.");
           }
         }
@@ -623,10 +634,10 @@ Office.context.document.setSelectedDataAsync(myTable, {coercionType: Office.Coer
 Office.context.document.goToByIdAsync("MyTableBinding", Office.GoToType.Binding,
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message +
+      console.log("Action failed with error: " + asyncResult.error.message +
                   ". Try going back to the previous step to set a binding.");
     } else {
-      showMessage("Navigation successful!");
+      console.log("Navigation successful!");
     }
   }
 );
@@ -646,9 +657,9 @@ Office.context.document.goToByIdAsync("MyTableBinding", Office.GoToType.Binding,
 Office.context.document.getFilePropertiesAsync(
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("The document location is: " + asyncResult.value.url);
+      console.log("The document location is: " + asyncResult.value.url);
     }
   }
 );
@@ -687,9 +698,9 @@ Office.context.document.setSelectedDataAsync(myTable,
   },
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Check out your fancy new table!");
+      console.log("Check out your fancy new table!");
     }
   }
 );
@@ -710,9 +721,9 @@ Office.context.document.setSelectedDataAsync(myTable,
 Office.context.mailbox.item.body.getTypeAsync(
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Body type: " + asyncResult.value + 
+      console.log("Body type: " + asyncResult.value + 
       ". Select the arrow button to learn another API call.");
     }
   }
@@ -730,9 +741,9 @@ Office.context.mailbox.item.body.getTypeAsync(
 Office.context.mailbox.item.subject.setAsync("New subject!", 
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You successfully updated the email subject.");
+      console.log("You successfully updated the email subject.");
     }
   }
 );
@@ -748,9 +759,9 @@ Office.context.mailbox.item.subject.setAsync("New subject!",
 Office.context.mailbox.item.body.prependAsync("Add-ins rule!",
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Body prepend successful. Select the arrow button to learn a more general method.")
+      console.log("Body prepend successful. Select the arrow button to learn a more general method.")
     }
   }
 );
@@ -767,9 +778,9 @@ or highlight some text in the body of the email and click Run Code to overwrite 
 Office.context.mailbox.item.body.setSelectedDataAsync("Hello World!",
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("You successfully wrote in the email body. Select the arrow button to learn more.");
+      console.log("You successfully wrote in the email body. Select the arrow button to learn more.");
     }
   }
 );
@@ -785,9 +796,9 @@ Office.context.mailbox.item.body.setAsync(
     coercionType : Office.CoercionType.Html },
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-      showMessage("Success! Now you know how to compose emails using API calls.");
+      console.log("Success! Now you know how to compose emails using API calls.");
     }
 	}
 );
@@ -830,7 +841,7 @@ Office.context.mailbox.item.displayReplyAllForm("This is my reply ALL");
  
 /* Click Run Code to display available EWS IDs */
 
-showMessage("EWS ID: " + Office.context.mailbox.item.itemId +
+console.log("EWS ID: " + Office.context.mailbox.item.itemId +
   " Conversation ID: " + Office.context.mailbox.item.conversationId + 
   ". Select the arrow button to learn how to use these IDs.");
         
@@ -866,9 +877,9 @@ var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instan
 Office.context.mailbox.makeEwsRequestAsync(request,
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Message sent! Check your inbox.");
+      console.log("Message sent! Check your inbox.");
     }
 });
         
@@ -885,9 +896,9 @@ Office.context.mailbox.makeEwsRequestAsync(request,
 Office.context.mailbox.getCallbackTokenAsync(
   function (asyncResult) {
     if (asyncResult.status == "failed") {
-      showMessage("Action failed with error: " + asyncResult.error.message);
+      console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-      showMessage("Token: " + asyncResult.value);
+      console.log("Token: " + asyncResult.value);
     }
 });
         
@@ -911,15 +922,15 @@ if(Office.context.mailbox.item.subject.getAsync){
   Office.context.mailbox.item.subject.getAsync(
     function (asyncResult) {
       if (asyncResult.status == "failed") {
-        showMessage("Action failed with error: " + asyncResult.error.message);
+        console.log("Action failed with error: " + asyncResult.error.message);
       }
       else {
-        showMessage("Composed subject is: " + asyncResult.value);
+        console.log("Composed subject is: " + asyncResult.value);
       }
   });
 }
 else {
-  showMessage("Subject is: " + Office.context.mailbox.item.subject);
+  console.log("Subject is: " + Office.context.mailbox.item.subject);
 };
   ]]>
         </code>
@@ -931,9 +942,9 @@ Office.context.mailbox.item.body.getAsync(
   {coercionType: "text"},
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-			showMessage("Body: " + asyncResult.value);
+			console.log("Body: " + asyncResult.value);
 		}
 	}
 );
@@ -957,9 +968,9 @@ Office.context.mailbox.item.notificationMessages.addAsync(
   },
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-      showMessage("Check out the new progress indicator at the top of the email, then select the arrow button.");
+      console.log("Check out the new progress indicator at the top of the email, then select the arrow button.");
     }
 	}
 );
@@ -981,9 +992,9 @@ Office.context.mailbox.item.notificationMessages.replaceAsync(
   },
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-      showMessage("Success! Select the arrow button to learn another API call.");
+      console.log("Success! Select the arrow button to learn another API call.");
     }
 	}
 );
@@ -998,9 +1009,9 @@ Office.context.mailbox.item.notificationMessages.replaceAsync(
 Office.context.mailbox.item.notificationMessages.getAllAsync(
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-			showMessage("notification messages: " + JSON.stringify(asyncResult.value));
+			console.log("notification messages: " + JSON.stringify(asyncResult.value));
 		}
 	}
 );
@@ -1016,9 +1027,9 @@ Office.context.mailbox.item.notificationMessages.removeAsync(
 	"foo", 
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-      showMessage("Notification successfully removed");
+      console.log("Notification successfully removed");
     }
 	}
 );
@@ -1035,7 +1046,7 @@ Office.context.mailbox.item.notificationMessages.removeAsync(
 /* Click Run Code to set a setting in the mailbox*/
 
  Office.context.roamingSettings.set("mySetting", "mySetting value");
- showMessage("Now that you've set a setting, select the arrow button to learn how to retrieve it");
+ console.log("Now that you've set a setting, select the arrow button to learn how to retrieve it");
         ]]>
         </code>
       </task>
@@ -1045,7 +1056,7 @@ Office.context.mailbox.item.notificationMessages.removeAsync(
 /* Click Run Code to retrieve a setting  in the mailbox*/
 
 var settingsValue = Office.context.roamingSettings.get("mySetting");
-showMessage("mySetting value is: " + settingsValue);
+console.log("mySetting value is: " + settingsValue);
         ]]>
         </code>
       </task>
@@ -1057,9 +1068,9 @@ showMessage("mySetting value is: " + settingsValue);
 Office.context.roamingSettings.saveAsync(
   function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
     } else {
-			showMessage("Settings saved with status: " + asyncResult.status);
+			console.log("Settings saved with status: " + asyncResult.status);
 		}
 });
         ]]>
@@ -1075,9 +1086,9 @@ Office.context.roamingSettings.saveAsync(
 Office.context.mailbox.item.saveAsync(
 	function (asyncResult) {
 		if (asyncResult.status == "failed") {
-			showMessage("Action failed with error: " + asyncResult.error.message);
+			console.log("Action failed with error: " + asyncResult.error.message);
 		} else {
-			showMessage("Saved successfully, EWS ID is: " + asyncResult.value);
+			console.log("Saved successfully, EWS ID is: " + asyncResult.value);
 		}
 	});
         ]]>
@@ -1101,9 +1112,9 @@ Office.context.mailbox.item.close();
 Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
   function (result) {
     if (result.status === Office.AsyncResultStatus.Failed) {
-      showMessage(result.error);
+      console.log(result.error);
     } else {
-      showMessage(result.value);
+      console.log(result.value);
     }
   }
 );
@@ -1119,9 +1130,9 @@ click Run Code to retrieve the unique ID of the task*/
 Office.context.document.getSelectedTaskAsync(
  	function (result) {
  	  if (result.status === Office.AsyncResultStatus.Failed) {
-      showMessage("Task retrieval failed");
+      console.log("Task retrieval failed");
     } else {
-      showMessage("Task ID: " + result.value +
+      console.log("Task ID: " + result.value +
         ". Select the arrow button to learn more about task retrieval.");
     }
   }
@@ -1135,14 +1146,14 @@ Office.context.document.getSelectedTaskAsync(
 Office.context.document.getSelectedTaskAsync(
  	function (result) {
  	  if (result.status === Office.AsyncResultStatus.Failed) {
-      showMessage("Task ID retrieval failed");
+      console.log("Task ID retrieval failed");
     } else {
       Office.context.document.getTaskAsync(result.value,
         function (result2){
           if (result2.status === Office.AsyncResultStatus.Failed) {
-       				 showMessage("Task retrieval failed");
+       				 console.log("Task retrieval failed");
           } else{
-            showMessage("Task data: " + JSON.stringify(result2.value));
+            console.log("Task data: " + JSON.stringify(result2.value));
           }
         }
       )

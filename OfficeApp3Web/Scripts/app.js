@@ -5,6 +5,12 @@ var isSnippet = false;
 var rootUrl = document.location;
 var hostName = "";
 
+function showMessage(text) {
+        $("#message").text(text);
+        $("#toastMessage").slideDown();
+        $("#closeImage")[0].focus();
+}
+
 var logComment = function(message) {
 	//var consoleElement;
 	//consoleElement = document.getElementById('console');
