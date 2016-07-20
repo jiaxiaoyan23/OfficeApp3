@@ -64,7 +64,7 @@ InteractiveTutorial.App = new function () {
         })
         $("#run").click(self.executeCode);
         $("#next").click(self.nextStep);
-
+        
         /*
         Escape key will move focus to the run code button.  
         Elements with a role of button will also react to enter and space keydown events like a input button
@@ -614,7 +614,10 @@ InteractiveTutorial.App = new function () {
 
     var console = {};
     console.log = function (text) {
-        $("#message").text(text);
+        if (text.indexOf('arrow button') > -1) {
+            text = text.replace('arrow button', '<span class="arrow">arrow button</span>');
+        }
+        $("#message").html(text);
         $("#toastMessage").slideDown();
         $("#closeImage")[0].focus();
     };

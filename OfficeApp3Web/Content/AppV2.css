@@ -540,6 +540,11 @@ li.listItem:hover{
     padding: 5px;
 }
 
+.arrow, .arrow:hover {
+    color: #337147;
+    font-weight:600;
+}
+
 @media screen and (-ms-high-contrast:none){
     #imgNext_BlackBackground {
         display:none;

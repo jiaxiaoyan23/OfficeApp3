@@ -59,5 +59,8 @@ li.listItem:hover{
 
 #codeMenu a.selected {
      color: #2873C9;
+}
 
+.arrow, .arrow:hover {
+    color: #2873C9;
 }
