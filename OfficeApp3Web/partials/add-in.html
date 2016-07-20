@@ -13,10 +13,10 @@
                 <span id="placeholder2" class="codeSnippetsMenu hidden">&nbsp; > </span>
                 <!--<a href="#/testAll" style="text-decoration: none;">-</a>-->
 
-                <select id="sampleSelector" ng-change="isSnippet && loadSampleCode()" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
+                <select id="sampleSelector" ng-change="loadSampleCode()" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
                     <option value="">(choose a sample)</option>
                 </select>
-                <button id="goButton" ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" ng-click="loadSampleCode()"></button>
+                <!--<button id="goButton" ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" ng-click="loadSampleCode()"></button>-->
             </p>
         </div>
     </div>
