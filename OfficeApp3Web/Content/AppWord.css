@@ -70,6 +70,10 @@ li.listItem:hover{
     background-color: #2b579a;
 }
 
+.arrow, .arrow:hover {
+    color: #2b579a;
+}
+
 @media screen and (-ms-high-contrast:active)
 {
     li.listItem {
