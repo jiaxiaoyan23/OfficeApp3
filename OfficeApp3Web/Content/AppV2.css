@@ -545,6 +545,18 @@ li.listItem:hover{
     font-weight:600;
 }
 
+#sampleSelector:focus {
+    outline-color: black;
+    outline-style: dotted;
+    outline-width: 1.5px;
+}
+
+#groupSelector:focus {
+    outline-color: black;
+    outline-style: dotted;
+    outline-width: 1.5px;
+}
+
 @media screen and (-ms-high-contrast:none){
     #imgNext_BlackBackground {
         display:none;
