@@ -71,14 +71,32 @@ InteractiveTutorial.App = new function () {
         */
         $("body").keydown(function (event) {
             if (event.which == 27) {
-                $("#run").focus();
+                if ($("#headercontent")[0].getAttribute("class").toString() == "apiPageHeader") {
+                    $("#run").focus();
+                }
+                if ($("#codeSnippet")[0].getAttribute("class").toString() != "hidden") {
+                    $("#runButton").focus();
+                }
                 $('#toastMessage').hide();
             } //Check for enter and space to mimic the behavior of buttons
             else if (event.which == 13 || event.which == 32) {
                 var element = $(event.srcElement);
                 if (element.attr("role") == "button") {
                     $(event.srcElement).click();
+                    return false;
                 }
+            }
+
+            if (event.which == 9 && $(':focus')[0].id == "message") {
+                $('#toastMessage').hide();
+                if ($("#headercontent")[0].getAttribute("class").toString() == "apiPageHeader") {
+                    $("#run").focus();
+                }
+                if ($("#codeSnippet")[0].getAttribute("class").toString() != "hidden") {
+                    $("#runButton").focus();
+                }
+
+                return false;
             }
         });
 
