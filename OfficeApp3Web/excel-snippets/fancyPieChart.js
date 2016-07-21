@@ -1,5 +1,5 @@
 Excel.run(function (ctx) {
-	var sheet = ctx.workbook.worksheets.getItem("Sheet1");
+    var sheet = ctx.workbook.worksheets.getActiveWorksheet();
 	
 	var range = sheet.getRange("A1:B3");
 	range.values = [
