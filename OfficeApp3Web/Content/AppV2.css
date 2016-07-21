@@ -540,9 +540,22 @@ li.listItem:hover{
     padding: 5px;
 }
 
+<<<<<<< HEAD
 .arrow, .arrow:hover {
     color: #337147;
     font-weight:600;
+=======
+#sampleSelector:focus {
+    border-color: black;
+    border-style: dotted;
+    border-width: 1.5px;
+}
+
+#groupSelector:focus {
+    border-color: black;
+    border-style: dotted;
+    border-width: 1.5px;
+>>>>>>> 1c54248f4a3db168dcde866d2874896fe9edb8ac
 }
 
 @media screen and (-ms-high-contrast:none){
