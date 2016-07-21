@@ -17,13 +17,13 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Success! HTML added to the beginning of the document body. Select the arrow button button to move on.');        
+        console.log('Success! HTML added to the beginning of the document body. Select the arrow button button to move on.');        
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });   
     
@@ -46,13 +46,13 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Success! Added inline picture  to the end of the document body.');        
+        console.log('Success! Added inline picture  to the end of the document body.');        
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });   
     
@@ -90,14 +90,14 @@ Word.run(function (context) {
                 
             return context.sync().then(function () {
                 contentControlId = contentControl.id;
-                showMessage('Success! ContentControl: ' + contentControlId + ' inserted successfully. Select the arrow button to move on.');
+                console.log('Success! ContentControl: ' + contentControlId + ' inserted successfully. Select the arrow button to move on.');
             })
         });                
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });   
     
@@ -128,14 +128,14 @@ Word.run(function (context) {
             contentControls.items[0].insertText("New text in the content control", Word.InsertLocation.replace);                
       
          return context.sync().then(function () {               
-                showMessage('Success! You’ve changed the contents of the content control. Select the arrow button to move on.');
+                console.log('Success! You’ve changed the contents of the content control. Select the arrow button to move on.');
             })
         });
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });           
         
@@ -163,7 +163,7 @@ Word.run(function (context) {
     return context.sync().then(function () {
 
         if (contentControls.items.length === 0) {
-            showMessage("There isn't a content control in this document.");
+            console.log("There isn't a content control in this document.");
         } else {
 
             // Queue a command to delete the first content control. The
@@ -172,16 +172,16 @@ Word.run(function (context) {
             // Synchronize the document state by executing the queued commands, 
             // and return a promise to indicate task completion.
             return context.sync().then(function () {
-               showMessage('Success! You deleted the content control.');
+               console.log('Success! You deleted the content control.');
             });      
         }
 
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });
         ]]>
@@ -207,13 +207,13 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Success! Added text to the beginning of the document body. Select the arrow button to move on.');
+        console.log('Success! Added text to the beginning of the document body. Select the arrow button to move on.');
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });
         ]]>
@@ -242,13 +242,13 @@ Word.run(function (context) {
                       '; Font color: ' + body.font.color +
                       '; Body style: ' + body.style;
         results += ' Select the arrow button to move on.';
-        showMessage(results);
+        console.log(results);
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });
 
@@ -290,14 +290,14 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage(results);
+            console.log(results);
         });  
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });
 
@@ -326,13 +326,13 @@ Word.run(function (context) {
     // Synchronize the document state by executing the queued commands, 
     // and return a promise to indicate task completion.
     return context.sync().then(function () {
-        showMessage('Success! Added a new paragraph at the end of the document body. Select the arrow button to move on.');
+        console.log('Success! Added a new paragraph at the end of the document body. Select the arrow button to move on.');
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });
 
@@ -366,14 +366,14 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage('Success! Selected the last paragraph.');
+            console.log('Success! Selected the last paragraph.');
         });      
     });  
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 });
 
@@ -412,7 +412,7 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage('Success! Added Header and Footer. Select the arrow button to move on.');
+            console.log('Success! Added Header and Footer. Select the arrow button to move on.');
         }); 
      });  
 })
@@ -454,14 +454,14 @@ Word.run(function (context) {
         // Synchronize the document state by executing the queued commands, 
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            showMessage('Success! Removed Header and Footer.');
+            console.log('Success! Removed Header and Footer.');
         }); 
     });
 })
 .catch(function (error) {
-    showMessage('Error: ' + JSON.stringify(error));
+    console.log('Error: ' + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage('Debug info: ' + JSON.stringify(error.debugInfo));
+        console.log('Debug info: ' + JSON.stringify(error.debugInfo));
     }
 }); 
 
@@ -488,13 +488,13 @@ Word.run(function (ctx) {
     // Synchronize the document state by executing the queued-up commands, 
     // and return a promise to indicate task completion.
     return ctx.sync().then(function () {
-        showMessage('Success! Cleared the body contents.');
+        console.log('Success! Cleared the body contents.');
     });  
 })
 .catch(function (error) {
-    showMessage("Error: " + JSON.stringify(error));
+    console.log("Error: " + JSON.stringify(error));
     if (error instanceof OfficeExtension.Error) {
-        showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+        console.log("Debug info: " + JSON.stringify(error.debugInfo));
     }
 });    
 

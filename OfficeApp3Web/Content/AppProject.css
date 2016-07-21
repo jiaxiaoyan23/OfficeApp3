@@ -61,3 +61,7 @@ li.listItem:hover{
      color: #31752f;
 
 }
+
+.arrow, .arrow:hover {
+    color: #31752f;
+}

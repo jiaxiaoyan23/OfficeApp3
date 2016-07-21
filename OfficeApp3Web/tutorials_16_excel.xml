@@ -35,11 +35,11 @@ Excel.run(function (ctx) {
 	return ctx.sync();
   })
 	.then(function () {
-		showMessage("Success! Range created. Select the arrow button to see how to remove the range data and format.");
+		console.log("Success! Range created. Select the arrow button to see how to remove the range data and format.");
 	})
   .catch(function (error) {
 		// Always be sure to catch any accumulated errors that bubble up from the Excel.run execution
-		showMessage("Error: " + error);		
+		console.log("Error: " + error);		
 });
 
         ]]></code>
@@ -56,7 +56,7 @@ Excel.run(function (ctx) {
   return ctx.sync(); 
   })
   .then(function () {
-		showMessage("Success! Removed range data and format.");
+		console.log("Success! Removed range data and format.");
 	})
   .catch(function(error) {
     console.log("Error: " + error);
@@ -75,7 +75,7 @@ Excel.run(function (ctx) {
 // Create a table
 Excel.run(function (ctx) { 
 	  var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-	  var expenseTable = ctx.workbook.tables.add('Sheet1!N6:P6', true);
+	  var expenseTable = sheet.tables.add('N6:P6', true);
 	  expenseTable.name = 'expenseTable';
 	  expenseTable.getHeaderRowRange().values = [['Description','Cost','Category']];
 	  var tableRows = expenseTable.rows;
@@ -89,10 +89,10 @@ Excel.run(function (ctx) {
 	  tableRows.add(null, [["Loan", "$250", "Loans/Payments"]]);
     
     return ctx.sync().then(function() {
-        showMessage("Success! My monthly expense table created! Select the arrow button to see how to remove the table.");
+        console.log("Success! My monthly expense table created! Select the arrow button to see how to remove the table.");
     })
     .catch(function (error) {
-        showMessage(JSON.stringify(error));
+        console.log(JSON.stringify(error));
     });
 });
 
@@ -109,7 +109,7 @@ Excel.run(function (ctx) {
     return ctx.sync(); 
     })
     .then(function () {
-		showMessage("Success! Removed table.");
+		console.log("Success! Removed table.");
 	  })
     .catch(function(error) {
       console.log("Error: " + error);      
@@ -152,11 +152,11 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! Select the arrow button to move on.");
+            console.log("Success! Select the arrow button to move on.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+                console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
             }
         });
 });
@@ -176,11 +176,11 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! " + chart.name + " was added. Select the arrow button to move on.");
+            console.log("Success! " + chart.name + " was added. Select the arrow button to move on.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+                console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
             }
         });
 });
@@ -199,11 +199,11 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! " + chart.name + " is the name of the chart added in the previous step.");
+            console.log("Success! " + chart.name + " is the name of the chart added in the previous step.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+                console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
             }
         });
 });
@@ -221,7 +221,7 @@ Excel.run(function (ctx) {
 // Create a table
 Excel.run(function (ctx) { 
 	  var sheet = ctx.workbook.worksheets.getActiveWorksheet();
-	  var expenseTable = ctx.workbook.tables.add('Sheet1!N6:P6', true);
+	  var expenseTable = sheet.tables.add('N6:P6', true);
 	  expenseTable.name = 'expenseTable';
 	  expenseTable.getHeaderRowRange().values = [['Description','Cost','Category']];
 	  var tableRows = expenseTable.rows;
@@ -235,10 +235,10 @@ Excel.run(function (ctx) {
 	  tableRows.add(null, [["Loan", "$250", "Loans/Payments"]]);
     
     return ctx.sync().then(function() {
-        showMessage("Success! My monthly expense table created! Select the arrow button to see how to format the table.");
+        console.log("Success! My monthly expense table created! Select the arrow button to see how to format the table.");
     })
     .catch(function (error) {
-        showMessage(JSON.stringify(error));
+        console.log(JSON.stringify(error));
     });
 });
         ]]>
@@ -262,13 +262,13 @@ Excel.run(function (ctx) {
       tableHeaderRange.format.borders.getItem('EdgeTop').style = 'Continuous';
 			
       return ctx.sync().then(function() {      
-          showMessage("Success! Formatted table header at " +tableHeaderRange.address + ". Select the arrow button to see how to format the table data.");
+          console.log("Success! Formatted table header at " +tableHeaderRange.address + ". Select the arrow button to see how to format the table data.");
         });
     });
 }).catch(function(error) {
-        showMessage("Error: " + error);
+        console.log("Error: " + error);
         if (error instanceof OfficeExtension.Error) {
-            showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
         }
 });
         ]]>
@@ -291,13 +291,13 @@ Excel.run(function (ctx) {
       tableDataRange.format.borders.getItem('EdgeTop').style = 'Continuous';
 			
       return ctx.sync().then(function() {      
-          showMessage("Success! Formatted table data at " +tableDataRange.address);
+          console.log("Success! Formatted table data at " +tableDataRange.address);
         });
     });
 }).catch(function(error) {
-        showMessage("Error: " + error);
+        console.log("Error: " + error);
         if (error instanceof OfficeExtension.Error) {
-            showMessage("Debug info: " + JSON.stringify(error.debugInfo));
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
         }
 });
         ]]>
@@ -317,11 +317,11 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! " + myWorksheet.name + " was added. Select the arrow button to move on.");
+            console.log("Success! " + myWorksheet.name + " was added. Select the arrow button to move on.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+                console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
             }
         });
 });
@@ -338,11 +338,11 @@ Excel.run(function (ctx) {
 
     return ctx.sync()
         .then(function () {
-            showMessage("Success! " + myWorksheet.position + " is position (zero based) of the worksheet added in the previous step.");
+            console.log("Success! " + myWorksheet.position + " is position (zero based) of the worksheet added in the previous step.");
         })
         .catch(function (error) {
             if (error instanceof OfficeExtension.Error) {
-                showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+                console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
             }
         });
 });
@@ -365,11 +365,11 @@ Excel.run(function (ctx) {
   rangeUR.load('address');
   return ctx.sync()
      .then(function () {
-       showMessage(rangeUR.address);
+       console.log(rangeUR.address);
       })
      .catch(function (error) {
          if (error instanceof OfficeExtension.Error) {
-             showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+             console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
          }
      });
 });
@@ -386,11 +386,11 @@ Excel.run(function (ctx) {
   sheet.getUsedRange().clear();
   return ctx.sync()
      .then(function () {
-       showMessage("Success! Used range cleared.");
+       console.log("Success! Used range cleared.");
       })
      .catch(function (error) {
          if (error instanceof OfficeExtension.Error) {
-             showMessage("Action failed with error: " + JSON.stringify(error.debugInfo));
+             console.log("Action failed with error: " + JSON.stringify(error.debugInfo));
          }
      });
 });
