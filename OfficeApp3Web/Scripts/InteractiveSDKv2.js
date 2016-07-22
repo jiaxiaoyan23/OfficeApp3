@@ -476,7 +476,6 @@ InteractiveTutorial.App = new function () {
                 $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to the next step'><img id='imgNext_WhiteBackground' src='Images/next-translucent.png' alt='Next' /><img id='imgNext_BlackBackground' src='/Images/next-translucent-highContrast.png' alt='Next' /></div></div>").appendTo(navigation);
             }
 
-
             $("#next").click(function () {
                 $("#toastMessage").slideUp();
                 _currentTaskIndex++;
@@ -501,7 +500,6 @@ InteractiveTutorial.App = new function () {
                     writeLog("Open NapaTask clicked [" + _currentLink + "]");
                     window.open(_currentLink, "_blank");
                 });
-
                 navigation.append("<div class='navigationButtons'><div id='previous' role='button' tabindex='0' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go back to tutorial list'><img id='imgNext_WhiteBackground' src='Images/list-translucent.png' alt='Go to tutorial list' /><img id='imgNext_BlackBackground' src='/Images/list-translucent-highContrast.png' alt='Go to tutorial list' /></div></div>");
                 $('#next').click(function () {
                     $("#toastMessage").slideUp();
