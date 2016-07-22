@@ -16,6 +16,7 @@ build/
 app.publish/
 [Bb]in/
 [Oo]bj/
+.vs/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -152,61 +153,3 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
-
-# =========================
-# Orchard specifics
-# =========================
-
-App_Data/
-glob:*.user
-*.patch
-*.hg
-build/
-/buildazure
-/buildtasks
-/artifacts
-*.sln.cache
-src/Orchard.Web/Media/*
-log.xml
-profiling/
-*.orig
-src/Orchard.Web/Modules-temp/*
-src/Backup/*
-src/packages/*
-src/UpgradeLog.*
-*.itrace.csdef
-*.build.csdef
-src/Orchard.Azure/Orchard.Azure.Web/Core/
-src/Orchard.Azure/Orchard.Azure.Web/Modules/
-src/Orchard.Azure/Orchard.Azure.Web/Themes/
-src/Orchard.Azure/Orchard.Azure.CloudService/csx/Debug/*
-src/Orchard.Web/Orchard.Web.Publish.xml
-src/TestResults/*
-src/Orchard.Web/Properties/PublishProfiles
-src/Orchard.Azure/Orchard.Azure.CloudService/Staging/
-src/Orchard.Web/Modules/Orchard.Azure.MediaServices/node_modules
-src/Orchard.Web/Modules/Orchard.Layouts/node_modules
-src/Orchard.Web/Modules/Orchard.DynamicForms/node_modules
-
-#enable all /lib artifacts
-!lib/*/*.*
-
-# =========================
-# devofficecom specifics
-# =========================
-
-src/Orchard.Web/Modules/Provoke.Highlights/obj/Debug/*.cache
-src/Orchard.Web/Modules/Provoke.Highlights/bin/Orchard.Core.dll
-src/Orchard.Web/Modules/Provoke.Highlights/bin/Orchard.Framework.dll
-*.cache
-src/Orchard.Web/Modules/Provoke.Highlights/obj/Debug/Provoke.Highlights.csprojResolveAssemblyReference.cache
-src/Orchard.Web/Modules/Provoke.Highlights/bin/Orchard.Framework.dll
-src/Orchard.Web/Modules/Provoke.Highlights/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-src/Orchard.Web/Modules/Provoke.Highlights/bin/Orchard.Core.dll
-src/Orchard.Web/OfficeDocuments/*
-src/Orchard.Web/OfficeReferences/*
-src/Orchard.Web/Media/*
-
-
-src/Orchard.Web/SEO
-.vs/

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
     <NameOfLastUsedPublishProfile>officeapitutorial-staging - Web Deploy %282%29</NameOfLastUsedPublishProfile>
+    <ToolsVersionPromptShown>1.7</ToolsVersionPromptShown>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
