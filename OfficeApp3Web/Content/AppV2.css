@@ -405,7 +405,7 @@ li.listItem:hover{
      bottom: 0px; 
      left: 0px; 
      right: 0px; 
-     padding: 10px;
+     padding: 0 10px;
 }
 
 #samplesContainer select{
@@ -521,7 +521,7 @@ li.listItem:hover{
 
 #sampleDescription {
     height:auto;
-    padding:10px;
+    padding:0 10px;
 }
 #sampleDescription p{
     margin:5px;
