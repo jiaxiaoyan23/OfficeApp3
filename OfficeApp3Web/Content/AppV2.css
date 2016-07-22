@@ -557,13 +557,11 @@ li.listItem:hover{
     outline-width: 1.5px;
 }
 
-@media screen and (-ms-high-contrast:none){
-    #imgNext_BlackBackground {
-        display:none;
-    }
-    #imgBack_BlackBackground{
-        display:none;
-    }
+#imgNext_BlackBackground {
+    display:none;
+}
+#imgBack_BlackBackground{
+    display:none;
 }
  
 @media screen and (-ms-high-contrast:active)
@@ -571,12 +569,16 @@ li.listItem:hover{
      #sampleSelector{
      overflow: hidden; 
      background:url("/Images/arrowGray.png");
-     border:1px solid #9E9E9E;
+     outline-color: #9E9E9E;
+     outline-style: solid;
+     outline-width: 1px;
     }
      #groupSelector{
      overflow: hidden; 
      background:url("/Images/arrowGray.png");
-     border:1px solid #9E9E9E;
+     outline-color: #9E9E9E;
+     outline-style: solid;
+     outline-width: 1px;
     }
 
     li.listItem {
@@ -589,6 +591,12 @@ li.listItem:hover{
     }
     #imgBack_WhiteBackground{
         display:none;
+    }
+    #imgNext_BlackBackground {
+        display:block;
+    }
+    #imgBack_BlackBackground{
+        display:block;
     } 
 }
 @media screen and (-ms-high-contrast:black-on-white) {
