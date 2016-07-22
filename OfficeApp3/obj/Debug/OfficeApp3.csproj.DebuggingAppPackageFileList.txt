@@ -1,2 +1,0 @@
-bin\Debug\OfficeAppManifests\3eb962dad8cb4ba88a6f70649ba58a27.xml
-D:\GithubSource\Repos\OfficeApp3\OfficeApp3\bin\Debug\OfficeApp3.debugapp
