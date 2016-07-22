@@ -16,7 +16,7 @@
                 <select id="sampleSelector" ng-change="loadSampleCode()" ng-model="selectedSample" ng-options="sample.name for sample in samples | filter:{group: selectedGroup.name}">
                     <option value="">(choose a sample)</option>
                 </select>
-                <button id="goButton" ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" ng-click="loadSampleCode()"></button>
+                <button id="goButton" role="tooltip" aria-label='preview button' ng-hide="isSnippet" class="fa fa-arrow-circle-o-right" ng-click="loadSampleCode()"></button>
             </p>
         </div>
     </div>
