@@ -87,6 +87,8 @@ InteractiveTutorial.App = new function () {
                 }
             }
 
+            // When tab key is pressed and current focus is on the toast message, 
+            // the message will be hide and move focus on the run code button.
             if (event.which == 9 && $(':focus')[0].id == "message") {
                 $('#toastMessage').hide();
                 if ($("#headercontent")[0].getAttribute("class").toString() == "apiPageHeader") {
@@ -96,7 +98,7 @@ InteractiveTutorial.App = new function () {
                     $("#runButton").focus();
                 }
 
-                return false;
+                return false; //Disable the origin function of the key.
             }
         });
 
