@@ -140,7 +140,7 @@ InteractiveTutorial.App = new function () {
             var list = $("#scenarioList");
             for (var i = 0; i < iTutorialCount; i++) {
                 var scenario = _contentList[i].scenario;
-                var listItem = $("<li class='listItem' role='button' tabindex='0'><div class='listText checked'><h2>" + self.htmlEncode(scenario) + "</h2></div><img src='Images/checkwhite.png' height='10px' alt='Check' /></li>");
+                var listItem = $("<li class='listItem' role='button' tabindex='0'><div class='listText checked'><h2>" + self.htmlEncode(scenario) + "</h2></div><img src='Images/checkwhite.png' tabindex='0' aria-label='Checked' height='10px' alt='Checked' /></li>");
                 listItem.appendTo(list).click({ "content": _contentList, "index": i }, self.showAPIPage);
                 if (!(_checked[scenario])) {
                     listItem.find('.listText').removeClass('checked');
