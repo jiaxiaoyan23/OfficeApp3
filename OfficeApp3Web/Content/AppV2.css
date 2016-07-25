@@ -1,7 +1,7 @@
 ﻿html, body {
     height: 100%;
     font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
-    overflow-y: auto;
+    overflow-y: auto!important;
 }
 
 #APILayout {
@@ -405,7 +405,7 @@ li.listItem:hover{
      bottom: 0px; 
      left: 0px; 
      right: 0px; 
-     padding: 10px;
+     padding: 0 10px;
 }
 
 #samplesContainer select{
@@ -483,7 +483,7 @@ li.listItem:hover{
     border:none;
     font-size:15px;
     color:white;    
-    height: auto;
+    height: 25px;
     padding:0;
 }
 
@@ -521,7 +521,7 @@ li.listItem:hover{
 
 #sampleDescription {
     height:auto;
-    padding:10px;
+    padding:0 10px;
 }
 #sampleDescription p{
     margin:5px;

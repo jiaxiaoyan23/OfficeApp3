@@ -71,14 +71,34 @@ InteractiveTutorial.App = new function () {
         */
         $("body").keydown(function (event) {
             if (event.which == 27) {
-                $("#run").focus();
+                if ($("#headercontent")[0].getAttribute("class").toString() == "apiPageHeader") {
+                    $("#run").focus();
+                }
+                if ($("#codeSnippet")[0].getAttribute("class").toString() != "hidden") {
+                    $("#runButton").focus();
+                }
                 $('#toastMessage').hide();
             } //Check for enter and space to mimic the behavior of buttons
             else if (event.which == 13 || event.which == 32) {
                 var element = $(event.srcElement);
                 if (element.attr("role") == "button") {
                     $(event.srcElement).click();
+                    return false;
                 }
+            }
+
+            // When tab key is pressed and current focus is on the toast message, 
+            // the message will be hide and move focus on the run code button.
+            if (event.which == 9 && $(':focus')[0].id == "message") {
+                $('#toastMessage').hide();
+                if ($("#headercontent")[0].getAttribute("class").toString() == "apiPageHeader") {
+                    $("#run").focus();
+                }
+                if ($("#codeSnippet")[0].getAttribute("class").toString() != "hidden") {
+                    $("#runButton").focus();
+                }
+
+                return false; //Disable the origin function of the key.
             }
         });
 
@@ -122,7 +142,7 @@ InteractiveTutorial.App = new function () {
             var list = $("#scenarioList");
             for (var i = 0; i < iTutorialCount; i++) {
                 var scenario = _contentList[i].scenario;
-                var listItem = $("<li class='listItem' role='button' tabindex='0'><div class='listText checked'><h2>" + self.htmlEncode(scenario) + "</h2></div><img src='Images/checkwhite.png' height='10px' alt='Check' /></li>");
+                var listItem = $("<li class='listItem' role='button' tabindex='0'><div class='listText checked'><h2>" + self.htmlEncode(scenario) + "</h2></div><img src='Images/checkwhite.png' tabindex='0' aria-label='Checked' height='10px' alt='Checked' /></li>");
                 listItem.appendTo(list).click({ "content": _contentList, "index": i }, self.showAPIPage);
                 if (!(_checked[scenario])) {
                     listItem.find('.listText').removeClass('checked');
