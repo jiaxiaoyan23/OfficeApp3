@@ -560,6 +560,9 @@ li.listItem:hover{
 #imgNext_BlackBackground {
     display:none;
 }
+#imgList_BlackBackground {
+    display:none;
+}
 #imgBack_BlackBackground{
     display:none;
 }
@@ -589,10 +592,16 @@ li.listItem:hover{
     #imgNext_WhiteBackground{
         display:none;
     }
+    #imgList_WhiteBackground{
+        display:none;
+    }
     #imgBack_WhiteBackground{
         display:none;
     }
     #imgNext_BlackBackground {
+        display:block;
+    }
+    #imgList_BlackBackground {
         display:block;
     }
     #imgBack_BlackBackground{
@@ -603,10 +612,17 @@ li.listItem:hover{
     #imgNext_BlackBackground {
         display:none;
     }
+    #imgList_BlackBackground {
+        display:none;
+    }
     #imgBack_BlackBackground{
         display:none;
     }
     #imgNext_WhiteBackground{
+        display:block;
+        background-color: black;
+    }
+    #imgList_WhiteBackground{
         display:block;
         background-color: black;
     }
