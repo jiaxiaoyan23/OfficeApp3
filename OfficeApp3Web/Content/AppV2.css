@@ -1,7 +1,7 @@
 ﻿html, body {
     height: 100%;
     font-family: "Segoe UI", Tahoma, Verdana, Arial, sans-serif;
-    overflow-y: auto;
+    overflow-y: auto!important;
 }
 
 #APILayout {
@@ -405,7 +405,7 @@ li.listItem:hover{
      bottom: 0px; 
      left: 0px; 
      right: 0px; 
-     padding: 10px;
+     padding: 0 10px;
 }
 
 #samplesContainer select{
@@ -483,7 +483,7 @@ li.listItem:hover{
     border:none;
     font-size:15px;
     color:white;    
-    height: auto;
+    line-height: 25px;
     padding:0;
 }
 
@@ -521,7 +521,7 @@ li.listItem:hover{
 
 #sampleDescription {
     height:auto;
-    padding:10px;
+    padding:0 10px;
 }
 #sampleDescription p{
     margin:5px;
@@ -540,22 +540,9 @@ li.listItem:hover{
     padding: 5px;
 }
 
-<<<<<<< HEAD
 .arrow, .arrow:hover {
     color: #337147;
     font-weight:600;
-=======
-#sampleSelector:focus {
-    border-color: black;
-    border-style: dotted;
-    border-width: 1.5px;
-}
-
-#groupSelector:focus {
-    border-color: black;
-    border-style: dotted;
-    border-width: 1.5px;
->>>>>>> 1c54248f4a3db168dcde866d2874896fe9edb8ac
 }
 
 #sampleSelector:focus {
@@ -571,6 +558,9 @@ li.listItem:hover{
 }
 
 #imgNext_BlackBackground {
+    display:none;
+}
+#imgList_BlackBackground {
     display:none;
 }
 #imgBack_BlackBackground{
@@ -602,10 +592,16 @@ li.listItem:hover{
     #imgNext_WhiteBackground{
         display:none;
     }
+    #imgList_WhiteBackground{
+        display:none;
+    }
     #imgBack_WhiteBackground{
         display:none;
     }
     #imgNext_BlackBackground {
+        display:block;
+    }
+    #imgList_BlackBackground {
         display:block;
     }
     #imgBack_BlackBackground{
@@ -616,10 +612,17 @@ li.listItem:hover{
     #imgNext_BlackBackground {
         display:none;
     }
+    #imgList_BlackBackground {
+        display:none;
+    }
     #imgBack_BlackBackground{
         display:none;
     }
     #imgNext_WhiteBackground{
+        display:block;
+        background-color: black;
+    }
+    #imgList_WhiteBackground{
         display:block;
         background-color: black;
     }
