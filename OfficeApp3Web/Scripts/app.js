@@ -165,6 +165,8 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
             $("#mainBtn").removeClass("hidden");
             $("#placeholder1").removeClass("hidden");
             $("#placeholder2").removeClass("hidden");
+            $("#sampleDescription").addClass("hidden");
+            $("#samplesContainer").removeClass("fixHeight");
 
             if ($scope.selectedSample != null &&
                 ($scope.selectedSample.description != "(Please choose a group and sample above.)")) {
@@ -206,6 +208,8 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
 	    $("#placeholder1").addClass("hidden");
 	    $("#placeholder2").addClass("hidden");
 	    $("#headerString").show();
+	    $("#sampleDescription").removeClass("hidden");
+	    $("#samplesContainer").addClass("fixHeight");
 	    InteractiveTutorial.App.showList();
 	}
 
