@@ -6,7 +6,7 @@ var rootUrl = document.location;
 var hostName = "";
 
 function showMessage(text) {
-        $("#message").text(text);
+        $("#message").html(text);
         $("#toastMessage").slideDown();
         $("#closeImage")[0].focus();
 }
