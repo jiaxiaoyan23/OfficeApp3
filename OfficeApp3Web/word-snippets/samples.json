@@ -77,12 +77,12 @@
         { "done": true, "filename": "rangeload.js", "name": "Load the range", "group": "Range", "description": "Load the range and then show its property values." },
         { "done": true, "filename": "rangeselect.js", "name": "Select a range", "group": "Range", "description": "Insert HTML content, and then select the range of the inserted HTML content." },
 
-        { "done": true, "filename": "searchText.js", "name": "Search the document (matchCase)", "group": "Search", "description": "Perform a case insensitive search for the word 'the' and highlight the results." },
-        { "done": true, "filename": "searchWholeWord.js", "name": "Search the document text (matchWholeWord)", "group": "Search", "description": "Perform a whole word search for the word 'video' and highlight the results." },
-        { "done": true, "filename": "searchPrefix.js", "name": "Search the document text (matchPrefix)", "group": "Search", "description": "Perform a search for the prefix 'pre' and highlight the results." },
-        { "done": true, "filename": "searchSuffix.js", "name": "Search the document text (matchSuffix)", "group": "Search", "description": "Perform a search for the suffix 'ly' and highlight the results." },
-        { "done": true, "filename": "searchIgnorePunctuation.js", "name": "Search the document text (ignorePunct)", "group": "Search", "description": "Perform a search for 'For example you' that ignores punctuation and highlight the results." },
-        { "done": true, "filename": "searchWildCard.js", "name": "Search the document text (*)", "group": "Search", "description": "Perform a search for 'to*' and highlight the results." },
+        { "done": true, "filename": "searchText.js", "name": "Search the doc (matchCase)", "group": "Search", "description": "Perform a case insensitive search for the word 'the' and highlight the results." },
+        { "done": true, "filename": "searchWholeWord.js", "name": "Search the doc text (matchWholeWord)", "group": "Search", "description": "Perform a whole word search for the word 'video' and highlight the results." },
+        { "done": true, "filename": "searchPrefix.js", "name": "Search the doc text (matchPrefix)", "group": "Search", "description": "Perform a search for the prefix 'pre' and highlight the results." },
+        { "done": true, "filename": "searchSuffix.js", "name": "Search the doc text (matchSuffix)", "group": "Search", "description": "Perform a search for the suffix 'ly' and highlight the results." },
+        { "done": true, "filename": "searchIgnorePunctuation.js", "name": "Search the doc text (ignorePunct)", "group": "Search", "description": "Perform a search for 'For example you' that ignores punctuation and highlight the results." },
+        { "done": true, "filename": "searchWildCard.js", "name": "Search the doc text (*)", "group": "Search", "description": "Perform a search for 'to*' and highlight the results." },
 
         { "done": true, "filename": "sectionInsertTextHeader.js", "name": "Insert a header", "group": "Section", "description": "Insert text into header and wrap the header in a content control." },
         { "done": true, "filename": "sectionGetParagraphs.js", "name": "Get all paragraphs in a section", "group": "Section", "description": "Gets the paragraphs from the first section." }
