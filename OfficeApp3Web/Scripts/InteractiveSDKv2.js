@@ -161,6 +161,7 @@ InteractiveTutorial.App = new function () {
         if ((_appHost.toLowerCase() == "excel" || _appHost.toLowerCase() == "word") && _appVersion == "16") {
             $("#tutorialMain").attr("class", "divWrapperInside");
             $("#bottomMenu").removeClass("hidden");
+            $("#samplesContainer").addClass("fixHeight");
             writeLog("ShowCodeSnippets for " + _appHost + ", " + _appBitness + ", " + _appVersion);
         }
         else {
