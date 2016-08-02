@@ -191,6 +191,8 @@ li.listItem:hover{
     cursor: pointer;
     position: relative;
     float: right;
+    border:0 none;
+    padding: 0px 0px 0px 0px;
 }
 
 #nextlabel {
@@ -209,6 +211,12 @@ li.listItem:hover{
     background-color:#43945d;
 }
 
+#next:focus {
+    outline-color: black;
+    outline-style: dotted;
+    outline-width: 1.5px;
+}
+
 #next img {
     cursor:pointer;  
     height: 30px;
@@ -221,6 +229,14 @@ li.listItem:hover{
     cursor:pointer;
     margin-right: 10px; 
     float:left;
+    border:0 none;
+    padding: 0px 0px 0px 0px;
+}
+
+#previous:focus {
+    outline-color: black;
+    outline-style: dotted;
+    outline-width: 1.5px;
 }
 
 #previous img {
