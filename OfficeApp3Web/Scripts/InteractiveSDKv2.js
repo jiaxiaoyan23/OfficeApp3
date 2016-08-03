@@ -490,11 +490,11 @@ InteractiveTutorial.App = new function () {
             //Loading last task with no Napa, show list button. Last step with Napa after, show next button 
             if (_currentTaskIndex == _tasks.length - 1 && !hasNapaLink) {
                 //show Next button as Tutorial List icon
-                $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to tutorial list'><img id='imgList_WhiteBackground' src='Images/list-translucent.png' alt='Go to tutorial list' /><img id='imgList_BlackBackground' src='/Images/list-translucent-highContrast.png' alt='Go to tutorial list' /></div></div>").appendTo(navigation);
+                $("<div class='navigationButtons'><button id='previous' role='tooltip' style='display:none' aria-label='Go to the previous step'></button><button id='next' role='tooltip' tabindex='0' aria-label='Go to tutorial list'><img id='imgList_WhiteBackground' src='Images/list-translucent.png' alt='Go to tutorial list' /><img id='imgList_BlackBackground' src='/Images/list-translucent-highContrast.png' alt='Go to tutorial list' /></button></div>").appendTo(navigation);
                 _checked[_currentScenario] = true;
             } else {
                 //show Next button as Next icon
-                $("<div class='navigationButtons'><div id='previous' role='button' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go to the next step'><img id='imgNext_WhiteBackground' src='Images/next-translucent.png' alt='Next' /><img id='imgNext_BlackBackground' src='/Images/next-translucent-highContrast.png' alt='Next' /></div></div>").appendTo(navigation);
+                $("<div class='navigationButtons'><button id='previous' role='tooltip' style='display:none' aria-label='Go to the previous step'></button><button id='next' role='tooltip' tabindex='0' aria-label='Go to the next step'><img id='imgNext_WhiteBackground' src='Images/next-translucent.png' alt='Next' /><img id='imgNext_BlackBackground' src='/Images/next-translucent-highContrast.png' alt='Next' /></button></div>").appendTo(navigation);
             }
 
             $("#next").click(function () {
@@ -521,7 +521,7 @@ InteractiveTutorial.App = new function () {
                     writeLog("Open NapaTask clicked [" + _currentLink + "]");
                     window.open(_currentLink, "_blank");
                 });
-                navigation.append("<div class='navigationButtons'><div id='previous' role='button' tabindex='0' title='Go to the previous step'></div><div id='next' role='button' tabindex='0' title='Go back to tutorial list'><img id='imgList_WhiteBackground' src='Images/list-translucent.png' alt='Go to tutorial list' /><img id='imgList_BlackBackground' src='/Images/list-translucent-highContrast.png' alt='Go to tutorial list' /></div></div>");
+                navigation.append("<div class='navigationButtons'><button id='previous' role='tooltip' style='display:none' tabindex='0' aria-label='Go to the previous step'></button><button id='next' role='tooltip' tabindex='0' aria-label='Go back to tutorial list'><img id='imgList_WhiteBackground' src='Images/list-translucent.png' alt='Go to tutorial list' /><img id='imgList_BlackBackground' src='/Images/list-translucent-highContrast.png' alt='Go to tutorial list' /></button></div>");
                 $('#next').click(function () {
                     $("#toastMessage").slideUp();
                     self.showList();
@@ -530,7 +530,8 @@ InteractiveTutorial.App = new function () {
         }
         //If not the 0th task, show previous button
         if (_currentTaskIndex != 0) {
-            $("<img id='imgBack_WhiteBackground' src='Images/back-translucent.png' alt='Previous' /><img id='imgBack_BlackBackground' src='/Images/back-translucent-highContrast.png' alt='Previous' /></div>").appendTo("#previous");
+            $("#previous").attr("style", "display:block");
+            $("<img id='imgBack_WhiteBackground' src='Images/back-translucent.png' alt='Previous' /><img id='imgBack_BlackBackground' src='/Images/back-translucent-highContrast.png' alt='Previous' /></button>").appendTo("#previous");
             $("#previous").click(function () {
                 $("#toastMessage").slideUp();
                 _currentTaskIndex--;
