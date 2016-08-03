@@ -192,7 +192,7 @@ li.listItem:hover{
     position: relative;
     float: right;
     border:0 none;
-    padding: 0px 0px 0px 0px;
+    padding: 0;
 }
 
 #nextlabel {
@@ -230,7 +230,7 @@ li.listItem:hover{
     margin-right: 10px; 
     float:left;
     border:0 none;
-    padding: 0px 0px 0px 0px;
+    padding: 0;
 }
 
 #previous:focus {
