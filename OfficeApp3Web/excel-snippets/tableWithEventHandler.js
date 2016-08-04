@@ -1,6 +1,6 @@
 //Create Table1
 Excel.run(function (ctx) {
-    var sheet = ctx.workbook.worksheets.get();
+    var sheet = ctx.workbook.worksheets.getActiveWorksheet();
     var table = sheet.tables.add("A1:C4", true).load("name");
     return ctx.sync()
         .then(function() {
