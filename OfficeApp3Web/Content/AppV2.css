@@ -522,6 +522,12 @@ li.listItem:hover{
     display:none;
 }
 
+#scenariolabel.codeSnippetsMenu:focus {
+    outline-color: black;
+    outline-style: dotted;
+    outline-width: 1.5px;
+}
+
 .codeSnippetsMenu option{
     color:black;
 }
