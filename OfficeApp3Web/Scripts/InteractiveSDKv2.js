@@ -6,6 +6,7 @@ var _appHost = "";
 var _appBitness = "";
 var _appVersion = "";
 var _detectOutlook = false;
+var jsEditorInitialized_TutorialList = false;
 
 InteractiveTutorial.App = new function () {
     var _codeXml = null;
@@ -101,13 +102,6 @@ InteractiveTutorial.App = new function () {
                 return false; //Disable the origin function of the key.
             }
         });
-
-        CodeEditorIntegration.initializeJsEditor('codeWindow', [
-           "/editorIntelliSense/ExcelLatest.txt",
-           "/editorIntelliSense/WordLatest.txt",
-           "/editorIntelliSense/OfficeCommon.txt",
-           "/editorIntelliSense/OfficeDocument.txt"
-        ]);
 
         AppsTelemetry.perfEnd("Initialize");
     }
@@ -291,14 +285,17 @@ InteractiveTutorial.App = new function () {
     }
 
     //Uses third party library for code formatting and styling of code snippet
-    this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) {
-        $("#codeWindow").empty();
-        CodeEditorIntegration.initializeJsEditor('codeWindow', [
-                            "/editorIntelliSense/ExcelLatest.txt",
-                            "/editorIntelliSense/WordLatest.txt",
-                            "/editorIntelliSense/OfficeCommon.txt",
-                            "/editorIntelliSense/OfficeDocument.txt"
-        ]);
+    this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) { 
+        if (!jsEditorInitialized_TutorialList) {
+            $("#codeWindow").empty();
+            CodeEditorIntegration.initializeJsEditor('codeWindow', [
+                                "/editorIntelliSense/ExcelLatest.txt",
+                                "/editorIntelliSense/WordLatest.txt",
+                                "/editorIntelliSense/OfficeCommon.txt",
+                                "/editorIntelliSense/OfficeDocument.txt"
+            ]);
+            jsEditorInitialized_TutorialList = true;
+        }
         CodeEditorIntegration.setJavaScriptText($.trim(code));           
         CodeEditorIntegration.resizeEditor();
     }

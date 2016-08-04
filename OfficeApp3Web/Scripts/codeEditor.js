@@ -9,51 +9,49 @@ var CodeEditorIntegration;
             defaultJsText = window.localStorage[localStorageKey];
         }
 
-        require(['vs/editor/editor.main'], function () {
-                var editorMode = 'text/javascript';
-                jsCodeEditor = Monaco.Editor.create(document.getElementById(textAreaId), {
-                    value: defaultJsText,
-                    mode: editorMode,
-                    wrappingColumn: 0,
-                    tabSize: 4,
-                    insertSpaces: false,
-                    scrollbar: {
-                    vertical: "auto",
-                    horizontal: "auto"
-                    },
-                });
-                document.getElementById(textAreaId).addEventListener('keyup', function () {
-                    storeCurrentJSBuffer();
-                });        
+        var editorMode = 'text/javascript';
+        jsCodeEditor = Monaco.Editor.create(document.getElementById(textAreaId), {
+            value: defaultJsText,
+            mode: editorMode,
+            wrappingColumn: 0,
+            tabSize: 4,
+            insertSpaces: false,
+            scrollbar: {
+                vertical: "auto",
+                horizontal: "auto"
+            },
+        });
+        document.getElementById(textAreaId).addEventListener('keyup', function () {
+            storeCurrentJSBuffer();
+        });
 
-                intellisensePaths = intellisensePaths.map(function (path) {
-                    if (path.indexOf("?") < 0) {
-                        path += '?';
-                    } else {
-                        path += '&';
-                    }
-                    return path += 'refresh=' + Math.floor(Math.random() * 1000000000);
-                });
+        intellisensePaths = intellisensePaths.map(function (path) {
+            if (path.indexOf("?") < 0) {
+                path += '?';
+            } else {
+                path += '&';
+            }
+            return path += 'refresh=' + Math.floor(Math.random() * 1000000000);
+        });
 
-                $.ajax("/editorIntelliSense/OfficeJS2015May.txt").then(function (intelliSenseContents) {
-                    require(['vs/languages/javascript/common/javascript'], function () {
-                        var jsExt = require('vs/languages/javascript/common/javascript.extensions');
-                        jsExt.Defaults.addExtraLib(intelliSenseContents);
-                        jsExt.Defaults.setCompilerOptions({
-                            target: 2
-                        })
-                    })
+        $.ajax("/editorIntelliSense/OfficeJS2015May.txt").then(function (intelliSenseContents) {
+            require(['vs/languages/javascript/common/javascript'], function () {
+                var jsExt = require('vs/languages/javascript/common/javascript.extensions');
+                jsExt.Defaults.addExtraLib(intelliSenseContents);
+                jsExt.Defaults.setCompilerOptions({
+                    target: 2
+                })
+            })
 
-                });
-                //require(['vs/platform/platform', 'vs/editor/modes/modesExtensions'], function (Platform, ModesExt) {
-                //    Platform.Registry.as(ModesExt.Extensions.EditorModes).configureMode(editorMode, {
-                //        "validate": {
-                //            "extraLibs": intellisensePaths
-                //        }
-                //    });  
-                //});
-            
-          
+            //require(['vs/platform/platform', 'vs/editor/modes/modesExtensions'], function (Platform, ModesExt) {
+            //    Platform.Registry.as(ModesExt.Extensions.EditorModes).configureMode(editorMode, {
+            //        "validate": {
+            //            "extraLibs": intellisensePaths
+            //        }
+            //    });  
+            //});
+
+
         });
 
         $(window).resize(function () {
@@ -84,7 +82,7 @@ var CodeEditorIntegration;
     }
     CodeEditorIntegration.setJavaScriptText = setJavaScriptText;
 
-    function resizeEditor(scrollUp) {       
+    function resizeEditor(scrollUp) {
         if (typeof scrollUp === "undefined") { scrollUp = false; }
         jsCodeEditor.layout();
         if (scrollUp) {
