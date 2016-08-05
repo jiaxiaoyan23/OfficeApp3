@@ -4,7 +4,6 @@ var consoleErrorFunction;
 var isSnippet = false;
 var rootUrl = document.location;
 var hostName = "";
-var jsEditorInitialized_Snippet = false;
 
 function showMessage(text) {
         $("#message").html(text);
@@ -118,6 +117,13 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
     $scope.selectedGroup = {};
     $scope.isSnippet = isSnippet;
 	
+    CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
+			"/editorIntelliSense/ExcelLatest.txt",
+			"/editorIntelliSense/WordLatest.txt",
+			"/editorIntelliSense/OfficeCommon.txt",
+			"/editorIntelliSense/OfficeDocument.txt"
+    ]);
+	
     CodeEditorIntegration.setDirty = function () {
         if ($scope.selectedSample.code) {
             $scope.selectedSample = { description: $scope.selectedSample.description + " (modified)" };
@@ -170,16 +176,12 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
             snippetFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
                 $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);                
 	            $scope.insideOffice = insideOffice;
-	            if (!jsEditorInitialized_Snippet) {
-	                $("#TxtRichApiScript").empty();
-	                CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
-                                "/editorIntelliSense/ExcelLatest.txt",
-                                "/editorIntelliSense/WordLatest.txt",
-                                "/editorIntelliSense/OfficeCommon.txt",
-                                "/editorIntelliSense/OfficeDocument.txt"
-	                ]);
-	                jsEditorInitialized_Snippet = true;
-	            }
+	            CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
+                            "/editorIntelliSense/ExcelLatest.txt",
+                            "/editorIntelliSense/WordLatest.txt",
+                            "/editorIntelliSense/OfficeCommon.txt",
+                            "/editorIntelliSense/OfficeDocument.txt"
+	            ]);
 	            CodeEditorIntegration.setJavaScriptText($scope.selectedSample.code);
 	            CodeEditorIntegration.resizeEditor();
 	            writeLog("Code sample loaded successfully for " + { name: $scope.selectedSample.name });
