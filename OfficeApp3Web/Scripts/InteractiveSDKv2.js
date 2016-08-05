@@ -44,7 +44,9 @@ InteractiveTutorial.App = new function () {
 
         //Resize code editor when window is resized
         $(window).resize(function () {
-            self.sizeCodeEditor();
+            if ($("#tutorialList")[0].getAttribute("class").toString() != "listPageContent") {
+                self.sizeCodeEditor();
+            }
         });
 
         //Populates the _contentList from tutorial.xml file.

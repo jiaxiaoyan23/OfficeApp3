@@ -414,8 +414,6 @@ li.listItem:hover{
 
 #samplesContainer {
      overflow: hidden; 
-     display:flex;
-     flex-direction: column; 
      position: relative;     
      top:0px;
      bottom: 0px; 
@@ -427,6 +425,10 @@ li.listItem:hover{
 #samplesContainer.fixHeight {
      overflow: auto!important; 
      height: 40%;
+}
+
+#selectors {
+     height: auto;
 }
 
 #samplesContainer select{
@@ -547,6 +549,7 @@ li.listItem:hover{
 }
 
 #sampleDescription {
+    position: relative;
     height:auto;
 }
 #sampleDescription p{
