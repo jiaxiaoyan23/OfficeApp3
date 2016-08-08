@@ -66,7 +66,7 @@
     left: 0px;
     z-index: 100;
     background-color: #EFEBEF;
-    bottom: 45px;
+    bottom: 35px;
     display: none;
     border-top-style:solid;
     border-top-width:1px;
@@ -76,13 +76,20 @@
 #message {   
     font-size: medium;
     padding-left:20px;
+    padding-top:20px;
     color: #000000;
     font-size:15px;
 }
 
 .toast .closeBtn {
     width: 100%;
+    position:fixed;
     margin-bottom:15px;  
+    background-color: #EFEBEF;
+}
+
+.fixRight {
+    right: 16px;
 }
 
 #closeImage {
@@ -299,7 +306,7 @@ li.listItem:hover{
 #navigation {
     position:absolute;
     bottom:0;
-    left:20px;
+    left:10px;
     right:25px;
     height:35px;
     background-color:white;
@@ -414,8 +421,6 @@ li.listItem:hover{
 
 #samplesContainer {
      overflow: hidden; 
-     display:flex;
-     flex-direction: column; 
      position: relative;     
      top:0px;
      bottom: 0px; 
@@ -427,6 +432,10 @@ li.listItem:hover{
 #samplesContainer.fixHeight {
      overflow: auto!important; 
      height: 40%;
+}
+
+#selectors {
+     height: auto;
 }
 
 #samplesContainer select{
@@ -547,6 +556,7 @@ li.listItem:hover{
 }
 
 #sampleDescription {
+    position: relative;
     height:auto;
 }
 #sampleDescription p{
