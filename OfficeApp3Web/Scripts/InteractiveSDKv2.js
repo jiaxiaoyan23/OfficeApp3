@@ -47,6 +47,11 @@ InteractiveTutorial.App = new function () {
             if ($("#tutorialList")[0].getAttribute("class").toString() != "listPageContent") {
                 self.sizeCodeEditor();
             }
+
+            if ($("#toastMessage")[0].clientWidth < $("#toastMessage")[0].offsetWidth - 4)
+                $("#toastMessage > div.closeBtn").addClass("fixRight");
+            else
+                $("#toastMessage > div.closeBtn").removeClass("fixRight");
         });
 
         //Populates the _contentList from tutorial.xml file.
@@ -639,8 +644,13 @@ InteractiveTutorial.App = new function () {
         if (text.indexOf('arrow button') > -1) {
             text = text.replace('arrow button', '<span class="arrow">arrow button</span>');
         }
-        $("#message").html(text);
-        $("#toastMessage").slideDown();
+        $("#message").html('<td>' + text + '</td>');
+        $("#toastMessage").slideDown(function () {
+            if ($("#toastMessage")[0].clientWidth < $("#toastMessage")[0].offsetWidth - 4)
+                $("#toastMessage > div.closeBtn").addClass("fixRight");
+            else
+                $("#toastMessage > div.closeBtn").removeClass("fixRight");
+        });
         $("#closeImage")[0].focus();
     };
 }
