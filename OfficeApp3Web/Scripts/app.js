@@ -176,7 +176,6 @@ officeJsSnippetApp.controller("SamplesController", function ($scope, $routeParam
             snippetFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
                 $scope.selectedSample.code = addErrorHandlingIfNeeded(response.data);                
 	            $scope.insideOffice = insideOffice;
-	            $("#TxtRichApiScript").empty();
 	            CodeEditorIntegration.initializeJsEditor('TxtRichApiScript', [
                             "/editorIntelliSense/ExcelLatest.txt",
                             "/editorIntelliSense/WordLatest.txt",

@@ -2,6 +2,8 @@ var CodeEditorIntegration;
 (function (CodeEditorIntegration) {
     var localStorageKey = 'office-js-snippets';
     var jsCodeEditor;
+    var jsCodeEditor_CodeWindow;
+    var jsCodeEditor_Snippet;
 
     function initializeJsEditor(textAreaId, intellisensePaths) {
         var defaultJsText = '';
@@ -10,18 +12,33 @@ var CodeEditorIntegration;
         }
 
         require(['vs/editor/editor.main'], function () {
-                var editorMode = 'text/javascript';
-                jsCodeEditor = Monaco.Editor.create(document.getElementById(textAreaId), {
+            var editorMode = 'text/javascript';
+            function CreateJsCodeEditor(textAreaId) {
+                return Monaco.Editor.create(document.getElementById(textAreaId), {
                     value: defaultJsText,
                     mode: editorMode,
                     wrappingColumn: 0,
                     tabSize: 4,
                     insertSpaces: false,
                     scrollbar: {
-                    vertical: "auto",
-                    horizontal: "auto"
+                        vertical: "auto",
+                        horizontal: "auto"
                     },
                 });
+            }
+
+            if (textAreaId == 'codeWindow') {
+                if (jsCodeEditor_CodeWindow == undefined) {
+                    jsCodeEditor_CodeWindow = CreateJsCodeEditor(textAreaId);
+                }
+                jsCodeEditor = jsCodeEditor_CodeWindow;
+            } else if (textAreaId == 'TxtRichApiScript') {
+                if (jsCodeEditor_Snippet == undefined) {
+                    jsCodeEditor_Snippet = CreateJsCodeEditor(textAreaId);
+                }
+                jsCodeEditor = jsCodeEditor_Snippet;
+            }
+
                 document.getElementById(textAreaId).addEventListener('keyup', function () {
                     storeCurrentJSBuffer();
                 });        

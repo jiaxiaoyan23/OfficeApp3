@@ -292,7 +292,6 @@ InteractiveTutorial.App = new function () {
 
     //Uses third party library for code formatting and styling of code snippet
     this.setCodeWindow = function InteractiveTutorial_App$setCodeWindow(code) {
-        $("#codeWindow").empty();
         CodeEditorIntegration.initializeJsEditor('codeWindow', [
                             "/editorIntelliSense/ExcelLatest.txt",
                             "/editorIntelliSense/WordLatest.txt",
