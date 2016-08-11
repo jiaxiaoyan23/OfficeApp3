@@ -7,7 +7,12 @@ var hostName = "";
 
 function showMessage(text) {
         $("#message").html(text);
-        $("#toastMessage").slideDown();
+        $("#toastMessage").slideDown(function () {
+            if ($("#toastMessage")[0].clientWidth < $("#toastMessage")[0].offsetWidth - 4)
+                $("#toastMessage > div.closeBtn").addClass("fixRight");
+            else
+                $("#toastMessage > div.closeBtn").removeClass("fixRight");
+        });
         $("#closeImage")[0].focus();
 }
 
